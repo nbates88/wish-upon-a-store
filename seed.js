@@ -83,7 +83,7 @@ var seedProducts = function () {
             inventoryQuantity: 5
         })
    .then(function(product){
-        product.setCollection('health')
+        return product.addCollection('health')
          .then(function(product){
                 return product;
             })
@@ -97,7 +97,7 @@ var seedProducts = function () {
         })
      .then(function(product){
         console.log(product);
-        product.setCollection('career')
+        return product.addCollection('career')
             .then(function(product){
                 return product;
             })
@@ -109,12 +109,6 @@ var seedProducts = function () {
 db.sync({ force: true })
     .then(function () {
         return seedUsers();
-        // Promise.all([function(){
-        //     return seedUsers()}, function(){
-        //         return seedCollections()}])
-        //     .then(function(){
-        //         seedProducts();
-        //     });
     })
     .then(function(){
         return seedCollections();
