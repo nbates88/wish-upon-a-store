@@ -1,27 +1,27 @@
 var router = require('express').Router();
 module.exports = router;
 
-var products = require('FOLDER???');
+var collections = require('../../../db/models/collection.js');
 
-// GET ALL PRODUCTS
-router.get('api/products/', function(req, res, next) {
-    products.findAll()
+// GET ALL COLLECTIONS
+router.get('/collections', function(req, res, next) {
+    collections.findAll()
         .then(function(response) {
             res.status(200).send(response);
         });
 });
 
-// CREATE PRODUCT
-router.get('api/products/', function(req, res, next) {
-    products.create(req.body)
+// CREATE COLLECTION
+router.get('/collections/', function(req, res, next) {
+    collections.create(req.body)
         .then(function(response) {
             res.status(201).send(response);
         });
 });
 
-// GET ONE PRODUCT BY ID
-router.get('api/products/:id', function(req, res, next) {
-    products.findById({
+// GET ONE COLLECTION BY ID
+router.get('/collections/:id', function(req, res, next) {
+    collections.findById({
             where: {
                 id: req.params.id
             }
@@ -31,9 +31,10 @@ router.get('api/products/:id', function(req, res, next) {
         });
 });
 
-// UPDATE ONE PRODUCT
-router.put('api/products/:id', function(req, res, next) {
-    products.findById({
+
+// UPDATE ONE COLLECTION
+router.put('/collections/:id', function(req, res, next) {
+    collections.findById({
             where: {
                 id: req.params.id
             }
@@ -46,9 +47,9 @@ router.put('api/products/:id', function(req, res, next) {
         });
 });
 
-// DELETE ONE PRODUCT
-router.delete('api/products/:id', function(req, res, next) {
-    products.findById({
+// DELETE ONE COLLECTION
+router.delete('/collections/:id', function(req, res, next) {
+    collections.findById({
             where: {
                 id: req.params.id
             }
