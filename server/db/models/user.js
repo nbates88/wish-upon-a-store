@@ -7,6 +7,11 @@ module.exports = function (db) {
 
     db.define('user', {
         email: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            unique: true
+        },
+        name: {
             type: Sequelize.STRING
         },
         password: {
