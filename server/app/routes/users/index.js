@@ -4,7 +4,7 @@ module.exports = router;
 var users = require('../../../db/models/user.js');
 
 // GET ALL USERS
-router.get('/users/', function(req, res, next) {
+router.get('/users', function(req, res, next) {
     users.findAll()
         .then(function(response) {
             res.status(200).send(response);
@@ -12,7 +12,7 @@ router.get('/users/', function(req, res, next) {
 });
 
 // CREATE USER
-router.get('/users/', function(req, res, next) {
+router.post('/users', function(req, res, next) {
     users.create(req.body)
         .then(function(response) {
             res.status(201).send(response);
@@ -21,11 +21,7 @@ router.get('/users/', function(req, res, next) {
 
 // GET ONE USER BY ID
 router.get('/users/:id', function(req, res, next) {
-    users.findById({
-            where: {
-                id: req.params.id
-            }
-        })
+    users.findById(req.params.id)
         .then(function(response) {
             res.status(200).send(response);
         });
@@ -33,11 +29,7 @@ router.get('/users/:id', function(req, res, next) {
 
 // UPDATE ONE USER
 router.put('/users/:id', function(req, res, next) {
-    users.findById({
-            where: {
-                id: req.params.id
-            }
-        })
+    users.findById(req.params.id)
         .then(function(response) {
             return response.update(req.body);
         })
@@ -48,13 +40,9 @@ router.put('/users/:id', function(req, res, next) {
 
 // DELETE ONE USER
 router.delete('/users/:id', function(req, res, next) {
-    users.findById({
-            where: {
-                id: req.params.id
-            }
-        })
+    users.findById(req.params.id)
         .then(function(response) {
-            return response.destroy(req.body);
+            return response.destroy();
         })
         .then(function(response) {
             res.status(204).redirect('/');
