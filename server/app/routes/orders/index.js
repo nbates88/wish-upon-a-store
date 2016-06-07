@@ -12,7 +12,7 @@ router.get('/orders/', function(req, res, next) {
 });
 
 // CREATE ORDER
-router.get('/orders/', function(req, res, next) {
+router.post('/orders', function(req, res, next) {
     orders.create(req.body)
         .then(function(response) {
             res.status(201).send(response);
@@ -21,11 +21,7 @@ router.get('/orders/', function(req, res, next) {
 
 // GET ONE ORDER BY ID
 router.get('/orders/:id', function(req, res, next) {
-    orders.findById({
-            where: {
-                id: req.params.id
-            }
-        })
+    orders.findById(req.params.id)
         .then(function(response) {
             res.status(200).send(response);
         });
@@ -33,11 +29,7 @@ router.get('/orders/:id', function(req, res, next) {
 
 // UPDATE ONE ORDER
 router.put('/orders/:id', function(req, res, next) {
-    orders.findById({
-            where: {
-                id: req.params.id
-            }
-        })
+    orders.findById(req.params.id)
         .then(function(response) {
             return response.update(req.body);
         })
@@ -48,13 +40,9 @@ router.put('/orders/:id', function(req, res, next) {
 
 // DELETE ONE ORDER
 router.delete('/orders/:id', function(req, res, next) {
-    orders.findById({
-            where: {
-                id: req.params.id
-            }
-        })
+    orders.findById(req.params.id)
         .then(function(response) {
-            return response.destroy(req.body);
+            return response.destroy();
         })
         .then(function(response) {
             res.status(204).redirect('/');
