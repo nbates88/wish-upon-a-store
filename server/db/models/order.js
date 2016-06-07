@@ -3,11 +3,13 @@ var Sequelize = require('sequelize');
 
 module.exports = function (db) {
 
-    db.define('order', {
+    var Order = db.define('order', {
+        status: {
+            type: Sequelize.ENUM("Created", "Processing", "Cancelled", "Completed")
+        }
        
-     
     })
 
-
+    return Order;
 
 };
