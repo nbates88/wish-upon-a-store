@@ -21,36 +21,36 @@ describe('/products', function(){
 
 	describe('GET /products', function() {
 		var product;
-      beforeEach(function () {
-        return Product.create({
-          	name: 'Product1',
-	        description: 'a product',
-	        price: 10.0,
-	        inventoryQuantity: 2
-        })
-        .then(function (p) {
-          product = p;
-          return Product.create({
-          	name: 'Product2',
-	        description: 'another product',
-	        price: 12.0,
-	        inventoryQuantity: 5
-          });
-        });
-      });
+		beforeEach(function () {
+			return Product.create({
+			  	name: 'Product1',
+			    description: 'a product',
+			    price: 10.0,
+			    inventoryQuantity: 2
+			})
+			.then(function (p) {
+				product = p;
+				return Product.create({
+				  	name: 'Product2',
+				    description: 'another product',
+				    price: 12.0,
+				    inventoryQuantity: 5
+				});
+			});
+    	});
 
 	   it('returns all of the products in the DB', function () {
 	   		it('GET all', function (done) {
-	        agent
-	        .get('/products')
-	        .expect(200)
-	        .end(function (err, res) {
-	          if (err) return done(err);
-	          expect(res.body).to.be.instanceof(Array);
-	          expect(res.body).to.have.length(2);
-	          done();
-	        });
-	      });
+		        agent
+		        .get('/products')
+		        .expect(200)
+		        .end(function (err, res) {
+		          if (err) return done(err);
+		          expect(res.body).to.be.instanceof(Array);
+		          expect(res.body).to.have.length(2);
+		          done();
+		        });
+	      	});
 		});
 	});
 
@@ -69,7 +69,7 @@ describe('/products', function(){
 		        .expect(200)
 		        .end(function (err, res) {
 		          if (err) return done(err);
-		          expect(res.body.title).to.equal('Book Made By Test');
+		          expect(res.product.name).to.equal('Product3');
 		          expect(res.body.id).to.exist;
 		          Book.findById(res.body.id)
 		          .then(function (b) {
