@@ -12,7 +12,7 @@ router.get('/collections', function(req, res, next) {
 });
 
 // CREATE COLLECTION
-router.get('/collections/', function(req, res, next) {
+router.post('/collections', function(req, res, next) {
     collections.create(req.body)
         .then(function(response) {
             res.status(201).send(response);
@@ -21,11 +21,7 @@ router.get('/collections/', function(req, res, next) {
 
 // GET ONE COLLECTION BY ID
 router.get('/collections/:id', function(req, res, next) {
-    collections.findById({
-            where: {
-                id: req.params.id
-            }
-        })
+    collections.findById(req.params.id)
         .then(function(response) {
             res.status(200).send(response);
         });
@@ -34,11 +30,7 @@ router.get('/collections/:id', function(req, res, next) {
 
 // UPDATE ONE COLLECTION
 router.put('/collections/:id', function(req, res, next) {
-    collections.findById({
-            where: {
-                id: req.params.id
-            }
-        })
+    collections.findById(req.params.id)
         .then(function(response) {
             return response.update(req.body);
         })
@@ -49,13 +41,9 @@ router.put('/collections/:id', function(req, res, next) {
 
 // DELETE ONE COLLECTION
 router.delete('/collections/:id', function(req, res, next) {
-    collections.findById({
-            where: {
-                id: req.params.id
-            }
-        })
+    collections.findById(req.params.id)
         .then(function(response) {
-            return response.destroy(req.body);
+            return response.destroy();
         })
         .then(function(response) {
             res.status(204).redirect('/');
