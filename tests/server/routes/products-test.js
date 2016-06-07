@@ -45,10 +45,10 @@ describe('/products', function(){
 		        .get('/products')
 		        .expect(200)
 		        .end(function (err, res) {
-		          if (err) return done(err);
-		          expect(res.body).to.be.instanceof(Array);
-		          expect(res.body).to.have.length(2);
-		          done();
+		        if (err) return done(err);
+			        expect(res.body).to.be.instanceof(Array);
+			        expect(res.body).to.have.length(2);
+			        done();
 		        });
 	      	});
 		});
@@ -68,15 +68,15 @@ describe('/products', function(){
 		        })
 		        .expect(200)
 		        .end(function (err, res) {
-		          if (err) return done(err);
-		          expect(res.product.name).to.equal('Product3');
-		          expect(res.body.id).to.exist;
-		          Book.findById(res.body.id)
-		          .then(function (b) {
-		            expect(b).to.not.be.null;
-		            expect(res.body).to.eql(toPlainObject(b));
-		            done();
-		          })
+			        if (err) return done(err);
+			        expect(res.product.name).to.equal('Product3');
+			        expect(res.body.id).to.exist;
+			        Book.findById(res.body.id)
+			        .then(function (b) {
+			        	expect(b).to.not.be.null;
+			            expect(res.body).to.eql(toPlainObject(b));
+			            done();
+		          	})
 		          .catch(done);
 	        	});
 	    	});
@@ -90,9 +90,9 @@ describe('/products', function(){
 		        .get('/products/' + product.id)
 		        .expect(200)
 		        .end(function (err, res) {
-		          if (err) return done(err);
-		          expect(res.body.name).to.equal(product.name);
-		          done();
+			        if (err) return done(err);
+			        expect(res.body.name).to.equal(product.name);
+			        done();
 		        });
 	      	});
 		});
@@ -104,19 +104,19 @@ describe('/products', function(){
 		        agent
 		        .put('/product/' + product.id)
 		        .send({
-		          name: 'Another Product'
+		        	name: 'Another Product'
 		        })
 		        .expect(200)
 		        .end(function (err, res) {
-		          if (err) return done(err);
-		          expect(res.body.name).to.equal('Another Product');
-		          Product.findById(book.id)
-		          .then(function (b) {
-		            expect(b).to.not.be.null;
-		            expect(res.body).to.eql(toPlainObject(b));
-		            done();
-		          })
-		          .catch(done);
+			        if (err) return done(err);
+			        expect(res.body.name).to.equal('Another Product');
+			        Product.findById(book.id)
+			        .then(function (b) {
+			            expect(b).to.not.be.null;
+			            expect(res.body).to.eql(toPlainObject(b));
+			            done();
+			        })
+			        .catch(done);
 		        });
 	      	});
 		});
