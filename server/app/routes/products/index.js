@@ -4,7 +4,7 @@ module.exports = router;
 var products = require('../../../db/models/products.js');
 
 // GET ALL PRODUCTS
-router.get('/products/', function(req, res, next) {
+router.get('/products', function(req, res, next) {
     products.findAll()
         .then(function(response) {
             res.status(200).send(response);
@@ -12,7 +12,7 @@ router.get('/products/', function(req, res, next) {
 });
 
 // CREATE PRODUCT
-router.get('/products/', function(req, res, next) {
+router.post('/products', function(req, res, next) {
     products.create(req.body)
         .then(function(response) {
             res.status(201).send(response);
@@ -21,11 +21,7 @@ router.get('/products/', function(req, res, next) {
 
 // GET ONE PRODUCT BY ID
 router.get('/products/:id', function(req, res, next) {
-    products.findById({
-            where: {
-                id: req.params.id
-            }
-        })
+    products.findById(req.params.id)
         .then(function(response) {
             res.status(200).send(response);
         });
@@ -33,11 +29,7 @@ router.get('/products/:id', function(req, res, next) {
 
 // UPDATE ONE PRODUCT
 router.put('/products/:id', function(req, res, next) {
-    products.findById({
-            where: {
-                id: req.params.id
-            }
-        })
+    products.findById(req.params.id)
         .then(function(response) {
             return response.update(req.body);
         })
@@ -48,13 +40,9 @@ router.put('/products/:id', function(req, res, next) {
 
 // DELETE ONE PRODUCT
 router.delete('/products/:id', function(req, res, next) {
-    products.findById({
-            where: {
-                id: req.params.id
-            }
-        })
+    products.findById(req.params.id)
         .then(function(response) {
-            return response.destroy(req.body);
+            return response.destroy();
         })
         .then(function(response) {
             res.status(204).redirect('/');
