@@ -1,10 +1,12 @@
 var router = require('express').Router();
+var db = require('../../../db/_db');
+var collections = require('../../../db/models/collection.js')(db);
+var Sequelize = require('sequelize');
 module.exports = router;
 
-var collections = require('../../../db/models/collection.js');
 
 // GET ALL COLLECTIONS
-router.get('/collections', function(req, res, next) {
+router.get('/', function(req, res, next) {
     collections.findAll()
         .then(function(response) {
             res.status(200).send(response);
@@ -12,15 +14,18 @@ router.get('/collections', function(req, res, next) {
 });
 
 // CREATE COLLECTION
-router.post('/collections', function(req, res, next) {
+router.post('/', function(req, res, next) {
+    if(!req.user || !req.user.isAdmin) res.sendStatus(403);
+    else {
     collections.create(req.body)
         .then(function(response) {
             res.status(201).send(response);
         });
+    }
 });
 
 // GET ONE COLLECTION BY ID
-router.get('/collections/:id', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
     collections.findById(req.params.id)
         .then(function(response) {
             res.status(200).send(response);
@@ -29,7 +34,9 @@ router.get('/collections/:id', function(req, res, next) {
 
 
 // UPDATE ONE COLLECTION
-router.put('/collections/:id', function(req, res, next) {
+router.put('/:id', function(req, res, next) {
+    if(!req.user || !req.user.isAdmin) res.sendStatus(403);
+    else {
     collections.findById(req.params.id)
         .then(function(response) {
             return response.update(req.body);
@@ -37,10 +44,13 @@ router.put('/collections/:id', function(req, res, next) {
         .then(function(response) {
             res.status(300).send(response);
         });
+    }
 });
 
 // DELETE ONE COLLECTION
-router.delete('/collections/:id', function(req, res, next) {
+router.delete('/:id', function(req, res, next) {
+    if(!req.user || !req.user.isAdmin) res.sendStatus(403);
+    else {
     collections.findById(req.params.id)
         .then(function(response) {
             return response.destroy();
@@ -48,4 +58,5 @@ router.delete('/collections/:id', function(req, res, next) {
         .then(function(response) {
             res.status(204).redirect('/');
         });
+    }
 });

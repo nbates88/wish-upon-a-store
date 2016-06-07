@@ -31,11 +31,13 @@ var seedUsers = function () {
 
     var users = [
         {
+            name: 'fsa',
             email: 'testing@fsa.com',
             password: 'password',
             isAdmin: false
         },
         {
+            name: 'Obama',
             email: 'obama@gmail.com',
             password: 'potus',
             isAdmin: true
@@ -71,11 +73,13 @@ var seedCollections = function () {
         return Collection.create(collectionObj);
     });
 
-    return Promise.all(creatingCollections);
+    return Promise
+        .all(creatingCollections)
+        .then(collections => collections.reduce((all, one) => (all[one.name] = one, all), {}))
 
 };
 
-var seedProducts = function () {
+var seedProducts = function (collections) {
 
   var product1 = Product.create({name: 'lose weight',
             description: 'lose five pounds',
@@ -83,7 +87,8 @@ var seedProducts = function () {
             inventoryQuantity: 5
         })
    .then(function(product){
-        return product.addCollection('health')
+        var product = product;
+        return product.addCollection(collections.health)
          .then(function(product){
                 return product;
             })
@@ -97,7 +102,7 @@ var seedProducts = function () {
         })
      .then(function(product){
         console.log(product);
-        return product.addCollection('career')
+        return product.addCollection(collections.career)
             .then(function(product){
                 return product;
             })
@@ -113,14 +118,12 @@ db.sync({ force: true })
     .then(function(){
         return seedCollections();
     })
-    .then(function(){
-        return seedProducts();
-    })
+    .then(seedProducts)
     .then(function () {
         console.log(chalk.green('Seed successful!'));
-        process.kill(0);
+        process.exit(0);
     })
     .catch(function (err) {
         console.error(err);
-        process.kill(1);
+        process.exit(1);
     });
