@@ -3,23 +3,29 @@ var Sequelize = require('sequelize');
 
 module.exports = function (db) {
 
-    db.define('product', {
+   var Product = db.define('product', {
         description: {
             type: Sequelize.TEXT,
         },
-        title: {
+        name: {
             type: Sequelize.STRING,
             allowNull: false,
             unique: true
         },
         price: {
-            type: Sequelize.Number,
+            type: Sequelize.DECIMAL(10,2),
             allowNull: false
+        },
+        inventoryQuantity: {
+            type: Sequelize.INTEGER,
+            allowNull: false
+        },
+        imageUrl: {
+            type: Sequelize.STRING,
+            defaultValue: "https://pixabay.com/static/uploads/photo/2015/05/24/21/19/wish-782424_960_720.jpg"
         }
     })
 
-
+   return Product;
 
 };
-
-// Must have title, description, price, and inventory quantity

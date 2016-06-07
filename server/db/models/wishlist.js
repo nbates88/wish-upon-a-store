@@ -3,11 +3,13 @@ var Sequelize = require('sequelize');
 
 module.exports = function (db) {
 
-    db.define('wishlist', {
-       
-     
+    var Wishlist = db.define('wishlist', {
+        name: {
+            type: Sequelize.STRING,
+            default: null
+            } 
     })
 
-
+    return Wishlist;
 
 };

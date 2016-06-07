@@ -73,4 +73,6 @@ module.exports = function (app, db) {
         require(path.join(__dirname, strategyName))(app, db);
     });
 
+    
+
 };
