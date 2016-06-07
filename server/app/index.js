@@ -11,11 +11,8 @@ module.exports = function (db) {
 
     // Routes that will be accessed via AJAX should be prepended with
     // /api so they are isolated from our GET /* wildcard.
-    app.use('/api/products', require('./routes/products'));
-    app.use('/api/users', require('./routes/users'));
-    app.use('/api/orders', require('./routes/orders'));
-    app.use('/api/collections', require('./routes/collections'));
 
+    app.use('/api', require('./routes'));
 
     /*
      This middleware will catch any URLs resembling a file extension
