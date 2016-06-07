@@ -18,7 +18,7 @@ name in the environment files.
 */
 
 var Promise = require('bluebird')
-Promise.config({longStackTraces: true})
+
 
 var chalk = require('chalk');
 var db = require('./server/db');
