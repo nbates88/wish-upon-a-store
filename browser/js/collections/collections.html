@@ -1,7 +1,7 @@
-<h1>{{ name.name }}</h1>
-<h2>collection</h2>
-<section ng-repeat="product in products">
-<h2> {{product.name}} </h2>
-<!-- <img src={{product.imageUrl}} /> -->
-
-</section>
+<div class="col-xs-10">
+  <h1>{{ collection.name }} Collection</h1>
+  <ul>
+    <a ui-sref="product({id:product.id})"><li ng-repeat="product in products"> {{product.name}} </li></a>
+    <!-- <img src={{product.imageUrl}} /> -->
+  </ul>
+</div>
