@@ -1,11 +1,20 @@
 <section id="product">
   <p>
-    <h3>Name: {{ product.name }}</h3>
-    <img ng-src="{{ product.imageUrl }}" class="img-thumbnail">
+    <h3>{{ product.name }}</h3>
+    <img id="productImage" ng-src="{{ product.imageUrl }}" class="img-thumbnail">
     <div class="product_details">
     <h2>Description: {{ product.description }}</h2>
     <h2>Price: {{ product.price }}</h2>
-    <button type="button">Buy Me!</button>
+    <select>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+    </select>
+    <h4>Average Rating: 3 </h4>
+
+    <button type="button">Add a Review</button>
+    <button type="submit" ng-click="addToCart()">Add to Cart!</button>
     </div>
   </p>
   </div>

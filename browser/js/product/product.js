@@ -6,7 +6,6 @@ app.config(function ($stateProvider) {
         resolve: {
         	product: function($stateParams, ProductFactory){
                 var id = $stateParams.id;
-                console.log("id", id)
         		return ProductFactory.getOneProduct(id)
         	}
         }
@@ -14,7 +13,17 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('ProductCtrl', function($scope, product){
+app.controller('ProductCtrl', function($scope, product, $state, ItemFactory){
     
     $scope.product = product;
+
+    $scope.setItemInfo = function(){
+        console.log(product)
+        ItemFactory.addProduct(product)
+    }
+
+
+    $scope.addToCart = function(){
+        $state.go('shoppingCart')
+    }
 })
