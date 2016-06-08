@@ -9,12 +9,14 @@ module.exports = function (app, db) {
     // When passport.authenticate('local') is used, this function will receive
     // the email and password to run the actual authentication logic.
     var strategyFn = function (email, password, done) {
+        console.log("AUTH EMAIL:", email)
         User.findOne({
                 where: {
                     email: email
                 }
             })
             .then(function (user) {
+                console.log("AUTH PW:", password)
                 // user.correctPassword is a method from the User schema.
                 if (!user || !user.correctPassword(password)) {
                     done(null, false);

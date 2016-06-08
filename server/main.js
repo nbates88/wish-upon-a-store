@@ -21,7 +21,10 @@ var startServer = function () {
 
 };
 
-db.sync().then(createApplication).then(startServer).catch(function (err) {
+try {
+	createApplication()
+	startServer()
+} catch(err) {
     console.error(chalk.red(err.stack));
-    process.kill(1);
-});
+    //process.kill(1);
+}

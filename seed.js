@@ -17,21 +17,30 @@ name in the environment files.
 
 */
 
+var Promise = require('bluebird')
+
+
 var chalk = require('chalk');
 var db = require('./server/db');
 var User = db.model('user');
-var Promise = require('sequelize').Promise;
+var Product = db.model('product');
+var Collection = db.model('collection');
+
 
 var seedUsers = function () {
 
     var users = [
         {
+            name: 'fsa',
             email: 'testing@fsa.com',
-            password: 'password'
+            password: 'password',
+            isAdmin: false
         },
         {
+            name: 'Obama',
             email: 'obama@gmail.com',
-            password: 'potus'
+            password: 'potus',
+            isAdmin: true
         }
     ];
 
@@ -43,15 +52,74 @@ var seedUsers = function () {
 
 };
 
+var seedCollections = function () {
+
+    var collections = [
+        {
+            name: 'health'
+        },
+        {
+            name: 'career'
+        },
+        {   
+            name: 'romance'
+        },
+        {   
+            name: 'luxuries'
+        }
+    ];
+
+    var creatingCollections = collections.map(function (collectionObj) {
+        return Collection.create(collectionObj);
+    });
+
+    return Promise
+        .all(creatingCollections)
+        .then(collections => collections.reduce((all, one) => (all[one.name] = one, all), {}))
+
+};
+
+var seedProducts = function (collections) {
+
+  var product1 = Product.create({name: 'lose weight',
+            description: 'lose five pounds',
+            price: 5.50,
+            inventoryQuantity: 5
+        })
+    .then(function(product){
+        var product = product;
+        return product.addCollection(collections.health)
+         .then(function(product){
+                return product;
+            })
+   });
+
+   var product2 = Product.create({
+            name: 'get a job after senior phase',
+            description: 'finished Grace Hopper yayyy need job',
+            price: 10.50,
+            inventoryQuantity: 22
+        })
+     .then(function(product){
+        console.log(product);
+        return product.addCollection(collections.career)
+            .then(function(product){
+                return product;
+            })
+   });
+
+     return Promise.all([product1, product2]);
+};
+
 db.sync({ force: true })
-    .then(function () {
-        return seedUsers();
-    })
+    .then(seedUsers)
+    .then(seedCollections)
+    .then(seedProducts)
     .then(function () {
         console.log(chalk.green('Seed successful!'));
-        process.kill(0);
+        process.exit(0);
     })
     .catch(function (err) {
         console.error(err);
-        process.kill(1);
+        process.exit(1);
     });
