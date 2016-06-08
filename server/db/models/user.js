@@ -6,12 +6,12 @@ var Sequelize = require('sequelize');
 module.exports = function (db) {
 
    var User = db.define('user', {
-        email: {
+       email: {
             type: Sequelize.STRING,
             allowNull: false,
             unique: true
         },
-        name: {
+         name: {
             type: Sequelize.STRING
         },
         isAdmin: {
