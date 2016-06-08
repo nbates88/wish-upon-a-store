@@ -8,14 +8,26 @@ app.config(function ($stateProvider) {
         resolve: {
         	collection: function($stateParams, ProductFactory){
                 var id = $stateParams.id;
-                console.log("id", id)
-        		return ProductFactory.getOneCollection(id)
-        	}
+                if(id === 'all'){
+                   return ProductFactory.getAllProducts(); 
+                }else{
+                   return ProductFactory.getProductsByCollectionId(id); 
+                }
+        	},
+            collectionName: function($stateParams, ProductFactory){
+                var id = $stateParams.id;
+                if(id === 'all'){
+                   return {name: "all"}; 
+                }else{
+                   return ProductFactory.getOneCollection(id); 
+                }
+            }
         }
     });
 
 });
 
-app.controller('CollectionCtrl', function($scope, collection){
-    $scope.collection = collection;
+app.controller('CollectionCtrl', function($scope, collection, collectionName){
+    $scope.name = collectionName;
+    $scope.products = collection;
 });

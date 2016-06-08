@@ -14,5 +14,8 @@ Order.belongsTo(User);
 Review.belongsTo(Product);
 Review.belongsTo(User);
 Product.belongsToMany(Collection, {through: 'CollectionProduct'});
+//
+Collection.belongsToMany(Product, {through: 'CollectionProduct'});
+//
 Product.belongsToMany(Wishlist, {through: 'WishlistProduct'});
 Wishlist.belongsTo(User);
