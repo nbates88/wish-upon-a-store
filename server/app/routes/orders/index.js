@@ -1,8 +1,10 @@
 var router = require('express').Router();
 var db = require('../../../db/_db');
 var orders = require('../../../db/models/order.js')(db);
+var User = require('../../../db/models/user.js')(db);
 var Sequelize = require('sequelize');
 module.exports = router;
+
 
 
 // GET ALL ORDERS
@@ -20,14 +22,13 @@ router.get('/', function(req, res, next) {
 // CREATE ORDER
 router.post('/', function(req, res, next) {
     orders.create(req.body)
-        .then(function(response) {
-            console.log("USSRRRRRR", req.user)
-                return response.setUser(req.user)
-        })
-        .then(function(response){
-            res.status(201).send(response);
-        })
-        .then(null, next)
+    .then(function(response) {
+        return response.setUser(req.user)
+    })
+    .then(function(response){
+        res.status(201).send(response);
+    })
+    .then(null, next)
 });
 
 // GET ONE ORDER BY ID

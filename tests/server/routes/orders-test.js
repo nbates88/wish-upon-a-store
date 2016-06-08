@@ -10,9 +10,9 @@ var app = require('../../../server/app')(db);
 var agent = supertest.agent(app);
 
 describe('/orders', function() {
-    // before(function() {
-    //     return db.sync({ force: true });
-    // });
+    before(function() {
+        return db.sync({ force: true });
+    });
 
     var userInfo = {
         name: 'Mr. H',
@@ -31,9 +31,9 @@ describe('/orders', function() {
         agent.post('/login').send(userInfo).end(done);
     })
 
-    // after(function() {
-    //     return db.sync({ force: true });
-    // });
+    after(function() {
+        return db.sync({ force: true });
+    });
 
     describe('GET /orders', function() {
         var order;
@@ -63,8 +63,6 @@ describe('/orders', function() {
     });
 
     describe('POST /orders', function() {
-
-
         it('creates a new order', function(done) {
                 return agent
                 .post('/api/orders')
