@@ -11,16 +11,11 @@ app.config(function ($stateProvider) {
                 console.log("id", id)
         		return ProductFactory.getOneCollection(id)
         	}
-            // collection: function(ProductFactory){
-            //     console.log(ProductFactory.getOneCollection)
-            //     return {name:"health"}
-            // }
         }
     });
 
 });
 
 app.controller('CollectionCtrl', function($scope, collection){
-    console.log("controller collection", collection);
     $scope.collection = collection;
-})
+});
