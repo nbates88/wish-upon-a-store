@@ -1,7 +1,7 @@
 var router = require('express').Router();
-var db = require('../../../db/_db');
-var collections = require('../../../db/models/collection.js')(db);
+var db = require('../../../db');
 var Sequelize = require('sequelize');
+var collections = db.model('collection');
 module.exports = router;
 
 
@@ -60,4 +60,17 @@ router.delete('/:id', function(req, res, next) {
             res.status(204).redirect('/');
         });
     }
+});
+
+// Get Collection's Products
+router.get('/:id/products', function(req, res, next) {
+    // collections.findAll({where: {id: req.params.id}, include: products})
+    collections.findById(req.params.id)
+    .then(function(collection){
+        return collection.getProducts();
+    })
+    .then(function(response) {
+        console.log(response, "collection's products");
+        res.status(200).send(response);
+    });
 });

@@ -1,6 +1,6 @@
 var router = require('express').Router();
-var db = require('../../../db/_db');
-var products = require('../../../db/models/product.js')(db);
+var db = require('../../../db');
+var products = db.model('product');
 var Sequelize = require('sequelize');
 module.exports = router;
 
