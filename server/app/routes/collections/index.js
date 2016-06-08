@@ -15,12 +15,12 @@ router.get('/', function(req, res, next) {
 
 // CREATE COLLECTION
 router.post('/', function(req, res, next) {
-    if(!req.user || !req.user.isAdmin) res.sendStatus(403);
+    if (!req.user || !req.user.isAdmin) res.sendStatus(403);
     else {
-    collections.create(req.body)
-        .then(function(response) {
-            res.status(201).send(response);
-        });
+        collections.create(req.body)
+            .then(function(response) {
+                res.status(201).send(response);
+            });
     }
 });
 
@@ -28,7 +28,7 @@ router.post('/', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
     collections.findById(req.params.id)
         .then(function(response) {
-            console.log(response);
+            // console.log(response);
             res.status(200).send(response);
         });
 });
@@ -36,28 +36,28 @@ router.get('/:id', function(req, res, next) {
 
 // UPDATE ONE COLLECTION
 router.put('/:id', function(req, res, next) {
-    if(!req.user || !req.user.isAdmin) res.sendStatus(403);
+    if (!req.user || !req.user.isAdmin) res.sendStatus(403);
     else {
-    collections.findById(req.params.id)
-        .then(function(response) {
-            return response.update(req.body);
-        })
-        .then(function(response) {
-            res.status(300).send(response);
-        });
+        collections.findById(req.params.id)
+            .then(function(response) {
+                return response.update(req.body);
+            })
+            .then(function(response) {
+                res.status(300).send(response);
+            });
     }
 });
 
 // DELETE ONE COLLECTION
 router.delete('/:id', function(req, res, next) {
-    if(!req.user || !req.user.isAdmin) res.sendStatus(403);
+    if (!req.user || !req.user.isAdmin) res.sendStatus(403);
     else {
-    collections.findById(req.params.id)
-        .then(function(response) {
-            return response.destroy();
-        })
-        .then(function(response) {
-            res.status(204).redirect('/');
-        });
+        collections.findById(req.params.id)
+            .then(function(response) {
+                return response.destroy();
+            })
+            .then(function(response) {
+                res.status(204).redirect('/');
+            });
     }
 });
