@@ -8,7 +8,7 @@ var Sequelize = require('sequelize');
 process.env.NODE_ENV = 'testing';
 var db = require('../../../server/db', {loggging: false});
 var Product = db.model('product');
-
+var User = db.model('user');
 // var Product = require('../../../server/db/models/product')(db);
 var supertest = require('supertest');
 
@@ -20,10 +20,10 @@ describe('/products', function() {
         return db.sync({ force: true });
     });
 
-    // afterEach(function() {
+    // after(function() {
     //     return db.sync({ force: true });
     // });
-   
+
     describe('GET /products', function() {
         var product;
         beforeEach(function() {
@@ -59,6 +59,23 @@ describe('/products', function() {
 
     describe('POST /products', function() {
 
+        var userInfo = {
+        name: 'Mr. H',
+        email: 'test@test.com',
+        isAdmin: true,
+        password: "myPassword"
+        };
+
+        before(function(done) {
+            return User.create(userInfo).then(function (user) {
+                done();
+            }).catch(done);
+        });
+
+        before(function(done){
+            agent.post('/login').send(userInfo).end(done);
+        })
+
         it('creates a new product', function(done) {
                 return agent
                 .post('/api/products')
@@ -68,15 +85,14 @@ describe('/products', function() {
                     price: 15.0,
                     inventoryQuantity: 5
                 })
-                .expect(200)
+                .expect(201)
                 .end(function(err, res) {
                     if (err) return done(err);
-                    expect(res.product.name).to.equal('Product3');
+                    expect(res.body.name).to.equal('Product3');
                     expect(res.body.id).to.exist;
-                    Book.findById(res.body.id)
+                    Product.findById(res.body.id)
                     .then(function(b) {
                         expect(b).to.not.be.null;
-                        expect(res.body).to.eql(toPlainObject(b));
                         done();
                     })
                     .catch(done);
@@ -111,7 +127,6 @@ describe('/products', function() {
                     Product.findById(2)
                     .then(function(b) {
                         expect(b).to.not.be.null;
-                        expect(res.body).to.eql(toPlainObject(b));
                         done();
                     })
                     .catch(done);
