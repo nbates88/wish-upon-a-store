@@ -85,31 +85,32 @@ describe('/users', function() {
         });
     });
 
-    describe('GET /products/:id', function() {
-        it('returns a product by id', function(done) {
+    describe('GET /users/:id', function() {
+        it('returns a user by id', function(done) {
                 return agent
-                .get('/api/products/1')
+                .get('/api/users/1')
                 .expect(200)
                 .end(function(err, res) {
                     if (err) return done(err);
-                    expect(res.body.name).to.equal('Product1');
+                    expect(res.body.name).to.equal('Mr. H');
                     done();
                 });
         });
     });
 
-    describe('PUT /products/:id', function() {
-        it('updates a product', function(done) {
+    describe('PUT /users/:id', function() {
+        
+        it('updates a user', function(done) {
                 return agent
-                .put('/api/products/2')
+                .put('/api/users/1')
                 .send({
-                    name: 'A Product'
+                    name: 'A new Name'
                 })
                 .expect(200)
                 .end(function(err, res) {
                     if (err) return done(err);
-                    expect(res.body.name).to.equal('A Product');
-                    Product.findById(2)
+                    expect(res.body.name).to.equal('A new Name');
+                    User.findById(1)
                     .then(function(b) {
                         expect(b).to.not.be.null;
                         done();
@@ -119,14 +120,14 @@ describe('/users', function() {
         });
     });
 
-    describe('DELETE /products/:id', function() {
-        it('deletes a product', function(done) {
+    describe('DELETE /users/:id', function() {
+        it('deletes a user', function(done) {
                 return agent
-                .delete('/api/products/2')
+                .delete('/api/users/1')
                 .expect(204)
                 .end(function (err, res) {
                     if (err) return done(err);
-                    Product.findById(2)
+                    User.findById(1)
                     .then(function (b) {
                         expect(b).to.be.null;
                         done();

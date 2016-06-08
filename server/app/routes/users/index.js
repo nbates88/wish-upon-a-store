@@ -39,28 +39,28 @@ router.get('/:id', function(req, res, next) {
 
 // UPDATE ONE USER
 router.put('/:id', function(req, res, next) {
-    if(!req.user || !req.user.isAdmin || req.user !== req.params.id) res.sendStatus(403);
+    if(!req.user || !req.user.isAdmin || req.user.dataValues.id !== +req.params.id) res.sendStatus(403);
     else {
     users.findById(req.params.id)
         .then(function(response) {
             return response.update(req.body);
         })
         .then(function(response) {
-            res.status(300).send(response);
+            res.status(200).send(response);
         });
     }
 });
 
 // DELETE ONE USER
 router.delete('/:id', function(req, res, next) {
-    if(!req.user || !req.user.isAdmin || req.user !== req.params.id) res.sendStatus(403);
+    if(!req.user || !req.user.isAdmin || req.user.dataValues.id !== +req.params.id) res.sendStatus(403);
     else {
     users.findById(req.params.id)
         .then(function(response) {
             return response.destroy();
         })
         .then(function(response) {
-            res.status(204).redirect('/');
+            res.redirect(204, '/');
         });
     }
 });
