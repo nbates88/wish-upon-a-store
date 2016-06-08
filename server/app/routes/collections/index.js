@@ -28,6 +28,7 @@ router.post('/', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
     collections.findById(req.params.id)
         .then(function(response) {
+            console.log(response);
             res.status(200).send(response);
         });
 });
