@@ -14,28 +14,31 @@ function makeFakeCollections(){
           {id: 2, name: 'Health'}];
 }
 
-// function makeFakeProduct(){
-//   return {name: 'lose weight',
-//             description: 'lose five pounds',
-//             price: 5.50,
-//             inventoryQuantity: 5
-//         };
-// }
+function makeFakeProduct(){
+  return {name: 'lose weight',
+            id: 1,
+            description: 'lose five pounds',
+            price: 5.50,
+            inventoryQuantity: 5
+        };
+}
 
-// function makeFakeProducts(){
-//   return [{name: 'lose weight',
-//             description: 'lose five pounds',
-//             price: 5.50,
-//             inventoryQuantity: 5
-//           },
-//           {
-//             name: 'get a job after senior phase',
-//             description: 'finished Grace Hopper yayyy need job',
-//             price: 10.50,
-//             inventoryQuantity: 22
-//           }
-//          ];
-//}
+function makeFakeProducts(){
+  return [{name: 'lose weight',
+            id: 1,
+            description: 'lose five pounds',
+            price: 5.50,
+            inventoryQuantity: 5
+          },
+          {
+            name: 'get a job after senior phase',
+            id: 2,
+            description: 'finished Grace Hopper yayyy need job',
+            price: 10.50,
+            inventoryQuantity: 22
+          }
+         ];
+}
 
 describe('ProductFactory Collections', function () {
   /*------------------
@@ -46,26 +49,22 @@ describe('ProductFactory Collections', function () {
   // the `Todo` factory will be loaded before each test
   // $httpBackend lets us "stub" $http responses
   // fakeResTodo is a modified copy of fakeReqTodo (a randomized todo object)
-  var ProductFactory, $httpBackend, fakeReqCollection, fakeResCollection;
+  var ProductFactory, $httpBackend, fakeCollection;
 
   beforeEach(inject(function ($injector) {
     ProductFactory = $injector.get('ProductFactory');
     $httpBackend = $injector.get('$httpBackend');
-    fakeReqCollection = makeFakeCollection();
-    fakeResCollection = {
-      id: fakeReqCollection.id,
-      name: fakeReqCollection.name
-    };
+    fakeCollection = makeFakeCollection();
   }));
   // checks that $httpBackend received and handled all expected calls
-  // afterEach(function(){
-  //   try {
-  //     $httpBackend.verifyNoOutstandingExpectation(false);
-  //     $httpBackend.verifyNoOutstandingRequest();
-  //   } catch (err) {
-  //     this.test.error(err);
-  //   }
-  // });
+  afterEach(function(){
+    try {
+      $httpBackend.verifyNoOutstandingExpectation(false);
+      $httpBackend.verifyNoOutstandingRequest();
+    } catch (err) {
+      this.test.error(err);
+    }
+  });
 
   /*------------------
       TEST SPECS
@@ -75,11 +74,11 @@ describe('ProductFactory Collections', function () {
 //GET one collection
   it('`.getOneCollection` fetches a backend collection by id', function (done) {
     $httpBackend
-      .expect('GET', '/api/collections/' + fakeReqCollection.id)
-      .respond(200, fakeResCollection);
-    ProductFactory.getOneCollection(fakeReqCollection.id)
+      .expect('GET', '/api/collections/' + fakeCollection.id)
+      .respond(200, fakeCollection);
+    ProductFactory.getOneCollection(fakeCollection.id)
       .then(function (collection) {
-        expect(collection).to.deep.equal(fakeResCollection);
+        expect(collection).to.deep.equal(fakeCollection);
       })
       .catch(done);
     $httpBackend.flush();
@@ -105,53 +104,63 @@ describe('ProductFactory Collections', function () {
 });
 
 
-// describe('ProductFactory Products', function () {
-//   /*------------------
-//       CONFIGURATION
-//   /------------------*/
+describe('ProductFactory Products', function () {
+  /*------------------
+      CONFIGURATION
+  /------------------*/
 
-//   beforeEach(module('FullstackGeneratedApp'));  
-//   // the `Todo` factory will be loaded before each test
-//   // $httpBackend lets us "stub" $http responses
-//   // fakeResTodo is a modified copy of fakeReqTodo (a randomized todo object)
-//   var ProductFactory, $httpBackend, fakeReqCollection, fakeResCollection;
+  beforeEach(module('FullstackGeneratedApp'));  
+  // the `Todo` factory will be loaded before each test
+  // $httpBackend lets us "stub" $http responses
+  // fakeResTodo is a modified copy of fakeReqTodo (a randomized todo object)
+  var ProductFactory, $httpBackend, fakeProduct;
 
-//   beforeEach(inject(function ($injector) {
-//     ProductFactory = $injector.get('ProductFactory');
-//     $httpBackend = $injector.get('$httpBackend');
-//     fakeReqProduct = makeFakeProduct();
-//     fakeResProduct = {
-//       id: fakeReqProduct.id,
-//       name: fakeReqProduct.name
-//     };
-//   }));
-//   // checks that $httpBackend received and handled all expected calls
-//   afterEach(function(){
-//     try {
-//       $httpBackend.verifyNoOutstandingExpectation(false);
-//       $httpBackend.verifyNoOutstandingRequest();
-//     } catch (err) {
-//       this.test.error(err);
-//     }
-//   });
+  beforeEach(inject(function ($injector) {
+    ProductFactory = $injector.get('ProductFactory');
+    $httpBackend = $injector.get('$httpBackend');
+    fakeProduct = makeFakeProduct();
+  }));
+  // checks that $httpBackend received and handled all expected calls
+  afterEach(function(){
+    try {
+      $httpBackend.verifyNoOutstandingExpectation(false);
+      $httpBackend.verifyNoOutstandingRequest();
+    } catch (err) {
+      this.test.error(err);
+    }
+  });
 
-//   /*------------------
-//       TEST SPECS
-//   /------------------*/
+  /*------------------
+      TEST SPECS
+  /------------------*/
 
-// //GET one product
-//   it('`.getOneProduct` fetches a backend product by id', function (done) {
-//     $httpBackend
-//       .expect('GET', '/api/products/' + fakeReqProduct.id)
-//       .respond(200, fakeResProduct);
-//     ProductFactory.getOneProduct(fakeReqProduct.id)
-//       .then(function (product) {
-//         expect(product).to.deep.equal(fakeResProduct);
-//       })
-//       .catch(done);
-//     $httpBackend.flush();
-//     done();
-//   });
+//GET one product
+  it('`.getOneProduct` fetches a backend product by id', function (done) {
+    $httpBackend
+      .expect('GET', '/api/products/' + fakeProduct.id)
+      .respond(200, fakeProduct);
+    ProductFactory.getOneProduct(fakeProduct.id)
+      .then(function (product) {
+        expect(product).to.deep.equal(fakeProduct);
+      })
+      .catch(done);
+    $httpBackend.flush();
+    done();
+  });
 
-// //GET all products
-// });
+//GET all products
+  it('`.getAllProducts` fetches a backend for products', function (done) {
+    var fakeProducts = makeFakeProducts();
+    $httpBackend
+      .expect('GET', '/api/products')
+      .respond(200, fakeProducts);
+    ProductFactory.getAllProducts()
+      .then(function (products) {
+        expect(products).to.deep.equal(fakeProducts);
+      })
+      .catch(done);
+    $httpBackend.flush();
+    done();
+  });
+
+});
