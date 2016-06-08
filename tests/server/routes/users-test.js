@@ -3,62 +3,53 @@ var expect = require('chai').expect;
 var Sequelize = require('sequelize');
 process.env.NODE_ENV = 'testing';
 var db = require('../../../server/db', {loggging: false});
-var Product = db.model('product');
 var User = db.model('user');
 var supertest = require('supertest');
 
 var app = require('../../../server/app')(db);
 var agent = supertest.agent(app);
 
-describe('/products', function() {
+describe('/users', function() {
+
     before(function() {
         return db.sync({ force: true });
     });
 
+    var user;
     var userInfo = {
         name: 'Mr. H',
         email: 'test@test.com',
         isAdmin: true,
         password: "myPassword"
     };
+    var user2Info = {
+        name: 'Mrs. M',
+        email: 'email@test.com',
+        isAdmin: false,
+        password: "password"
+    };
 
-    before(function(done) {
-        return User.create(userInfo).then(function (user) {
-            done();
-        }).catch(done);
+    before(function() {
+        return User.create(userInfo)
+        .then(function (u) {
+            user = u;
+            return User.create(user2Info)
+        })
     });
 
     before(function(done){
         agent.post('/login').send(userInfo).end(done);
     })
 
-    after(function() {
-        return db.sync({ force: true });
-    });
+    // after(function() {
+    //     return db.sync({ force: true });
+    // });
 
-    describe('GET /products', function() {
-        var product;
-        beforeEach(function() {
-            return Product.create({
-                    name: 'Product1',
-                    description: 'a product',
-                    price: 10.0,
-                    inventoryQuantity: 2
-                })
-                .then(function(p) {
-                    product = p;
-                    return Product.create({
-                        name: 'Product2',
-                        description: 'another product',
-                        price: 12.0,
-                        inventoryQuantity: 5
-                    });
-                });
-        });
+    describe('GET /users', function() {
 
-        it('returns all of the products in the DB', function(done) {
+        it('returns all of the users in the DB', function(done) {
                 return agent
-                .get('/api/products')
+                .get('/api/users')
                 .expect(200)
                 .end(function(err, res) {
                     if (err) return done(err);
@@ -69,24 +60,22 @@ describe('/products', function() {
         });
     });
 
-    describe('POST /products', function() {
-
-
-        it('creates a new product', function(done) {
+    describe('POST /users', function() {
+        it('creates a new user', function(done) {
                 return agent
-                .post('/api/products')
+                .post('/api/users')
                 .send({
-                    name: 'Product3',
-                    description: 'yay product',
-                    price: 15.0,
-                    inventoryQuantity: 5
+                    name: 'Mrs. Blah',
+                    email: 'emailthree@test.com',
+                    isAdmin: false,
+                    password: "Aaapassword"
                 })
                 .expect(201)
                 .end(function(err, res) {
                     if (err) return done(err);
-                    expect(res.body.name).to.equal('Product3');
+                    expect(res.body.name).to.equal('Mrs. Blah');
                     expect(res.body.id).to.exist;
-                    Product.findById(res.body.id)
+                    User.findById(res.body.id)
                     .then(function(b) {
                         expect(b).to.not.be.null;
                         done();

@@ -12,7 +12,8 @@ router.get('/', function(req, res, next) {
     users.findAll()
         .then(function(response) {
             res.status(200).send(response);
-        });
+        })
+        .then(null, next)
     }
 });
 
@@ -21,7 +22,8 @@ router.post('/', function(req, res, next) {
     users.create(req.body)
         .then(function(response) {
             res.status(201).send(response);
-        });
+        })
+        .then(null, next)
 });
 
 // GET ONE USER BY ID

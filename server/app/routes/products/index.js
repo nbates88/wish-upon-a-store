@@ -10,7 +10,6 @@ module.exports = router;
 router.get('/', function(req, res, next) {
     products.findAll()
         .then(function(response) {
-            console.log("response", response);
             res.status(200).send(response);
         })
         .then(null, next)
