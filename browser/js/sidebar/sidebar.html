@@ -7,10 +7,10 @@
           </section>
           <ul >
           <li>
-          <a ui-sref="">All</a>
+          <!-- <a ui-sref="">All</a> -->
           </li>
           <li ng-repeat="item in items">
-          <a ui-sref="">{{ item.label }}</a>
+          <a ui-sref="collections({id:item.id})">{{ item.name }}</a>
           </li>
           </ul>
       </div>
