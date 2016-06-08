@@ -1,55 +1,57 @@
-// Instantiate all models
 var expect = require('chai').expect;
 var Sequelize = require('sequelize');
 process.env.NODE_ENV = 'testing';
 var db = require('../../../server/db', {loggging: false});
+var Order = db.model('order');
 var User = db.model('user');
 var supertest = require('supertest');
 
 var app = require('../../../server/app')(db);
 var agent = supertest.agent(app);
 
-describe('/users', function() {
+describe('/orders', function() {
+    // before(function() {
+    //     return db.sync({ force: true });
+    // });
 
-    before(function() {
-        return db.sync({ force: true });
-    });
-
-    var user;
     var userInfo = {
         name: 'Mr. H',
         email: 'test@test.com',
         isAdmin: true,
         password: "myPassword"
     };
-    var user2Info = {
-        name: 'Mrs. M',
-        email: 'email@test.com',
-        isAdmin: false,
-        password: "password"
-    };
 
-    before(function() {
-        return User.create(userInfo)
-        .then(function (u) {
-            user = u;
-            return User.create(user2Info)
-        })
+    before(function(done) {
+        return User.create(userInfo).then(function (user) {
+            done();
+        }).catch(done);
     });
 
     before(function(done){
         agent.post('/login').send(userInfo).end(done);
     })
 
-    after(function() {
-        return db.sync({ force: true });
-    });
+    // after(function() {
+    //     return db.sync({ force: true });
+    // });
 
-    describe('GET /users', function() {
+    describe('GET /orders', function() {
+        var order;
+        beforeEach(function() {
+            return Order.create({
+                status: "Processing"
+                })
+                .then(function(o) {
+                    order = o;
+                    return Order.create({
+                       status: "Created"
+                    });
+                });
+        });
 
-        it('returns all of the users in the DB', function(done) {
+        it('returns all of the orders in the DB', function(done) {
                 return agent
-                .get('/api/users')
+                .get('/api/orders')
                 .expect(200)
                 .end(function(err, res) {
                     if (err) return done(err);
@@ -60,22 +62,21 @@ describe('/users', function() {
         });
     });
 
-    describe('POST /users', function() {
-        it('creates a new user', function(done) {
+    describe('POST /orders', function() {
+
+
+        it('creates a new order', function(done) {
                 return agent
-                .post('/api/users')
+                .post('/api/orders')
                 .send({
-                    name: 'Mrs. Blah',
-                    email: 'emailthree@test.com',
-                    isAdmin: false,
-                    password: "Aaapassword"
+                    status: "Created"
                 })
                 .expect(201)
                 .end(function(err, res) {
                     if (err) return done(err);
-                    expect(res.body.name).to.equal('Mrs. Blah');
+                    expect(res.body.status).to.equal('Created');
                     expect(res.body.id).to.exist;
-                    User.findById(res.body.id)
+                    Order.findById(res.body.id)
                     .then(function(b) {
                         expect(b).to.not.be.null;
                         done();
@@ -85,32 +86,31 @@ describe('/users', function() {
         });
     });
 
-    describe('GET /users/:id', function() {
-        it('returns a user by id', function(done) {
+    describe('GET /orders/:id', function() {
+        it('returns an order by id', function(done) {
                 return agent
-                .get('/api/users/1')
+                .get('/api/orders/1')
                 .expect(200)
                 .end(function(err, res) {
                     if (err) return done(err);
-                    expect(res.body.name).to.equal('Mr. H');
+                    expect(res.body.status).to.equal('Processing');
                     done();
                 });
         });
     });
 
-    describe('PUT /users/:id', function() {
-        
-        it('updates a user', function(done) {
+    describe('PUT /orders/:id', function() {
+        it('updates an order', function(done) {
                 return agent
-                .put('/api/users/1')
+                .put('/api/orders/2')
                 .send({
-                    name: 'A new Name'
+                    status: 'Processing'
                 })
                 .expect(200)
                 .end(function(err, res) {
                     if (err) return done(err);
-                    expect(res.body.name).to.equal('A new Name');
-                    User.findById(1)
+                    expect(res.body.status).to.equal('Processing');
+                    Order.findById(2)
                     .then(function(b) {
                         expect(b).to.not.be.null;
                         done();
@@ -120,14 +120,14 @@ describe('/users', function() {
         });
     });
 
-    describe('DELETE /users/:id', function() {
-        it('deletes a user', function(done) {
+    describe('DELETE /orders/:id', function() {
+        it('deletes an order', function(done) {
                 return agent
-                .delete('/api/users/1')
+                .delete('/api/orders/2')
                 .expect(204)
                 .end(function (err, res) {
                     if (err) return done(err);
-                    User.findById(1)
+                    Order.findById(2)
                     .then(function (b) {
                         expect(b).to.be.null;
                         done();
