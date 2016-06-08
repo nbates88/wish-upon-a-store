@@ -1,27 +1,28 @@
 app.factory('ProductFactory', function ($http) {
 	return {
 		getOneProduct: function(id){
-			$http.get('/api/products/'+id)
+			return $http.get('/api/products/'+id)
 				.then(function(product){
-					return product
+					return product.data
 				})
 		},
 		getAllProducts: function(){
-			$http.get('/api/products')
+			return $http.get('/api/products')
 				.then(function(products){
-					return products
+					return products.data
 				})
 		},
 		getOneCollection: function(id){
-			$http.get('/api/collections/'+id)
-				.then(function(products){
-					return products
+			return $http.get('/api/collections/'+id)
+				.then(function(collection){
+					console.log("factory collection", collection.data)
+					return collection.data
 				})
 		},
 		getAllCollections: function(){
-			$http.get('/api/collections')
+			return $http.get('/api/collections')
 				.then(function(collections){
-					return collections
+					return collections.data
 				})
 		}
 	}
