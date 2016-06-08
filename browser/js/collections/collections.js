@@ -28,6 +28,6 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('CollectionCtrl', function($scope, collection, collectionName){
-    $scope.name = collectionName;
+    $scope.collection = collectionName;
     $scope.products = collection;
 });
