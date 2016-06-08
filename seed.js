@@ -86,7 +86,7 @@ var seedProducts = function (collections) {
             price: 5.50,
             inventoryQuantity: 5
         })
-   .then(function(product){
+    .then(function(product){
         var product = product;
         return product.addCollection(collections.health)
          .then(function(product){
@@ -112,12 +112,8 @@ var seedProducts = function (collections) {
 };
 
 db.sync({ force: true })
-    .then(function () {
-        return seedUsers();
-    })
-    .then(function(){
-        return seedCollections();
-    })
+    .then(seedUsers)
+    .then(seedCollections)
     .then(seedProducts)
     .then(function () {
         console.log(chalk.green('Seed successful!'));

@@ -5,13 +5,21 @@ module.exports = function (db) {
 
     var Review = db.define('review', {
        stars: {
-       	type: Sequelize.ENUM(1, 2, 3, 4, 5),
-       	allowNull: false
+       	type: Sequelize.INTEGER,
+       	allowNull: false,
+        validate: {
+          isInt: true,
+          min: 1,
+          max: 5
+        }
        },
+
        description: {
        	type: Sequelize.TEXT,
        	allowNull: false,
-       	notEmpty: true
+        validate: {
+          notEmpty: true
+        }
        }
      
     })

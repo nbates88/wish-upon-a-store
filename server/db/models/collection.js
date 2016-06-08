@@ -6,7 +6,10 @@ module.exports = function (db) {
     var Collection = db.define('collection', {
        name: {
        	type: Sequelize.STRING,
-       	allowNull: false
+       	allowNull: false,
+       	validate: {
+       		notEmpty: true
+       	}
        }
     })
 

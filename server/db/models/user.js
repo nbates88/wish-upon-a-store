@@ -1,4 +1,5 @@
 'use strict';
+
 var crypto = require('crypto');
 var _ = require('lodash');
 var Sequelize = require('sequelize');
@@ -9,7 +10,10 @@ module.exports = function (db) {
        email: {
             type: Sequelize.STRING,
             allowNull: false,
-            unique: true
+            unique: true,
+            validate: {
+                isEmail: true
+            }
         },
          name: {
             type: Sequelize.STRING

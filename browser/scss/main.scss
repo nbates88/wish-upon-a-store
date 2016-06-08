@@ -19,6 +19,13 @@ body {
   margin: 0 auto;
 }
 
+sidebar {
+	a {
+		color: navy;
+	}
+	
+}
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';

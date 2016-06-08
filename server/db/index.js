@@ -2,9 +2,6 @@
 var db = require('./_db');
 module.exports = db;
 
-
-require('./models/user')(db);
-
 var User = require('./models/user')(db);
 var Product = require('./models/product')(db);
 var Order = require('./models/order')(db);
