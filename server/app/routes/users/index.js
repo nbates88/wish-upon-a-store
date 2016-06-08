@@ -16,13 +16,14 @@ router.get('/', function(req, res, next) {
     }
 });
 
-// CREATE USER
-router.post('/', function(req, res, next) {
-    users.create(req.body)
-        .then(function(response) {
-            res.status(201).send(response);
-        });
-});
+// // Moved this to server/app/configure/authentication/local.js
+// // CREATE USER
+// router.post('/', function(req, res, next) {
+//     users.create(req.body)
+//         .then(function(response) {
+//             res.status(201).send(response);
+//         });
+// });
 
 // GET ONE USER BY ID
 router.get('/:id', function(req, res, next) {
