@@ -4,7 +4,6 @@
   "description": "A generated project at Fullstack Academy",
   "main": "server/start.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha -w tests/server/**/*-test.js",
     "start": "nodemon --watch server -e js,html server/start.js",
     "postinstall": "gulp build",
     "test": "nodemon --exec './node_modules/.bin/mocha -w tests/server/**/*-test.js || true'"
