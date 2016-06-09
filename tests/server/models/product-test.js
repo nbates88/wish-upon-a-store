@@ -139,21 +139,18 @@ describe('Product model', function () {
             });
         });
 
-        // KC: hook method not working as expected. Low priority.
-        // it('requires price to have 2 decimal places', function() {
-        //     return Product.build({
-        //         name: 'Post-graduation Employment',
-        //         description: "You've busted your butt on databases and routes, eaten countless bowls of cereal, and trusted the process despite deep DEEP (we're talkin' deeeeeeeeep) levels of confusion and doubt. Now let's get you a JOB homie!",
-        //         price: 7.155,
-        //         inventoryQuantity: 22,
-        //         imageUrl: "https://pixabay.com/static/uploads/photo/2015/05/24/21/19/wish-782424_960_720.jpg"
-        //     })
-        //     .validate()
-        //     .then(function(result) {
-        //         expect(result).to.be.an('object');
-        //         expect(result.message).to.equal('Validation error: Validation isDecimal failed');
-        //     });
-        // });
+        it('requires price to have 2 decimal places', function() {
+            return Product.create({
+                name: 'Post-graduation Employment',
+                description: "You've busted your butt on databases and routes, eaten countless bowls of cereal, and trusted the process despite deep DEEP (we're talkin' deeeeeeeeep) levels of confusion and doubt. Now let's get you a JOB homie!",
+                price: 7.155,
+                inventoryQuantity: 22,
+                imageUrl: "https://pixabay.com/static/uploads/photo/2015/05/24/21/19/wish-782424_960_720.jpg"
+            })
+            .then(function(savedProduct) {
+                expect(savedProduct.price).to.equal('7.16');
+            });
+        });
 
         it('requires inventoryQuantity', function() {
             return Product.build({
@@ -183,12 +180,6 @@ describe('Product model', function () {
                 expect(result.message).to.equal('Validation error: Validation isInt failed');
             });
         });
-
-
-
-        
-
-
 
     });  // ends describe validations block
 
