@@ -78,6 +78,7 @@ app.controller('AdminCtrl', function($scope, ProductFactory, users, products, co
     };
 
     $scope.createProduct = function(data){
+        console.log($scope.productForm);
         // $scope.productForm.$setPristine();
         AdminFactory.createProduct(data)
             .then(function(product){
@@ -85,12 +86,12 @@ app.controller('AdminCtrl', function($scope, ProductFactory, users, products, co
             })
     }
     $scope.deleteCollection = function(collection){
-        $scope.collections.splice($scope.collections.indexOf(product), 1)
+        $scope.collections.splice($scope.collections.indexOf(collection), 1)
         AdminFactory.deleteCollection(collection.id)
     };
 
     $scope.createCollection = function(data){
-        $scope.collectionForm.$setPristine();
+        // $scope.collectionForm.$setPristine();
         AdminFactory.createCollection(data)
             .then(function(collection){
                 $scope.collections.push(collection)
