@@ -12,7 +12,7 @@ module.exports = router;
 router.get('/', function(req, res, next) {
     if(!req.user || !req.user.isAdmin) res.sendStatus(403);
     else{
-    orders.findAll()
+        orders.findAll()
         .then(function(response) {
             res.status(200).send(response);
         })
