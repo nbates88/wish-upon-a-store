@@ -28,7 +28,6 @@ router.post('/', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
     collections.findById(req.params.id)
         .then(function(response) {
-            // console.log(response);
             res.status(200).send(response);
         });
 });
@@ -75,8 +74,8 @@ router.get('/:id/products', function(req, res, next) {
 
 // Add Product to Collection
 router.post('/:id/products', function(req, res, next) {
-    Promise.all[collections.findById(req.params.id),
-    products.findOrCreate({where: req.body})]
+    Promise.all([collections.findById(req.params.id),
+    products.findOrCreate({where: req.body})])
     .then(function(response){
         var collection = response[0];
         var product = response[1];

@@ -17,7 +17,7 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('ProductCtrl', function($scope, product, $state, ItemFactory, AdminFactory, user){
+app.controller('ProductCtrl', function($scope, product, $state, ItemFactory, AdminFactory, user, $http){
     $scope.deleteProduct = function(id){
         AdminFactory.deleteProduct(id);
         $state.go('home');
@@ -26,6 +26,11 @@ app.controller('ProductCtrl', function($scope, product, $state, ItemFactory, Adm
     $scope.user = user;
    
     ItemFactory.addProduct(product)
+
+  // $scope.test = $http.get('/api/collections')
+  //               .then(function(collections){
+  //                   return collections.data
+  //               })
 
     $scope.addToCart = function(){
         //use factory function to findOrCreate order where status is open
