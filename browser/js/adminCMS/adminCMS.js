@@ -67,6 +67,11 @@ app.controller('AdminCtrl', function($scope, ProductFactory, users, products, Ad
              
         })
     };
+
+     $scope.deleteProduct = function(product){
+        $scope.products.splice($scope.products.indexOf(product), 1)
+        AdminFactory.deleteProduct(product.id)
+    };
 });
 
 
