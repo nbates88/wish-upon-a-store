@@ -1,19 +1,12 @@
 <div>
 <!-- {{accountInfo}} -->
   <h2>Welcome, {{accountInfo.email}}</h2>
-  <p>{{accountInfo.email}}</p>
+  <p>Email address: <span>{{accountInfo.email}}</span></p>
+  
+  <ul>
+  	<li><a ui-sref="myAccount.myOrders">View My Orders</a></li>
+  	<li><a ui-sref="myAccount.editAccount">Edit My Account Information</a></li>
+  </ul>
 
-  <h3>My Orders</h3>
-  <table class="tg">
-    <tr>
-      <th>Created On</th>
-      <th>Status</th>
-      <th>Last Updated</th>
-    </tr>
-    <tr ng-repeat="order in accountInfo.Orders">
-      <td>{{order.createdAt}}</td>
-      <td>{{order.status}}</td>
-      <td>{{order.updatedAt}}</td>
-    </tr>
-  </table>
+  <ui-view></ui-view>
 </div>
