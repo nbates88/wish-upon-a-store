@@ -1,3 +1,8 @@
+/*
+//////////////////
+ NOTE: THIS NEEDS TO BE CHANGED ONCE THE ORDER FUNCTIONALITY IS ADDED
+ ////////////////
+*/
 app.factory('ItemFactory', function () {
 	var product =[];
 	return {
