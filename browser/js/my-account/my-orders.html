@@ -1,0 +1,14 @@
+<h4>My Orders</h4>
+
+<table class="tg">
+  <tr>
+    <th>Created On</th>
+    <th>Status</th>
+    <th>Last Updated</th>
+  </tr>
+  <tr ng-repeat="order in orders">
+    <td>{{order._createdAt}}</td>
+    <td>{{order.status}}</td>
+    <td>{{order._updatedAt}}</td>
+  </tr>
+</table>

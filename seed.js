@@ -24,6 +24,7 @@ var chalk = require('chalk');
 var db = require('./server/db');
 var User = db.model('user');
 var Product = db.model('product');
+var Order = db.model('order');
 var Collection = db.model('collection');
 
 
@@ -183,10 +184,34 @@ var seedProducts = function (collections) {
      return Promise.all([product1, product2, product3, product4, product5, product6]);
 };
 
+var seedOrders = function () {
+
+    var orders = [
+        {
+            status: 'Created',
+            userId: 1
+        },
+        {
+            status: 'Processing',
+            userId: 2
+        }
+    ];
+
+    var creatingOrders = orders.map(function (order) {
+        return Order.create(order)
+            .then(function(response) {
+                return response
+            });
+    });
+
+    return Promise.all(creatingOrders);
+
+};
 db.sync({ force: true })
     .then(seedUsers)
     .then(seedCollections)
     .then(seedProducts)
+    .then(seedOrders)
     .then(function () {
         console.log(chalk.green('Seed successful!'));
         process.exit(0);
