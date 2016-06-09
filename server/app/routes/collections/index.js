@@ -64,13 +64,30 @@ router.delete('/:id', function(req, res, next) {
 
 // Get Collection's Products
 router.get('/:id/products', function(req, res, next) {
-    // collections.findAll({where: {id: req.params.id}, include: products})
     collections.findById(req.params.id)
     .then(function(collection){
         return collection.getProducts();
     })
     .then(function(response) {
-        console.log(response, "collection's products");
         res.status(200).send(response);
     });
 });
+
+// Add Product to Collection
+router.post('/:id/products', function(req, res, next) {
+    Promise.all[collections.findById(req.params.id),
+    products.findOrCreate({where: req.body})]
+    .then(function(response){
+        var collection = response[0];
+        var product = response[1];
+        return collection.addProduct(product);
+    })
+    .then(function(response) {
+        res.status(200).send(response);
+    });
+});
+
+// Need to figure out a route to Delete Product from Collection
+// router.delete('/:catid/products/:productid', function(req, res, next) {
+    
+// });
