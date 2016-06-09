@@ -17,7 +17,7 @@ app.config(function ($stateProvider) {
             collectionName: function($stateParams, ProductFactory){
                 var id = $stateParams.id;
                 if(id === 'all'){
-                   return {name: "all"}; 
+                   return {name: "All"}; 
                 }else{
                    return ProductFactory.getOneCollection(id); 
                 }
