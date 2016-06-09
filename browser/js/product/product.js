@@ -17,26 +17,24 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('ProductCtrl', function($scope, product, $state, ItemFactory, AdminFactory, user, $http){
+app.controller('ProductCtrl', function($scope, product, $state, OrderFactory, AdminFactory, user, $http){
+    
     $scope.deleteProduct = function(id){
         AdminFactory.deleteProduct(id);
         $state.go('home');
-    }
+    };
+
     $scope.product = product;
     $scope.user = user;
    
-    ItemFactory.addProduct(product)
+    // ItemFactory.addProduct(product)
 
-  // $scope.test = $http.get('/api/collections')
-  //               .then(function(collections){
-  //                   return collections.data
-  //               })
-
-    $scope.addToCart = function(){
+    $scope.addToCart = function(id){
         //use factory function to findOrCreate order where status is open
         //add product to order
+        OrderFactory.addProductToOrder(id);
         //redirect to shoppingCart 
         //and in shoppingCart state, have factoryfunc that getsOrder and renders with res. order from backend
         $state.go('shoppingCart')
-    }
-})
+    };
+});
