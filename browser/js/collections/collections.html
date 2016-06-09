@@ -1,7 +1,7 @@
 <div class="col-xs-10">
   <h1>{{ collection.name }} Collection</h1>
   <ul>
-    <a ui-sref="product({id:product.id})"><li ng-repeat="product in products"> {{product.name}} </li></a>
+    <li ng-repeat="product in products"><a ui-sref="product({id:product.id})"> {{product.name}} </a></li>
     <!-- <img src={{product.imageUrl}} /> -->
   </ul>
 </div>
