@@ -41,6 +41,7 @@ app.factory('ProductFactory', function($http) {
         createCollection: function(data) {
             return $http.post('/api/collections', data)
                 .then(function(collection) {
+                	cachedCollections.push(collection.data)
                     return collection.data
                 })
         },
@@ -53,7 +54,6 @@ app.factory('ProductFactory', function($http) {
         addProductToCollection: function(id, data) {
             return $http.post('/api/collections/' + id + '/products', data)
                 .then(function(collection) {
-                    cachedCollections.push(collection.data)
                     return collection.data
                 })
         },
