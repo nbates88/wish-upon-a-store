@@ -4,7 +4,15 @@ app.config(function ($stateProvider) {
     $stateProvider.state('admin', {
         url: '/admin',
         controller: 'AdminCtrl',
-        templateUrl: 'js/adminCMS/adminCMS.html'
+        templateUrl: 'js/adminCMS/adminCMS.html',
+        resolve: {
+            users: function(AdminFactory){
+                return AdminFactory.getAllUsers()
+            },
+            products: function(ProductFactory){
+                return ProductFactory.getAllProducts()
+            }
+        }
     });
 
     $stateProvider.state('admin.users', {
@@ -30,6 +38,38 @@ app.config(function ($stateProvider) {
 });
 
 
-app.controller('AdminCtrl', function($scope){
-    
+app.controller('AdminCtrl', function($scope, ProductFactory, users, products, AdminFactory){
+    $scope.users = users; 
+    $scope.products = products;
+    // realized admin doesn't need to create user
+    // $scope.createUser = AdminFactory.createUser;
+   
+    $scope.deleteUser = function(user){
+        $scope.users.splice($scope.users.indexOf(user), 1)
+        AdminFactory.deleteUser(user.id)
+    };
+
+    $scope.makeAdmin = function(id){
+        var user = _.find($scope.users, function(user){
+            return user.id === id
+        });
+        user.isAdmin = true;
+        AdminFactory.editUser(id, {isAdmin: true})
+
+    };
+    $scope.removeAdmin = function(id){
+        var user = _.find($scope.users, function(user){
+            return user.id === id
+        });
+        user.isAdmin = false;
+        AdminFactory.editUser(id, {isAdmin: false})
+        .then(function(){
+             
+        })
+    };
 });
+
+
+
+
+
