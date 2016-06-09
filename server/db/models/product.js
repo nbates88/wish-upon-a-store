@@ -34,6 +34,7 @@ module.exports = function (db) {
             defaultValue: "https://pixabay.com/static/uploads/photo/2015/05/24/21/19/wish-782424_960_720.jpg"
         }
     }, {
+      // EI: can remove this?
         // hooks: {
         //     KC: Function to force 2 decimal places not working as expected. Will worry about it later.
         //     beforeValidate: function (product) {
