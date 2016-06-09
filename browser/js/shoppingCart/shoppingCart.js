@@ -13,7 +13,7 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('ShoppingCartCtrl', function($scope, $state, ItemFactory){
-    $scope.product = ItemFactory.getProducts()
-    console.log($scope.product)
+app.controller('ShoppingCartCtrl', function($scope, $state, OrderFactory){
+    // $scope.products = OrderFactory.getProducts();
+    console.log($scope.product);
 })

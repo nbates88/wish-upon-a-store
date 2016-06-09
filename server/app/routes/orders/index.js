@@ -4,54 +4,18 @@ var db = require('../../../db');
 var orders = db.model('order');
 var users = db.model('user');
 var products = db.model('product');
+var passport = ('passport');
 
 var Sequelize = require('sequelize');
 module.exports = router;
 
-
-
-// GET ALL ORDERS
-router.get('/', function(req, res, next) {
-    if(!req.user || !req.user.isAdmin) res.sendStatus(403);
-    else{
-    orders.findAll()
-        .then(function(response) {
-            res.status(200).send(response);
-        })
-        .then(null, next)
-    }
-});
-
-// GET OR CREATE ORDER (call this route every time user adds one thing to a cart)
-router.get('/products/:id', function(req, res, next) {
-
+function addProductToOrder(productId, userId){
     var productObj;
-    var userId;
-    //is thre a req.user?
-    if(req.user){
-       //yes? use user.id (this is DB.id) to 
-        userId = req.user.id;
 
-        orders.findOrCreate({
-        where:{ 
-            userId: userId, 
-            status: 'Created'}
-        });
-    }else{
-
-        products.findById(req.params.id)
+    products.findById(productId)
         .then(function(product){
-            console.log('PRODUCT', product)
             productObj = product;
-        })
-        .then(function(){
-            return users.create()
-        })
-       //no? create a user that should automatically store new user id on session, use new user.id to find or create an order 
-       .then(function(user){
-        userId = user.dataValues.id;
-        return userId;
-       })
+        }) 
        .then(function(userId){
            return orders.find({
             where:{ 
@@ -62,7 +26,8 @@ router.get('/products/:id', function(req, res, next) {
        })
        .then(function(order){
         if(!order){
-            return orders.create({userId: userId, 
+            return orders.create(
+                {userId: userId, 
                 status: 'Created'})
         }else{
             return order;
@@ -72,37 +37,95 @@ router.get('/products/:id', function(req, res, next) {
             return order;
        })
        .then(function(newOrder){
-        //console.log(orders.associations)
             return newOrder.setProducts(productObj);
-       })
-       .then(function(something){
-        console.log('RESULT',something);
-       })
+       });
+}
+
+// GET ALL ORDERS
+router.get('/', function(req, res, next) {
+    if(!req.user || !req.user.isAdmin) res.sendStatus(403);
+    else{
+    orders.findAll()
+        .then(function(response) {
+            res.status(200).send(response);
+        })
+        .then(null, next);
     }
-   
-    //associaie product id with new or old order! 
-    //setProduct!!!
+});
+
+// ADDING A PRODUCT TO AN ORDER
+router.get('/products/:id', function(req, res, next) {
+
+    if(req.user){
+        addProductToOrder(req.params.id, req.user.id);
+    }else{
+        users.create()
+       .then(function(user){
+        //add this to cookies
+            return user.dataValues.id;
+       })
+       .then(function(userId){
+            addProductToOrder(req.params.id, userId);
+       });
+           
+    }
+
+    // if(req.user || req.session.cookie.user){
+    //     var userId = req.user || req.session.cookie.user
+    //     addProductToOrder(req.params.id, userId);
+    // }else{
+    //     users.create()
+    //    .then(function(user){
+    //     //add this to cookies
+    //     req.session.cookie.user = user.id;
+    //     console.log("REQ SESSION", req.session.cookie.user)
+    //         return user.dataValues.id;
+    //    })
+    //    .then(function(userId){
+    //         addProductToOrder(req.params.id, userId);
+    //    });
+           
+    // }
     
 });
 
-// //GET ALL ORDERS BY USER ID
-// router.get('/user', function(req,res,next){
-    
+//GET ALL PRODUCTS IN A USER'S CART
+// router.get('/products/', function(req, res, next) {
+//     if(!req.user || !req.session.cookie.user){
+//         throw new Error('Nothing in your cart!');
+//     }else{
+//         orders.find({
+//             where:{ 
+//                 userId: req.user.id, 
+//                 status: 'Created'
+//             }
+//        })
+//        .then(function(order){
+//             return order;
+//        })
+//        .then(function(foundOrder){
+//             return foundOrder.getProducts();
+//        })
+//        .then(function(products){
+//             return products.dataValues;
+//        })
+//     }
 // });
 
-// GET ONE ORDER BY ID
-router.get('/:id', function(req, res, next) {
-    orders.findById(req.params.id)
-        .then(function(response) {
-            if(response.user === req.user || req.user.isAdmin){
-                res.status(200).send(response);    
-            }
-            else{
-                res.sendStatus(403);
-            }
-        })
-        .then(null, next)
-});
+//not using yet
+// // GET ONE ORDER BY ID
+// router.get('/:id', function(req, res, next) {
+//     orders.findById(req.params.id)
+//         .then(function(response) {
+//             if(response.user === req.user || req.user.isAdmin){
+//                 res.status(200).send(response);    
+//             }
+//             else{
+//                 res.sendStatus(403);
+//             }
+//         })
+//         .then(null, next)
+// });
 
 // UPDATE ONE ORDER
 router.put('/:id', function(req, res, next) {
