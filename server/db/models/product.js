@@ -36,7 +36,7 @@ module.exports = function (db) {
     }, {
         // hooks: {
         //     KC: Function to force 2 decimal places not working as expected. Will worry about it later.
-        //     EI: why do you need this hook?
+        //     EI: why do you need this hook? maybe just trust Postgres?
         //     beforeValidate: function (product) {
         //         function twoDecimalPlaces(num) {
         //             var numString = num.toString;

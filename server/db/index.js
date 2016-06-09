@@ -9,6 +9,8 @@ var Review = require('./models/review')(db);
 var Collection = require('./models/collection')(db);
 var Wishlist = require('./models/wishlist')(db);
 
+//EI: define model OrderProducts with a quantity column, and use it to join Orders and Products
+// Product.belongsToMany(Order, {through: OrderProducts});
 Product.belongsToMany(Order, {through: 'OrderProducts'});
 Order.belongsTo(User);
 Review.belongsTo(Product);

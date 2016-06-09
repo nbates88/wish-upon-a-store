@@ -7,6 +7,7 @@ module.exports = function (db) {
         status: {
             type: Sequelize.STRING,
             validate: {
+            	// AK: Sequelize enum? make appropriate changes in testing (Order.status?)
             	isIn: [["Created", "Processing", "Cancelled", "Completed"]]
             }
         }
