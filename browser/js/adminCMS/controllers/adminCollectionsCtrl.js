@@ -1,9 +1,11 @@
-app.controller('AdminCollectionsCtrl', function($scope, AdminFactory){
+app.controller('AdminCollectionsCtrl', function($scope, AdminFactory, collections, $rootScope){
     $scope.collections = collections;
+
 
     $scope.deleteCollection = function(collection){
         $scope.collections.splice($scope.collections.indexOf(collection), 1)
-        AdminFactory.deleteCollection(collection.id)
+        AdminFactory.deleteCollection(collection)
+        $rootScope.$broadcast('collectionsUpdate', $scope.collections)
     };
 
     $scope.createCollection = function(data){
@@ -11,6 +13,7 @@ app.controller('AdminCollectionsCtrl', function($scope, AdminFactory){
         AdminFactory.createCollection(data)
             .then(function(collection){
                 $scope.collections.push(collection)
+                $rootScope.$broadcast('collectionsUpdate', $scope.collections)
             })
     }
     });
