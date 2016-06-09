@@ -1,0 +1,31 @@
+<div>
+	<!-- Realized after the fact that an admin won't need to create a user... -->
+	<!-- <h3>Create new user</h3>
+
+	<form name="user">
+		<label for="username">Name</label>
+		<input class="form-control" type="text" ng-model="user.name" name="username">
+
+		<label for="username">Email</label>
+		<input class="form-control" type="text" ng-model="user.email" name="username">
+
+		<label for="username">Admin?</label>
+		<input class="form-control" type="text" ng-model="user.isAdmin" name="username">
+
+		<button type="submit" class="btn btn-success" ng-disabled="user.$invalid" ng-click="createUser(user)">Create User</button>
+	</form>
+
+	<br> -->
+
+	<h3>Update curent users</h3>
+
+	<ul>
+		<li ng-repeat="user in users">
+		<h4>Name: {{user.name}}</h4>
+		<h4>Email: {{user.email}}</h4>
+		<button type="submit" class="btn btn-success" ng-show="!user.isAdmin" ng-click="makeAdmin(user.id)">Make User Admin</button>
+		<button type="submit" class="btn btn-success" ng-show="user.isAdmin" ng-click="removeAdmin(user.id)">Remove Admin Status</button>
+		<button type="submit" class="btn btn-success" ng-click="deleteUser(user)">Delete User</button>
+		</li>
+	</ul>
+</div>
