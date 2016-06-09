@@ -53,7 +53,7 @@ router.put('/:id', function(req, res, next) {
             if(response.user === req.user || req.user.isAdmin){
                 return response.update(req.body)
                 .then(function(repsonse){
-                    res.status(200).send(response);
+                    res.status(300).send(response);
                 });
             }
             else{
