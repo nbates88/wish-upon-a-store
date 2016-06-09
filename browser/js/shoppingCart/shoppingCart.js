@@ -14,6 +14,6 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('ShoppingCartCtrl', function($scope, $state, ItemFactory){
-    $scope.product = ItemFactory()
+    $scope.product = ItemFactory.getProducts()
     console.log($scope.product)
 })

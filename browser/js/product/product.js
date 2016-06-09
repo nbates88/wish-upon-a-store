@@ -16,14 +16,14 @@ app.config(function ($stateProvider) {
 app.controller('ProductCtrl', function($scope, product, $state, ItemFactory){
     
     $scope.product = product;
-
-    $scope.setItemInfo = function(){
-        console.log(product)
-        ItemFactory.addProduct(product)
-    }
-
+   
+    ItemFactory.addProduct(product)
 
     $scope.addToCart = function(){
+        //use factory function to findOrCreate order where status is open
+        //add product to order
+        //redirect to shoppingCart 
+        //and in shoppingCart state, have factoryfunc that getsOrder and renders with res. order from backend
         $state.go('shoppingCart')
     }
 })

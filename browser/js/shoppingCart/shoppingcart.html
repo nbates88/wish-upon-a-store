@@ -3,7 +3,6 @@
 <table class='table'>
     <thead>
       <tr>
-        <th></th>
         <th>Item</th>
         <th>Qty</th>
         <th>Unit Price</th>
@@ -11,6 +10,17 @@
       </tr>
     </thead>
     <tbody>
+      <tr>
+        <td>
+        {{product[0].name}}
+        </td>
+        <td>
+      
+        </td>
+        <td>
+        {{product[0].price}}
+        </td>
+      </tr>
     </tbody>
   </table>
    <button type="submit" ng-click="checkout()">Checkout</button>

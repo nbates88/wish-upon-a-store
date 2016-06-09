@@ -1,18 +1,13 @@
 app.factory('ItemFactory', function () {
+	var product =[];
+	return {
+		addProduct: function(newObj){
+		 	product.push(newObj)
+		 	console.log(product)
+	 	},
 
-	 var product =[];
-
-	 var addProduct = function(newObj){
-	 	product.push(newObj)
-	 	console.log(product)
-	 };
-
-	 var getProducts = function(){
-	 	return product
-	 };
-
-	 return{
-	 	addProduct: addProduct,
-	 	getProducts: getProducts
-	 };
+		getProducts: function(){
+	 		return product
+	 	}
+	}
 });
