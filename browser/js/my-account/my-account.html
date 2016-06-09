@@ -1,5 +1,19 @@
+<div>
+<!-- {{accountInfo}} -->
+  <h2>Welcome, {{accountInfo.email}}</h2>
+  <p>{{accountInfo.email}}</p>
 
-<h2>Welcome, {{accountInfo.email}}</h2>
-<p>{{accountInfo.email}}</p>
-
-yo what's up
+  <h3>My Orders</h3>
+  <table class="tg">
+    <tr>
+      <th>Created On</th>
+      <th>Status</th>
+      <th>Last Updated</th>
+    </tr>
+    <tr ng-repeat="order in accountInfo.Orders">
+      <td>{{order.createdAt}}</td>
+      <td>{{order.status}}</td>
+      <td>{{order.updatedAt}}</td>
+    </tr>
+  </table>
+</div>

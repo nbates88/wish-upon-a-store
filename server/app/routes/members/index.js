@@ -3,6 +3,7 @@ var router = require('express').Router();
 module.exports = router;
 var db = require('../../../db');
 var users = db.model('user');
+var orders = db.model('order');
 var _ = require('lodash');
 
 var ensureAuthenticated = function (req, res, next) {
@@ -19,7 +20,12 @@ router.get('/myaccount', ensureAuthenticated, function (req, res) {
     // get user page
     // if(!req.user) res.sendStatus(403);
     // else {
-    users.findById(req.user.id)
+    users.find({
+        where: {
+            id: req.user.id
+        },
+        include: [{model: orders, as: "Orders"}]
+    })
         .then(function(response) {
             console.log('info from db is', response);
             res.status(200).send(response);
@@ -27,5 +33,4 @@ router.get('/myaccount', ensureAuthenticated, function (req, res) {
     // }
 
     // res.send();
-
 });
