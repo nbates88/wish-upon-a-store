@@ -10,10 +10,8 @@ app.directive('sidebar', function () {
 });
 
 app.controller('SidebarCtrl', function($scope, ProductFactory){
-    //console.log(ProductFactory.getAllCollections())
         ProductFactory.getAllCollections()
         .then(function(collections){
-            console.log(collections)
             $scope.items = collections;
         })
 })

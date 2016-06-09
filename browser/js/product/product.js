@@ -7,15 +7,23 @@ app.config(function ($stateProvider) {
         	product: function($stateParams, ProductFactory){
                 var id = $stateParams.id;
         		return ProductFactory.getOneProduct(id)
-        	}
+        	},
+            user: function(AuthService){
+                return  AuthService.getLoggedInUser();
+                
+            }
         }
     });
 
 });
 
-app.controller('ProductCtrl', function($scope, product, $state, ItemFactory){
-    
+app.controller('ProductCtrl', function($scope, product, $state, ItemFactory, AdminFactory, user){
+    $scope.deleteProduct = function(id){
+        AdminFactory.deleteProduct(id);
+        $state.go('home');
+    }
     $scope.product = product;
+    $scope.user = user;
    
     ItemFactory.addProduct(product)
 

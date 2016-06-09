@@ -16,5 +16,8 @@
     <button type="button">Add a Review</button>
     <button type="submit" ng-click="addToCart()">Add to Cart!</button>
     </div>
-  </p>
-  </div>
+    <button ng-click="deleteProduct(product.id)" ng-hide="!user.isAdmin">
+      Delete Product</span>
+    </button>
+</p>
+</section>
