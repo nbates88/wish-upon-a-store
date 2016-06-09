@@ -1,7 +1,8 @@
 var router = require('express').Router();
-var db = require('../../../db/_db');
-var orders = require('../../../db/models/order.js')(db);
-var User = require('../../../db/models/user.js')(db);
+
+var db = require('../../../db');
+var orders = db.model('order');
+
 var Sequelize = require('sequelize');
 module.exports = router;
 

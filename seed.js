@@ -56,16 +56,16 @@ var seedCollections = function () {
 
     var collections = [
         {
-            name: 'health'
+            name: 'Health'
         },
         {
-            name: 'career'
+            name: 'Career'
         },
         {   
-            name: 'romance'
+            name: 'Romance'
         },
         {   
-            name: 'luxuries'
+            name: 'Luxury'
         }
     ];
 
@@ -88,7 +88,7 @@ var seedProducts = function (collections) {
         })
     .then(function(product){
         var product = product;
-        return product.addCollection(collections.health)
+        return product.addCollection(collections.Health)
          .then(function(product){
                 return product;
             })
@@ -102,7 +102,7 @@ var seedProducts = function (collections) {
         })
      .then(function(product){
         console.log(product);
-        return product.addCollection(collections.career)
+        return product.addCollection(collections.Career)
             .then(function(product){
                 return product;
             })

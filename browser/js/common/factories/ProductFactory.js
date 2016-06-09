@@ -24,6 +24,13 @@ app.factory('ProductFactory', function ($http) {
 				.then(function(collections){
 					return collections.data
 				})
+		},
+		getProductsByCollectionId: function(id){
+			return $http.get('/api/collections/'+id+'/products')
+			.then(function(products){
+				console.log(products, "products")
+					return products.data
+				})
 		}
 	}
 

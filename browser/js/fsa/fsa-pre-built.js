@@ -86,7 +86,8 @@
 
         };
 
-        this.login = function (credentials) {
+        // post to /login route on back end, which is used for BOTH LOGIN AND SIGN UP
+        this.loginOrSignUp = function (credentials) {
             return $http.post('/login', credentials)
                 .then(onSuccessfulLogin)
                 .catch(function () {
