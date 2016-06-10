@@ -6,7 +6,6 @@ app.factory('OrderFactory', function($http){
     getProducts : function(){
       return $http.get('/api/orders/products')
       .then(function(products){
-        console.log('PRODUCTS.DATA', products.data);
         return products.data;
       });
     }

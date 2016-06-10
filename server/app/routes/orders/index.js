@@ -18,19 +18,18 @@ function addProductToOrder(productId, userId){
             productObj = product;
         }) 
        .then(function(){
-        console.log('ORDER USER ID FUNCTION', userId)
            return orders.find({
             where:{ 
                 userId: userId, 
                 status: 'Created'
                 }
-            })
+            });
        })
        .then(function(order){
         if(!order){
             return orders.create(
                 {userId: userId, 
-                status: 'Created'})
+                status: 'Created'});
         }else{
             return order;
         }
@@ -51,7 +50,7 @@ router.get('/', function(req, res, next) {
         .then(function(response) {
             res.status(200).send(response);
         })
-        .then(null, next)
+        .then(null, next);
     }
 });
 
@@ -70,8 +69,6 @@ router.get('/', function(req, res, next) {
 // ADDING A PRODUCT TO AN ORDER
 router.get('/products/:id', function(req, res, next) {
 
-    console.log('ADD TO ORDER ROUTE',req.session.userId)
-
     var userId = req.session.userId || req.user.id;
 
         addProductToOrder(req.params.id, userId)
@@ -79,7 +76,6 @@ router.get('/products/:id', function(req, res, next) {
             res.status(200).send(response);
         })
         .then(null, next);
-
         
 });
 
@@ -95,18 +91,15 @@ router.get('/products/', function(req, res, next) {
             }
        })
        .then(function(order){
-        console.log('ORDER',order)
             return order;
        })
        .then(function(foundOrder){
             return foundOrder.getProducts();
        })
-       .then(function(products){
-        console.log('PRODUCTS', products)
-            return products;
+       .then(function(foundProducts){
+            return foundProducts;
        })
        .then(function(response) {
-        console.log('RESPONSE', response)
             res.send(response);
         })
         .then(null, next);
@@ -125,7 +118,7 @@ router.get('/:id', function(req, res, next) {
                 res.sendStatus(403);
             }
         })
-        .then(null, next)
+        .then(null, next);
 });
 
 // UPDATE ONE ORDER
@@ -142,7 +135,7 @@ router.put('/:id', function(req, res, next) {
                 res.sendStatus(403);
             }
         })
-       .then(null, next)
+       .then(null, next);
 });
 
 // DELETE ONE ORDER
@@ -152,12 +145,12 @@ router.delete('/:id', function(req, res, next) {
             if(response.user === req.user || req.user.isAdmin){
                 return response.destroy()
                 .then(function(response) {
-                    res.redirect(204, '/')
-                })
+                    res.redirect(204, '/');
+                });
             }
             else{
                 res.sendStatus(403);
             }
         })
-        .then(null, next)
+        .then(null, next);
 });
