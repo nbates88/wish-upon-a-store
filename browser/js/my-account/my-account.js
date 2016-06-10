@@ -61,6 +61,7 @@ app.config(function($stateProvider) {
     });
 });
 
+
 app.config(function($stateProvider) {
     $stateProvider.state('myAccount.editAccount', {
         url: '/edit-account',
@@ -75,6 +76,26 @@ app.config(function($stateProvider) {
         },
         // The following data.authenticate is read by an event listener
         // that controls access to this state. Refer to app.js.
+        data: {
+            authenticate: true
+        }
+    });
+});
+
+app.config(function($stateProvider) {
+    $stateProvider.state('myAccount.myReviews', {
+        url: '/reviews',
+        parent: 'myAccount',
+        templateUrl: '/js/my-account/reviews.html',
+        controller: function($scope, MyAccountFactory, ReviewFactory) {
+            
+            ReviewFactory.getUserReviews()
+                .then(function(reviews) {
+                    console.log('info from factory is', reviews)
+                    $scope.reviews = reviews;
+                })
+        },
+
         data: {
             authenticate: true
         }
