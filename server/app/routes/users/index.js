@@ -1,6 +1,8 @@
 var router = require('express').Router();
 var db = require('../../../db');
 var users = db.model('user');
+var Review = db.model('review');
+
 var Sequelize = require('sequelize');
 module.exports = router;
 
@@ -61,4 +63,16 @@ router.delete('/:id', function(req, res, next) {
             res.sendStatus(204);
         });
     }
+});
+
+// GET ALL REVIEWS FOR ONE USER
+router.get('/:userId/reviews', function(req, res, next) {
+    Review.findAll({
+        where: {
+            userId: req.params.userId
+        }
+    })
+        .then(function(reviews) {
+            res.status(200).send(reviews);
+        });
 });
