@@ -15,6 +15,12 @@ var ensureAuthenticated = function (req, res, next) {
     }
 };
 
+
+
+
+
+
+
 router.get('/myaccount', ensureAuthenticated, function (req, res) {
     // console.log('hit backend route' );
     // get user page

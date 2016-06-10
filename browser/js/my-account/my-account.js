@@ -66,12 +66,25 @@ app.config(function($stateProvider) {
         url: '/edit-account',
         parent: 'myAccount',
         templateUrl: '/js/my-account/edit-account.html',
-        controller: function($scope, MyAccountFactory) {
+        controller: function($scope, $http, Session, $rootScope, AUTH_EVENTS, $q, MyAccountFactory, AuthService) {
+
             MyAccountFactory.getMyAccount()
-                .then(function(response) {
-                    $scope.orders = response.Orders;
+                .then(function(account) {
+                    $scope.orders = account.Orders;
+                    $scope.email = account.email;
                 });
-            // $scope.orders = accountInfo.Orders
+            
+            $scope.submit = function(newpassword) {
+                console.log("$scope.submit new password: ", newpassword);
+                
+                return $http.put('/login', {newpassword: newpassword})
+                .then(function(response) {
+                    return $scope.message = response.data.message;
+                })
+                .catch(function() {
+                    return $q.reject({ message: 'Invalid login credentials.' });
+            });
+    };
         },
         // The following data.authenticate is read by an event listener
         // that controls access to this state. Refer to app.js.

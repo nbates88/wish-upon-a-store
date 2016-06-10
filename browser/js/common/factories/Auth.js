@@ -73,11 +73,11 @@ app.service('AuthService', function($http, Session, $rootScope, AUTH_EVENTS, $q)
     };
 
     // post to /login route on back end, which is used for BOTH LOGIN AND SIGN UP
-    this.loginOrSignUp = function(credentials) {
+    this.login = function(credentials) {
         return $http.post('/login', credentials)
             .then(onSuccessfulLogin)
             .catch(function() {
-                return $q.reject({ message: 'Invalid login credentials.' });
+                return $q.reject({ message: 'Hello from this.loginOrSignup: Invalid login credentials.' });
             });
     };
 

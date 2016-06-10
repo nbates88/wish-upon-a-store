@@ -40,6 +40,14 @@ module.exports = function (db) {
             },
             correctPassword: function (candidatePassword) {
                 return this.Model.encryptPassword(candidatePassword, this.salt) === this.password;
+            }, 
+            updatePassword: function (newPassword) {
+                // KC: Don't forget to add new salt as an argument when calling user.update! This function (updatePassword) is changing 2 properties (salt and password), so you need to update both. Not adding the salt to the update call was the reason you couldn't log in with either the old or the new password after a password change.
+                console.log("salt: ", this.salt);
+                console.log("new password: ", newPassword);
+                this.salt = this.Model.generateSalt();
+                this.password = this.Model.encryptPassword(newPassword, this.salt);
+                return this.password;
             }
         },
         classMethods: {
@@ -54,11 +62,17 @@ module.exports = function (db) {
             }
         },
         hooks: {
-            beforeValidate: function (user) {
-                if (user.changed('password')) {
-                    user.salt = user.Model.generateSalt();
-                    user.password = user.Model.encryptPassword(user.password, user.salt);
-                }
+            // // KC: Replaced beforeValidate with beforeCreate.
+            // // But I think beforeValidate is what came with fsg?
+            // beforeValidate: function (user) {
+                // if (user.changed('password')) {
+                //     user.salt = user.Model.generateSalt();
+                //     user.password = user.Model.encryptPassword(user.password, user.salt);
+                // }
+            // },
+            beforeCreate: function (user) {
+                user.salt = user.Model.generateSalt();
+                user.password = user.Model.encryptPassword(user.password, user.salt);
             }
         }
     });
