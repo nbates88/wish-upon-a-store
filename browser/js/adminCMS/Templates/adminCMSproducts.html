@@ -18,7 +18,8 @@
 		<input class="form-control" type="text" ng-model="product.inventoryQuantity" name="inventory">
 
 		<label for="collection">Collection</label>
-		<input class="form-control" type="text" ng-model="product.collection" name="collection">
+		<select ng-options="collection.name for collection in collections" class="form-control" ng-model="product.collection" name="collection">
+		</select>
 
 		<button type="submit" class="btn btn-success" ng-disabled="productForm.$invalid" >Create Product</button>
 	</form>
