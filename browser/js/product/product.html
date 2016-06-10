@@ -26,24 +26,22 @@
         <th>Stars</th>
         <th></th>
       </tr>
-      <tr>
-        <form name='addReview' ng-model="review" ng-submit="addReview(review)">
-          <td>
-            <input name="description" ng-model="review.description" type="text">
-          </td>
-          <td>
-            <select name="stars" ng-model="review.stars">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-          </td>
-          <td>
-            <button type="button">Add a Review</button>
-          </td>
-        </form>
+      <tr ng-form="reviewForm" name="reviewForm">
+        <td>
+          <input name="description" ng-model="review.description" type="text">
+        </td>
+        <td>
+          <select name="stars" ng-model="review.stars">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </td>
+        <td>
+          <button type="button" ng-click="addReview()">Add a Review</button>
+        </td>
       </tr>
 
       <tr ng-repeat="review in reviews">

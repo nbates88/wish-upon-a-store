@@ -30,10 +30,14 @@ app.controller('ProductCtrl', function($scope, product, $state, ItemFactory, Adm
     $scope.user = user;
     $scope.reviews = reviews;
 
-    $scope.addReview = function(review){
-        console.log(review);
+    $scope.addReview = function() {
+        var review = $scope.review;
+        $scope.reviewForm.$setPristine();
+        $scope.review = {};
+
         ReviewFactory.addReview(review, $scope.product.id)
     }
+    
     ItemFactory.addProduct(product)
 
     $scope.addToCart = function(){
