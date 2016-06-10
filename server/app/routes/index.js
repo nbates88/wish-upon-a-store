@@ -1,21 +1,29 @@
 'use strict';
 var router = require('express').Router();
-// var db = require('../../../db');
-// var users = db.model('user');
+var db = require('../../db');
+var users = db.model('user');
 
 module.exports = router;
 
-// router.use('/', function(req,res, next){
-//   if(!req.user){
-//         users.create()
-//        .then(function(user){
-//         req.user = user;
-//         console.log("REQ USER", req.user)
-//             return user.dataValues.id;
-//        })
-//     }
-//   next();
-// })
+//ADD A USER RIGHT AWAY
+router.use('/', function(req,res, next){
+
+  console.log('IN MIDDLEWARE TOP', req.session.userId, req.user);
+  
+  if(!req.session.userId && !req.user){
+        users.create()
+       .then(function(user){
+        console.log('IN MIDDLEWARE, CREATED USER', user.dataValues.id)
+        req.session.userId = user.dataValues.id;
+        next();  
+       });
+       
+  }else{
+    console.log("REQ SESSION USER ALREADY EXISTS", req.session.userId);
+    next();
+  }
+  
+});
 
 router.use('/members', require('./members'));
 router.use('/collections', require('./collections'));

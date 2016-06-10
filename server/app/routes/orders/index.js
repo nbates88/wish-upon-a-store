@@ -10,14 +10,15 @@ var Sequelize = require('sequelize');
 module.exports = router;
 
 function addProductToOrder(productId, userId){
-
+    var userId = userId;
     var productObj;
 
-    products.findById(productId)
+    return products.findById(productId)
         .then(function(product){
             productObj = product;
         }) 
-       .then(function(userId){
+       .then(function(){
+        console.log('ORDER USER ID FUNCTION', userId)
            return orders.find({
             where:{ 
                 userId: userId, 
@@ -38,7 +39,7 @@ function addProductToOrder(productId, userId){
             return order;
        })
        .then(function(newOrder){
-            return newOrder.setProducts(productObj);
+            return newOrder.addProduct(productObj);
        });
 }
 
@@ -69,61 +70,47 @@ router.get('/', function(req, res, next) {
 // ADDING A PRODUCT TO AN ORDER
 router.get('/products/:id', function(req, res, next) {
 
-    if(req.user){
-        addProductToOrder(req.params.id, req.user.id);
-    }else{
-        users.create()
-       .then(function(user){
-        //add this to cookies
-            return user.dataValues.id;
-       })
-       .then(function(userId){
-            addProductToOrder(req.params.id, userId);
-       });
-           
-    }
+    console.log('ADD TO ORDER ROUTE',req.session.userId)
 
-    // if(req.user || req.session.cookie.user){
-    //     var userId = req.user || req.session.cookie.user
-    //     addProductToOrder(req.params.id, userId);
-    // }else{
-    //     users.create()
-    //    .then(function(user){
-    //     //add this to cookies
-    //     req.session.cookie.user = user.id;
-    //     console.log("REQ SESSION", req.session.cookie.user)
-    //         return user.dataValues.id;
-    //    })
-    //    .then(function(userId){
-    //         addProductToOrder(req.params.id, userId);
-    //    });
-           
-    // }
-    
+    var userId = req.session.userId || req.user.id;
+
+        addProductToOrder(req.params.id, userId)
+        .then(function(response) {
+            res.status(200).send(response);
+        })
+        .then(null, next);
+
+        
 });
 
 //GET ALL PRODUCTS IN A USER'S CART
-// router.get('/products/', function(req, res, next) {
-//     if(!req.user || !req.session.cookie.user){
-//         throw new Error('Nothing in your cart!');
-//     }else{
-//         orders.find({
-//             where:{ 
-//                 userId: req.user.id, 
-//                 status: 'Created'
-//             }
-//        })
-//        .then(function(order){
-//             return order;
-//        })
-//        .then(function(foundOrder){
-//             return foundOrder.getProducts();
-//        })
-//        .then(function(products){
-//             return products.dataValues;
-//        })
-//     }
-// });
+router.get('/products/', function(req, res, next) {
+
+    var userId = req.session.userId || req.user.id;
+
+        orders.find({
+            where:{ 
+                userId: userId, 
+                status: 'Created'
+            }
+       })
+       .then(function(order){
+        console.log('ORDER',order)
+            return order;
+       })
+       .then(function(foundOrder){
+            return foundOrder.getProducts();
+       })
+       .then(function(products){
+        console.log('PRODUCTS', products)
+            return products;
+       })
+       .then(function(response) {
+        console.log('RESPONSE', response)
+            res.send(response);
+        })
+        .then(null, next);
+});
 
 // GET ONE ORDER BY ID
 // EI: findByUser method, use req.user ID
