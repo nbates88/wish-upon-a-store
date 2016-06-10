@@ -1,13 +1,11 @@
-<div>
-<!-- {{accountInfo}} -->
-  <h2>Welcome, {{accountInfo.email}}</h2>
+<div class="col-xs-10">
+  <h1>Welcome, {{accountInfo.name}}!</h1>
   <p>Email address: <span>{{accountInfo.email}}</span></p>
-  
-  <ul>
-  	<li><a ui-sref="myAccount.myOrders">View My Orders</a></li>
-  	<li><a ui-sref="myAccount.myReviews">View My Reviews</a></li>
-  	<li><a ui-sref="myAccount.editAccount">Edit My Account Information</a></li>
-  </ul>
 
+  <ul class="nav nav-tabs">
+    <li ui-sref-active="active"><a ui-sref='myAccount.myOrders'>My Orders</a></li>
+    <li ui-sref-active="active"><a ui-sref='myAccount.myReviews'>My Reviews</a></li>
+    <li ui-sref-active="active"><a ui-sref='myAccount.editAccount'>Update Account</a></li>
+  </ul>
   <ui-view></ui-view>
 </div>
