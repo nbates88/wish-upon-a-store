@@ -1,6 +1,6 @@
 var router = require('express').Router();
-var db = require('../../../db/_db');
-var users = require('../../../db/models/user.js')(db);
+var db = require('../../../db');
+var users = db.model('user');
 var Sequelize = require('sequelize');
 module.exports = router;
 
@@ -12,8 +12,7 @@ router.get('/', function(req, res, next) {
     users.findAll()
         .then(function(response) {
             res.status(200).send(response);
-        })
-        .then(null, next)
+        });
     }
 });
 
@@ -22,13 +21,12 @@ router.post('/', function(req, res, next) {
     users.create(req.body)
         .then(function(response) {
             res.status(201).send(response);
-        })
-        .then(null, next)
+        });
 });
 
 // GET ONE USER BY ID
 router.get('/:id', function(req, res, next) {
-    if(!req.user || !req.user.isAdmin) res.sendStatus(403);
+    if(!req.user || !req.user.isAdmin && req.user !== req.params.id) res.sendStatus(403);
     else {
     users.findById(req.params.id)
         .then(function(response) {
@@ -39,28 +37,28 @@ router.get('/:id', function(req, res, next) {
 
 // UPDATE ONE USER
 router.put('/:id', function(req, res, next) {
-    if(!req.user || !req.user.isAdmin || req.user.dataValues.id !== +req.params.id) res.sendStatus(403);
+    if(!req.user || !req.user.isAdmin && req.user !== req.params.id) res.sendStatus(403);
     else {
     users.findById(req.params.id)
         .then(function(response) {
             return response.update(req.body);
         })
         .then(function(response) {
-            res.status(200).send(response);
+            res.status(300).send(response);
         });
     }
 });
 
 // DELETE ONE USER
 router.delete('/:id', function(req, res, next) {
-    if(!req.user || !req.user.isAdmin || req.user.dataValues.id !== +req.params.id) res.sendStatus(403);
+    if(!req.user || !req.user.isAdmin && req.user !== req.params.id) res.sendStatus(403);
     else {
     users.findById(req.params.id)
         .then(function(response) {
             return response.destroy();
         })
         .then(function(response) {
-            res.redirect(204, '/');
+            res.sendStatus(204);
         });
     }
 });

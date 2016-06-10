@@ -20,7 +20,7 @@ module.exports = function (db) {
         },
         isAdmin: {
             type: Sequelize.BOOLEAN,
-            allowNull: false
+            defaultValue: false
         },
         password: {
             type: Sequelize.STRING

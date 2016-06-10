@@ -41,9 +41,9 @@ describe('/users', function() {
         agent.post('/login').send(userInfo).end(done);
     })
 
-    // after(function() {
-    //     return db.sync({ force: true });
-    // });
+    after(function() {
+        return db.sync({ force: true });
+    });
 
     describe('GET /users', function() {
 

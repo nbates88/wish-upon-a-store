@@ -1,0 +1,12 @@
+<div>
+<!-- {{accountInfo}} -->
+  <h2>Welcome, {{accountInfo.email}}</h2>
+  <p>Email address: <span>{{accountInfo.email}}</span></p>
+  
+  <ul>
+  	<li><a ui-sref="myAccount.myOrders">View My Orders</a></li>
+  	<li><a ui-sref="myAccount.editAccount">Edit My Account Information</a></li>
+  </ul>
+
+  <ui-view></ui-view>
+</div>

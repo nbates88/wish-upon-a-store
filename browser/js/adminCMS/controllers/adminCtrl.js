@@ -1,0 +1,12 @@
+app.controller('AdminCtrl', function(){
+
+});
+
+
+
+
+
+
+
+
+
