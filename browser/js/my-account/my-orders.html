@@ -1,6 +1,10 @@
 <h4>My Orders</h4>
 
-<table class="tg">
+<div ng-hide="orders.length">
+  No orders yet. <a ui-sref="home">Want to place one?</a>
+</div>
+
+<table class="table" ng-show="orders.length">
   <tr>
     <th>Created On</th>
     <th>Status</th>
