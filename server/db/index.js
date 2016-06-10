@@ -8,9 +8,10 @@ var Order = require('./models/order')(db);
 var Review = require('./models/review')(db);
 var Collection = require('./models/collection')(db);
 var Wishlist = require('./models/wishlist')(db);
+var OrderProducts = require('./models/orderProducts')(db);
 
-Product.belongsToMany(Order, {through: 'OrderProducts'});
-Order.belongsToMany(Product, {through: 'OrderProducts'});
+Product.belongsToMany(Order, {through: OrderProducts});
+Order.belongsToMany(Product, {through: OrderProducts});
 // Order.belongsTo(User, {foreignKey: 'userId'});
 User.hasMany(Order, {as: 'Orders'});
 Review.belongsTo(Product);
