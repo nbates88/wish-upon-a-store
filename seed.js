@@ -207,6 +207,8 @@ var seedOrders = function () {
     return Promise.all(creatingOrders);
 
 };
+
+
 db.sync({ force: true })
     .then(seedUsers)
     .then(seedCollections)
