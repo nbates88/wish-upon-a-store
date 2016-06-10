@@ -7,18 +7,22 @@ module.exports = router;
 
 //ADD A USER RIGHT AWAY
 router.use('/', function(req,res, next){
+
+  console.log('IN MIDDLEWARE TOP', req.session.userId, req.user);
   
-  if(!req.session.userId || !req.user){
+  if(!req.session.userId && !req.user){
         users.create()
        .then(function(user){
+        console.log('IN MIDDLEWARE, CREATED USER', user.dataValues.id)
         req.session.userId = user.dataValues.id;
-            return req.session.userId;
+        next();  
        });
-    }
-
-  console.log("REQ SESSION USER", req.session.userId);
-
-  next();
+       
+  }else{
+    console.log("REQ SESSION USER ALREADY EXISTS", req.session.userId);
+    next();
+  }
+  
 });
 
 router.use('/members', require('./members'));

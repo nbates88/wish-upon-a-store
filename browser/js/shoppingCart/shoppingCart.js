@@ -3,17 +3,17 @@ app.config(function ($stateProvider) {
         url: '/shoppingcart',
         controller: 'ShoppingCartCtrl',
         templateUrl: 'js/shoppingCart/shoppingcart.html',
-        // resolve: {
-        // 	product: function($stateParams, ProductFactory){
-        //         var id = $stateParams.id;
-        // 		return ProductFactory.getOneProduct(id)
-        // 	}
-        // }
+        resolve: {
+        	foundProducts: function(OrderFactory){
+        		return OrderFactory.getProducts();
+        	}
+        }
     });
 
 });
 
-app.controller('ShoppingCartCtrl', function($scope, $state, OrderFactory){
-    // $scope.products = OrderFactory.getProducts();
-    console.log($scope.product);
-})
+app.controller('ShoppingCartCtrl', function($scope, foundProducts){
+
+    $scope.products = foundProducts;
+    $scope.qty = 2;
+});
