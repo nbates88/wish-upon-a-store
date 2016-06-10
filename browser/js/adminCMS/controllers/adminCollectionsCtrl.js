@@ -10,7 +10,5 @@ app.controller('AdminCollectionsCtrl', function($scope, ProductFactory, collecti
         $scope.collectionForm.$setPristine();
         $scope.collection = {}
         ProductFactory.createCollection(data)
-            .then(function(collection){
-            })
     }
     });

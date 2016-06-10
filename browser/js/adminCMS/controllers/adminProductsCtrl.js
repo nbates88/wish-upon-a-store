@@ -10,7 +10,6 @@ app.controller('AdminProductsCtrl', function($scope, products, AdminFactory){
         $scope.productForm.$setPristine();
         $scope.product = {}
         AdminFactory.createProduct(data)
-            .then(function(product){
-            })
+        
     }
     });
