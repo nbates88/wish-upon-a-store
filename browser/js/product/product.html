@@ -26,7 +26,7 @@
         <th>Stars</th>
         <th></th>
       </tr>
-      <tr ng-form="reviewForm" name="reviewForm">
+      <tr ng-form="reviewForm" name="reviewForm" ng-show="user">
         <td>
           <input name="description" ng-model="review.description" type="text">
         </td>
