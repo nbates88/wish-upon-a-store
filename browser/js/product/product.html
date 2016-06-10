@@ -14,7 +14,7 @@
     <h4>Average Rating: 3 </h4>
 
     <button type="button">Add a Review</button>
-    <button type="submit" ng-click="addToCart()">Add to Cart!</button>
+    <button type="submit" ng-click="addToCart(product.id)">Add to Cart!</button>
     </div>
     <button ng-click="deleteProduct(product.id)" ng-hide="!user.isAdmin">
       Delete Product</span>
