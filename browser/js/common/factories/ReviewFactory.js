@@ -26,7 +26,10 @@ app.factory('ReviewFactory', function($http) {
 	};
 
 	reviewfac.getUserReviews = function() {
-
+		return $http.get('/api/reviews')
+			.then(function(reviews) {
+				return reviews.data;
+			});
 	};
 
 	reviewfac.getAverageRating = function() {

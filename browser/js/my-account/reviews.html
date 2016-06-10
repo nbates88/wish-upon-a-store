@@ -1,0 +1,18 @@
+<h4>My Reviews</h4>
+
+<div ng-hide="reviews.length">
+  No reviews yet.
+</div>
+
+<table class="table" ng-show="reviews.length">
+  <tr>
+    <th>Product</th>
+    <th>Review</th>
+    <th>Stars</th>
+  </tr>
+  <tr ng-repeat="review in reviews">
+    <td>{{review.productId}}</td>
+    <td>{{review.description}}</td>
+    <td>{{review.stars}}</td>
+  </tr>
+</table>

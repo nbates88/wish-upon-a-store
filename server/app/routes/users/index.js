@@ -64,15 +64,3 @@ router.delete('/:id', function(req, res, next) {
         });
     }
 });
-
-// GET ALL REVIEWS FOR ONE USER
-router.get('/:userId/reviews', function(req, res, next) {
-    Review.findAll({
-        where: {
-            userId: req.params.userId
-        }
-    })
-        .then(function(reviews) {
-            res.status(200).send(reviews);
-        });
-});
