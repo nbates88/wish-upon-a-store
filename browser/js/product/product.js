@@ -17,7 +17,7 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('ProductCtrl', function($scope, product, $state, OrderFactory, AdminFactory, user, $http){
+app.controller('ProductCtrl', function($scope, product, $state, OrderFactory, AdminFactory, user){
     
     $scope.deleteProduct = function(id){
         AdminFactory.deleteProduct(id);
