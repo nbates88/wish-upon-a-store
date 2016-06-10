@@ -1,4 +1,4 @@
-app.directive('sidebar', function () {
+app.directive('sidebar', function() {
 
     return {
         restrict: 'E',
@@ -9,9 +9,15 @@ app.directive('sidebar', function () {
 
 });
 
-app.controller('SidebarCtrl', function($scope, ProductFactory){
-        ProductFactory.getAllCollections()
-        .then(function(collections){
+app.controller('SidebarCtrl', function($scope, ProductFactory, $rootScope) {
+    ProductFactory.getAllCollections()
+        .then(function(collections) {
             $scope.items = collections;
         })
+    // $rootScope.on('collectionsUpdate', function() {
+    //     ProductFactory.getAllCollections()
+    //         .then(function(collections) {
+    //             $scope.items = collections;
+    //         })
+    // })
 })

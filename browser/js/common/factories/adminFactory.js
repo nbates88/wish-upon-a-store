@@ -19,38 +19,6 @@ app.factory('AdminFactory', function ($http) {
 					//not sure if anything needs to happen here
 					})
 		},
-		//here data will likely just be an object that looks like {name: 'Career'}
-		createCollection: function(data){
-			return $http.post('/api/collections', data)
-				.then(function(collection){
-					return collection.data
-				})
-		},
-		editCollection: function(id, data){
-			return $http.put('/api/collections/'+id, data)
-				.then(function(collection){
-					return collection.data
-				})
-		},
-		addProductToCollection: function(id, data){
-			return $http.post('/api/collections/'+id+'/products', data)
-				.then(function(collection){
-					return collection.data
-				})
-		},
-		//this would be nice to have at some point :)
-		// deleteProductFromCollection: function(catId, productId){
-		//return $http.delete('/api/collections/'+catId+'/products/'+productId)
-				// .then(function(collection){
-				// 	return collection.data
-				// })
-		// },
-		deleteCollection: function(id){
-			return $http.delete('/api/collections/'+id)
-				.then(function(){
-					//not sure if anything needs to happen here
-					})
-		},
 		createUser: function(data){
 			return $http.post('/api/users', data)
 				.then(function(user){
