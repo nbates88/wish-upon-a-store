@@ -70,10 +70,10 @@ module.exports = function (db) {
                 //     user.password = user.Model.encryptPassword(user.password, user.salt);
                 // }
             // },
-            beforeCreate: function (user) {
-                user.salt = user.Model.generateSalt();
-                user.password = user.Model.encryptPassword(user.password, user.salt);
-            }
+            // beforeCreate: function (user) {
+            //     user.salt = user.Model.generateSalt();
+            //     user.password = user.Model.encryptPassword(user.password, user.salt);
+            // }
         }
     });
 
