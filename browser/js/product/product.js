@@ -11,13 +11,17 @@ app.config(function ($stateProvider) {
             user: function(AuthService){
                 return  AuthService.getLoggedInUser();
                 
+            },
+            reviews: function($stateParams, ReviewFactory) {
+                var id = $stateParams.id;
+                return ReviewFactory.getProductReviews(id)
             }
         }
     });
 
 });
 
-app.controller('ProductCtrl', function($scope, product, $state, OrderFactory, AdminFactory, user){
+app.controller('ProductCtrl', function($scope, product, $state, OrderFactory, AdminFactory, user, reviews, ReviewFactory){
     
     $scope.deleteProduct = function(id){
         AdminFactory.deleteProduct(id);
@@ -26,6 +30,16 @@ app.controller('ProductCtrl', function($scope, product, $state, OrderFactory, Ad
 
     $scope.product = product;
     $scope.user = user;
+    $scope.reviews = reviews;
+
+    $scope.addReview = function() {
+        var review = $scope.review;
+        $scope.reviewForm.$setPristine();
+        $scope.review = {};
+
+        ReviewFactory.addReview(review, $scope.product.id)
+    }
+    
    
     // ItemFactory.addProduct(product)
 
