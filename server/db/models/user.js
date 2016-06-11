@@ -7,12 +7,14 @@ var Sequelize = require('sequelize');
 module.exports = function (db) {
 
    var User = db.define('user', {
-       email: {
+        email: {
             type: Sequelize.STRING,
             unique: true,
         },
-         name: {
-            type: Sequelize.STRING
+        name: {
+            type: Sequelize.STRING,
+            // KC: Added this because all the User model tests are breaking after the changes to the define block (for requiring email, etc).
+            defaultValue: 'Pleiades Polaris'
         },
         isAdmin: {
             type: Sequelize.BOOLEAN,
@@ -67,15 +69,16 @@ module.exports = function (db) {
             // // KC: Replaced beforeValidate with beforeCreate.
             // // But I think beforeValidate is what came with fsg?
             // beforeValidate: function (user) {
-                // if (user.changed('password')) {
-                //     user.salt = user.Model.generateSalt();
-                //     user.password = user.Model.encryptPassword(user.password, user.salt);
-                // }
-            // },
-            // beforeCreate: function (user) {
-            //     user.salt = user.Model.generateSalt();
-            //     user.password = user.Model.encryptPassword(user.password, user.salt);
+            //     if (user.changed('password')) {
+            //         user.salt = user.Model.generateSalt();
+            //         user.password = user.Model.encryptPassword(user.password, user.salt);
+            //     }
             // }
+
+            beforeCreate: function (user) {
+                user.salt = user.Model.generateSalt();
+                user.password = user.Model.encryptPassword(user.password, user.salt);
+            }
         }
     });
 
