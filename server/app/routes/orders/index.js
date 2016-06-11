@@ -65,6 +65,30 @@ function removeProductFromOrder(productId, userId){
         })
 }
 
+function updateProductQty(productId, quantity, userId){
+   // var productQuantity = product.qnty;
+    var productObj;
+
+    return products.findById(productId)
+        .then(function(product){
+            productObj = product;
+        }) 
+       .then(function(){
+            return orders.find({
+            where:{ 
+                userId: userId, 
+                status: 'Created'
+                }
+            });
+       })
+        .then(function(order){
+            return order.addProduct(productObj, {quantity: quantity})
+        })
+        .then(function(updatedOrder){
+            console.log(updatedOrder)
+        })
+}
+
 // GET ALL ORDERS
 router.get('/', function(req, res, next) {
     if(!req.user || !req.user.isAdmin) res.sendStatus(403);
@@ -104,6 +128,17 @@ router.post('/products', function(req, res, next) {
 router.delete('/products/:id', function(req, res, next) {
     var userId = req.session.userId || req.user.id;
     removeProductFromOrder(req.params.id, userId)
+    .then(function(response) {
+        res.sendStatus(200)
+    })
+    .then(null, next);
+        
+})
+
+//UPDATE QTY OF A PRODUCT IN AN ORDER
+router.put('/products/:id', function(req, res, next) {
+    var userId = req.session.userId || req.user.id;
+    updateProductQty(req.params.id, req.body.qty, userId)
     .then(function(response) {
         res.sendStatus(200)
     })
@@ -153,7 +188,7 @@ router.get('/:id', function(req, res, next) {
         .then(null, next);
 });
 
-// UPDATE ONE ORDER
+//UPDATE ONE ORDER
 router.put('/:id', function(req, res, next) {
     orders.findById(req.params.id)
         .then(function(response) {

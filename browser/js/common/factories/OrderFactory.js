@@ -11,7 +11,11 @@ app.factory('OrderFactory', function($http){
     },
     removeProduct : function(id){
       return $http.delete('/api/orders/products/' + id)
+    },
+    updateProductQty : function(id, qty){
+      return $http.put('/api/orders/products/' + id, qty)
     }
+
   };
 
 });

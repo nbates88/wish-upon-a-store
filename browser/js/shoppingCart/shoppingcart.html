@@ -5,6 +5,7 @@
       <tr>
         <th>Item</th>
         <th>Qty</th>
+        <th>Change Qty</th>
         <th>Unit Price</th>
         <th>Subtotal</th>
       </tr>
@@ -13,6 +14,7 @@
       <tr ng-repeat='product in products'>
         <td>{{product.name}}</td>
         <td>{{product.OrderProducts.quantity}}</td>
+        <td><button class="btn btn-default btn-xs" ng-click="decreaseQuantity(product)"><span class="glyphicon glyphicon-minus"></span><button class="btn btn-default btn-xs" ng-click="increaseQuantity(product)"><span class="glyphicon glyphicon-plus"></span></td>
         <td>{{product.price | currency}}</td>
         <td>{{product.OrderProducts.quantity * product.price | currency}}</td>
         <td><button class="btn btn-default btn-xs" ng-click="removeItem(product)"><span class="glyphicon glyphicon-remove"></span></td>
