@@ -1,3 +1,4 @@
+
 'use strict';
 
 var crypto = require('crypto');
@@ -76,6 +77,7 @@ module.exports = function (db) {
             beforeCreate: function (user) {
                 user.salt = user.Model.generateSalt();
                 user.password = user.Model.encryptPassword(user.password, user.salt);
+                console.log('password is', typeof user.password)
             }
         }
     });
@@ -83,4 +85,3 @@ module.exports = function (db) {
    return User;
 
 };
-

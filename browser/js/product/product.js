@@ -12,16 +12,16 @@ app.config(function ($stateProvider) {
                 return  AuthService.getLoggedInUser();
                 
             },
-            reviews: function($stateParams, ReviewFactory) {
-                var id = $stateParams.id;
-                return ReviewFactory.getProductReviews(id)
-            }
+            // reviews: function($stateParams, ReviewFactory) {
+            //     var id = $stateParams.id;
+            //     return ReviewFactory.getProductReviews(id)
+            // }
         }
     });
 
 });
 
-app.controller('ProductCtrl', function($scope, product, $state, OrderFactory, AdminFactory, user, reviews, ReviewFactory){
+app.controller('ProductCtrl', function($scope, product, $state, OrderFactory, AdminFactory, user, ReviewFactory){
     
     $scope.deleteProduct = function(id){
         AdminFactory.deleteProduct(id);
@@ -32,15 +32,15 @@ app.controller('ProductCtrl', function($scope, product, $state, OrderFactory, Ad
     $scope.options = [{ name: "1", id: 1 }, { name: "2", id: 2 }, { name: "3", id: 3 }];
     
     $scope.user = user;
-    $scope.reviews = reviews;
+    // $scope.reviews = reviews;
 
-    $scope.addReview = function() {
-        var review = $scope.review;
-        $scope.reviewForm.$setPristine();
-        $scope.review = {};
+    // $scope.addReview = function() {
+    //     var review = $scope.review;
+    //     $scope.reviewForm.$setPristine();
+    //     $scope.review = {};
 
-        ReviewFactory.addReview(review, $scope.product.id)
-    }
+    //     ReviewFactory.addReview(review, $scope.product.id)
+    // }
     
     $scope.addToCart = function(id, selectedQuantity){
         var id = {'id': id}

@@ -1,0 +1,39 @@
+<h4>Reviews</h4>
+
+<div ng-show="!user && !reviews.length">
+  No reviews yet.</a>
+</div>
+
+<table class="table">
+  <tr>
+    <th>User</th>
+    <th>Review</th>
+    <th>Stars</th>
+    <th></th>
+  </tr>
+  <tr ng-form="reviewForm" name="reviewForm">
+    <td></td>
+    <td>
+      <input name="description" ng-model="review.description" type="text">
+    </td>
+    <td>
+      <select name="stars" ng-model="review.stars">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </td>
+    <td>
+      <button type="button" ng-click="addReview()">Leave a Review</button>
+    </td>
+  </tr>
+
+  <tr ng-repeat="review in reviews">
+    <td>{{review.userId}}</td>
+    <td>{{review.description}}</td>
+    <td>{{review.stars}}</td>
+    <td></td>
+  </tr>
+</table>

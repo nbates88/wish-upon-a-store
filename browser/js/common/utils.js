@@ -16,3 +16,11 @@ let formatDate = function(rawDateString) {
     };
     return `${months[date[1]]} ${date[2]}, ${date[0]}`;
 }
+
+
+let getAverage = function(arrayOfNumbers) {
+    let len = arrayOfNumbers.length;
+    let total = arrayOfNumbers.reduce(function(a, b) {
+        return a + b })
+    return (Math.round((total/len)*2)/2).toFixed(1);
+}

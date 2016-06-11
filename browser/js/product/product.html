@@ -6,47 +6,21 @@
       <h2>Description: {{ product.description }}</h2>
       <h2>Price: {{ product.price }}</h2>
 
-     <select name = "Qnty" id ="myQnty" ng-options="option.name for option in options track by option.id" ng-model="selectedQuantity"></select>
-      <h4>Average Rating: 3 </h4>
+      <select name="Qnty" id="myQnty" ng-options="option.name for option in options track by option.id" ng-model="selectedQuantity"></select>
 
-    <button type="submit" ng-click="addToCart(product.id, selectedQuantity)">Add to Cart!</button>
-    
+      <!-- AVERAGE RATING DIRECTIVE (PRODUCT-STARS) -->
+      <product-stars productid="product.id"></product-stars>
+
+      <button type="submit" ng-click="addToCart(product.id, selectedQuantity)">Add to Cart!</button>
+
     </div>
     <button ng-click="deleteProduct(product.id)" ng-hide="!user.isAdmin">
       Delete Product</span>
     </button>
     <br>
-    <h4>Reviews</h4>
-    <table class="table">
-      <tr>
-        <th>Review</th>
-        <th>Stars</th>
-        <th></th>
-      </tr>
-      <tr ng-form="reviewForm" name="reviewForm" ng-show="user">
-        <td>
-          <input name="description" ng-model="review.description" type="text">
-        </td>
-        <td>
-          <select name="stars" ng-model="review.stars">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </td>
-        <td>
-          <button type="button" ng-click="addReview()">Add a Review</button>
-        </td>
-      </tr>
 
-      <tr ng-repeat="review in reviews">
-        <td>{{review.description}}</td>
-        <td>{{review.stars}}</td>
-        <td></td>
-      </tr>
-    </table>
+    <!-- REVIEW SECTION DIRECTIVE (PRODUCT-REVIEWS) -->
+    <product-reviews productid="product.id"></product-reviews>
 
   </div>
 </section>
