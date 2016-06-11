@@ -5,15 +5,12 @@
     <div class="product_details">
       <h2>Description: {{ product.description }}</h2>
       <h2>Price: {{ product.price }}</h2>
-      <select>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
+
+     <select name = "Qnty" id ="myQnty" ng-options="option.name for option in options track by option.id" ng-model="selectedQuantity"></select>
       <h4>Average Rating: 3 </h4>
 
-    <button type="submit" ng-click="addToCart(product.id)">Add to Cart!</button>
+    <button type="submit" ng-click="addToCart(product.id, selectedQuantity)">Add to Cart!</button>
+    
     </div>
     <button ng-click="deleteProduct(product.id)" ng-hide="!user.isAdmin">
       Delete Product</span>

@@ -68,13 +68,13 @@ router.get('/', function(req, res, next) {
 });
 
 // ADDING A PRODUCT TO AN ORDER
-router.get('/products/:id', function(req, res, next) {
+router.post('/products', function(req, res, next) {
 
     console.log('ADD TO ORDER ROUTE',req.session.userId)
 
     var userId = req.session.userId || req.user.id;
 
-        addProductToOrder(req.params.id, userId)
+        addProductToOrder(req.body.id, userId)
         .then(function(response) {
             res.status(200).send(response);
         })
