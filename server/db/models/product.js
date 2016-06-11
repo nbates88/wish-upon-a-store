@@ -34,20 +34,11 @@ module.exports = function (db) {
             defaultValue: "https://pixabay.com/static/uploads/photo/2015/05/24/21/19/wish-782424_960_720.jpg"
         }
     }, {
-      // EI: can remove this?
-        // hooks: {
-        //     KC: Function to force 2 decimal places not working as expected. Will worry about it later.
-        //     beforeValidate: function (product) {
-        //         function twoDecimalPlaces(num) {
-        //             var numString = num.toString;
-        //             if (num % 1 === 0) return (numString + ".00")*1;
-        //             else if (numString.split('.')[1].length === 1) return (numString + ".0")*1;
-        //             else return (numString + numString.split('.')[1].slice(0,2).join())*1;
-        //         }           
-
-        //         product.price = twoDecimalPlaces(product.price);
-        //     }
-        // }
+        hooks: {
+            beforeValidate: function (product) {
+                product.price = parseFloat(product.price).toFixed(2);
+            }
+        }
     })
 
    return Product;
