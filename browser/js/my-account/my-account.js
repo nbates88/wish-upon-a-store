@@ -56,18 +56,18 @@ app.config(function($stateProvider) {
                     $scope.orders = account.Orders;
                     $scope.email = account.email;
                 });
-            
+
             $scope.submit = function(newpassword) {
                 console.log("$scope.submit new password: ", newpassword);
-                
-                return $http.put('/login', {newpassword: newpassword})
-                .then(function(response) {
-                    return $scope.message = response.data.message;
-                })
-                .catch(function() {
-                    return $q.reject({ message: 'Invalid login credentials.' });
-            });
-    };
+
+                return $http.put('/login', { newpassword: newpassword })
+                    .then(function(response) {
+                        return $scope.message = response.data.message;
+                    })
+                    .catch(function() {
+                        return $q.reject({ message: 'Invalid login credentials.' });
+                    });
+            };
         },
         // The following data.authenticate is read by an event listener
         // that controls access to this state. Refer to app.js.
@@ -82,20 +82,17 @@ app.config(function($stateProvider) {
         url: '/reviews',
         parent: 'myAccount',
         templateUrl: '/js/my-account/reviews.html',
-        controller: function($scope, MyAccountFactory, ReviewFactory) {
-            
-            ReviewFactory.getUserReviews()
-                .then(function(reviews) {
-                    reviews.forEach(review => {
-                        review.product = reviews[0].product.name
-                        review.productId = reviews[0].product.id
-                    })
-                    $scope.reviews = reviews;
-                })
+        controller: function($scope, MyAccountFactory, reviews) {
+            $scope.reviews = reviews;
         },
 
         data: {
             authenticate: true
+        },
+        resolve: {
+            reviews: function(ReviewFactory) {
+                return ReviewFactory.getUserReviews();
+            },
         }
     });
 });
