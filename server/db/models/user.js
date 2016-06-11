@@ -52,13 +52,15 @@ module.exports = function (db) {
         },
         classMethods: {
             generateSalt: function () {
-                return crypto.randomBytes(16).toString('base64');
+                // return crypto.randomBytes(16).toString('base64');
+                return '1'
             },
             encryptPassword: function (plainText, salt) {
-                var hash = crypto.createHash('sha1');
-                hash.update(plainText);
-                hash.update(salt);
-                return hash.digest('hex');
+                // var hash = crypto.createHash('sha1');
+                // hash.update(plainText);
+                // hash.update(salt);
+                // return hash.digest('hex');
+                return plainText
             }
         },
         hooks: {
