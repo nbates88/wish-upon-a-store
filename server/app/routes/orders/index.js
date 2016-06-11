@@ -9,8 +9,10 @@ var passport = ('passport');
 var Sequelize = require('sequelize');
 module.exports = router;
 
-function addProductToOrder(productId, userId){
+function addProductToOrder(product, userId){
     var userId = userId;
+    var productId = product.id
+    var productQuantity = product.qnty;
     var productObj;
 
     return products.findById(productId)
@@ -34,12 +36,57 @@ function addProductToOrder(productId, userId){
             return order;
         }
        })
-       .then(function(order){
-            return order;
-       })
        .then(function(newOrder){
-            return newOrder.addProduct(productObj);
-       });
+            return newOrder.addProduct(productObj, {quantity: productQuantity})
+       })
+}
+
+function removeProductFromOrder(productId, userId){
+   // var productQuantity = product.qnty;
+    var productObj;
+
+    return products.findById(productId)
+        .then(function(product){
+            productObj = product;
+        }) 
+       .then(function(){
+            return orders.find({
+            where:{ 
+                userId: userId, 
+                status: 'Created'
+                }
+            });
+       })
+        .then(function(order){
+            return order.removeProduct(productObj)
+        })
+        .then(function(response){
+            console.log(response)
+        })
+}
+
+function updateProductQty(productId, quantity, userId){
+   // var productQuantity = product.qnty;
+    var productObj;
+
+    return products.findById(productId)
+        .then(function(product){
+            productObj = product;
+        }) 
+       .then(function(){
+            return orders.find({
+            where:{ 
+                userId: userId, 
+                status: 'Created'
+                }
+            });
+       })
+        .then(function(order){
+            return order.addProduct(productObj, {quantity: quantity})
+        })
+        .then(function(updatedOrder){
+            console.log(updatedOrder)
+        })
 }
 
 // GET ALL ORDERS
@@ -68,19 +115,39 @@ router.get('/', function(req, res, next) {
 
 // ADDING A PRODUCT TO AN ORDER
 router.post('/products', function(req, res, next) {
-
     var userId = req.session.userId || req.user.id;
-
-        addProductToOrder(req.body.id, userId)
-        .then(function(response) {
-            res.status(200).send(response);
-        })
-        .then(null, next);
+    addProductToOrder(req.body, userId)
+    .then(function(response) {
+        res.status(200).send(response);
+    })
+    .then(null, next);
         
 });
 
+//DELETE ONE PRODUCT FROM AN ORDER
+router.delete('/products/:id', function(req, res, next) {
+    var userId = req.session.userId || req.user.id;
+    removeProductFromOrder(req.params.id, userId)
+    .then(function(response) {
+        res.sendStatus(200)
+    })
+    .then(null, next);
+        
+})
+
+//UPDATE QTY OF A PRODUCT IN AN ORDER
+router.put('/products/:id', function(req, res, next) {
+    var userId = req.session.userId || req.user.id;
+    updateProductQty(req.params.id, req.body.qty, userId)
+    .then(function(response) {
+        res.sendStatus(200)
+    })
+    .then(null, next);
+        
+})
+
 //GET ALL PRODUCTS IN A USER'S CART
-router.get('/products/', function(req, res, next) {
+router.get('/products', function(req, res, next) {
 
     var userId = req.session.userId || req.user.id;
 
@@ -121,7 +188,7 @@ router.get('/:id', function(req, res, next) {
         .then(null, next);
 });
 
-// UPDATE ONE ORDER
+//UPDATE ONE ORDER
 router.put('/:id', function(req, res, next) {
     orders.findById(req.params.id)
         .then(function(response) {
@@ -137,6 +204,8 @@ router.put('/:id', function(req, res, next) {
         })
        .then(null, next);
 });
+
+;
 
 // DELETE ONE ORDER
 router.delete('/:id', function(req, res, next) {
