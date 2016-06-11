@@ -1,11 +1,16 @@
 <h4>Reviews</h4>
+
+<div ng-show="!user && !reviews.length">
+  No reviews yet.</a>
+</div>
+
 <table class="table">
   <tr>
     <th>Review</th>
     <th>Stars</th>
     <th></th>
   </tr>
-  <tr ng-form="reviewForm" name="reviewForm" ng-show="user">
+  <tr ng-form="reviewForm" name="reviewForm">
     <td>
       <input name="description" ng-model="review.description" type="text">
     </td>
@@ -19,7 +24,7 @@
       </select>
     </td>
     <td>
-      <button type="button" ng-click="addReview()">Add a Review</button>
+      <button type="button" ng-click="addReview()">Leave a Review</button>
     </td>
   </tr>
 
