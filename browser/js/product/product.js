@@ -11,27 +11,49 @@ app.config(function ($stateProvider) {
             user: function(AuthService){
                 return  AuthService.getLoggedInUser();
                 
+            },
+            reviews: function($stateParams, ReviewFactory) {
+                var id = $stateParams.id;
+                return ReviewFactory.getProductReviews(id)
             }
         }
     });
 
 });
 
-app.controller('ProductCtrl', function($scope, product, $state, ItemFactory, AdminFactory, user){
+app.controller('ProductCtrl', function($scope, product, $state, OrderFactory, AdminFactory, user, reviews, ReviewFactory){
+    
     $scope.deleteProduct = function(id){
         AdminFactory.deleteProduct(id);
         $state.go('home');
-    }
+    };
+
     $scope.product = product;
     $scope.user = user;
-   
-    ItemFactory.addProduct(product)
+    $scope.reviews = reviews;
 
-    $scope.addToCart = function(){
+    $scope.addReview = function() {
+        var review = $scope.review;
+        $scope.reviewForm.$setPristine();
+        $scope.review = {};
+
+        ReviewFactory.addReview(review, $scope.product.id)
+    }
+    
+   
+    // ItemFactory.addProduct(product)
+
+    $scope.addToCart = function(id){
+        console.log('ID',id)
         //use factory function to findOrCreate order where status is open
         //add product to order
+        OrderFactory.addProductToOrder(id)
+        .then(function(){
+            console.log('GOING TO NEW STATE')
+            $state.go('shoppingCart')
+        });
         //redirect to shoppingCart 
         //and in shoppingCart state, have factoryfunc that getsOrder and renders with res. order from backend
-        $state.go('shoppingCart')
-    }
-})
+        
+    };
+});

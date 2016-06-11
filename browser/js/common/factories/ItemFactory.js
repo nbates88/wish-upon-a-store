@@ -8,7 +8,6 @@ app.factory('ItemFactory', function () {
 	return {
 		addProduct: function(newObj){
 		 	product.push(newObj)
-		 	console.log(product)
 	 	},
 
 		getProducts: function(){

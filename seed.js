@@ -26,6 +26,7 @@ var User = db.model('user');
 var Product = db.model('product');
 var Order = db.model('order');
 var Collection = db.model('collection');
+var Review = db.model('review');
 
 
 var seedUsers = function () {
@@ -239,7 +240,7 @@ var seedOrders = function () {
     var creatingOrders = orders.map(function (order) {
         return Order.create(order)
             .then(function(response) {
-                return response
+                return response;
             });
     });
 
@@ -247,12 +248,40 @@ var seedOrders = function () {
 
 };
 
+var seedReviews = function () {
+
+    var reviews = [
+        {
+            stars: 1,
+            userId: 1,
+            productId: 1,
+            description: 'This sux'
+        },
+        {
+            stars: 5,
+            userId: 1,
+            productId: 2,
+            description: 'This rox'
+        },
+    ];
+
+    var creatingReviews = reviews.map(function (review) {
+        return Review.create(review)
+            .then(function(response) {
+                return response
+            });
+    });
+
+    return Promise.all(creatingReviews);
+
+};
 
 db.sync({ force: true })
     .then(seedUsers)
     .then(seedCollections)
     .then(seedProducts)
     .then(seedOrders)
+    .then(seedReviews)
     .then(function () {
         console.log(chalk.green('Seed successful!'));
         process.exit(0);

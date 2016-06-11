@@ -2,11 +2,45 @@ var router = require('express').Router();
 
 var db = require('../../../db');
 var orders = db.model('order');
+var users = db.model('user');
+var products = db.model('product');
+var passport = ('passport');
 
 var Sequelize = require('sequelize');
 module.exports = router;
 
+function addProductToOrder(productId, userId){
+    var userId = userId;
+    var productObj;
 
+    return products.findById(productId)
+        .then(function(product){
+            productObj = product;
+        }) 
+       .then(function(){
+           return orders.find({
+            where:{ 
+                userId: userId, 
+                status: 'Created'
+                }
+            });
+       })
+       .then(function(order){
+        if(!order){
+            return orders.create(
+                {userId: userId, 
+                status: 'Created'});
+        }else{
+            return order;
+        }
+       })
+       .then(function(order){
+            return order;
+       })
+       .then(function(newOrder){
+            return newOrder.addProduct(productObj);
+       });
+}
 
 // GET ALL ORDERS
 router.get('/', function(req, res, next) {
@@ -16,20 +50,59 @@ router.get('/', function(req, res, next) {
         .then(function(response) {
             res.status(200).send(response);
         })
-        .then(null, next)
+        .then(null, next);
     }
 });
 
-// CREATE ORDER
-router.post('/', function(req, res, next) {
-    orders.create(req.body)
-    .then(function(response) {
-        return response.setUser(req.user)
-    })
-    .then(function(response){
-        res.status(201).send(response);
-    })
-    .then(null, next)
+// GET ALL ORDERS
+router.get('/', function(req, res, next) {
+    if(!req.user || !req.user.isAdmin) res.sendStatus(403);
+    else{
+    orders.findAll()
+        .then(function(response) {
+            res.status(200).send(response);
+        })
+        .then(null, next);
+    }
+});
+
+// ADDING A PRODUCT TO AN ORDER
+router.get('/products/:id', function(req, res, next) {
+
+    var userId = req.session.userId || req.user.id;
+
+        addProductToOrder(req.params.id, userId)
+        .then(function(response) {
+            res.status(200).send(response);
+        })
+        .then(null, next);
+        
+});
+
+//GET ALL PRODUCTS IN A USER'S CART
+router.get('/products/', function(req, res, next) {
+
+    var userId = req.session.userId || req.user.id;
+
+        orders.find({
+            where:{ 
+                userId: userId, 
+                status: 'Created'
+            }
+       })
+       .then(function(order){
+            return order;
+       })
+       .then(function(foundOrder){
+            return foundOrder.getProducts();
+       })
+       .then(function(foundProducts){
+            return foundProducts;
+       })
+       .then(function(response) {
+            res.send(response);
+        })
+        .then(null, next);
 });
 
 // GET ONE ORDER BY ID
@@ -45,7 +118,7 @@ router.get('/:id', function(req, res, next) {
                 res.sendStatus(403);
             }
         })
-        .then(null, next)
+        .then(null, next);
 });
 
 // UPDATE ONE ORDER
@@ -62,7 +135,7 @@ router.put('/:id', function(req, res, next) {
                 res.sendStatus(403);
             }
         })
-       .then(null, next)
+       .then(null, next);
 });
 
 // DELETE ONE ORDER
@@ -72,12 +145,12 @@ router.delete('/:id', function(req, res, next) {
             if(response.user === req.user || req.user.isAdmin){
                 return response.destroy()
                 .then(function(response) {
-                    res.redirect(204, '/')
-                })
+                    res.redirect(204, '/');
+                });
             }
             else{
                 res.sendStatus(403);
             }
         })
-        .then(null, next)
+        .then(null, next);
 });

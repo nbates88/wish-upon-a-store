@@ -8,15 +8,12 @@ app.controller('AdminProductsCtrl', function($scope, products, AdminFactory){
     $scope.createProduct = function(data){
         console.log($scope.productForm);
         $scope.productForm.$setPristine();
-        AdminFactory.createProduct(data)
-            .then(function(product){
-                $scope.products.push(product)
-            })
+        $scope.product = {}
+        AdminFactory.createProduct(data)    
     }
 
     $scope.editProduct = function(product){
             AdminFactory.editProduct(product.id, product)
         }
-        // console.log(product);
     
     });
