@@ -1,3 +1,4 @@
+
 'use strict';
 
 var crypto = require('crypto');
@@ -54,15 +55,13 @@ module.exports = function (db) {
         },
         classMethods: {
             generateSalt: function () {
-                // return crypto.randomBytes(16).toString('base64');
-                return '1'
+                return crypto.randomBytes(16).toString('base64');
             },
             encryptPassword: function (plainText, salt) {
-                // var hash = crypto.createHash('sha1');
-                // hash.update(plainText);
-                // hash.update(salt);
-                // return hash.digest('hex');
-                return plainText
+                var hash = crypto.createHash('sha1');
+                hash.update(plainText);
+                hash.update(salt);
+                return hash.digest('hex');
             }
         },
         hooks: {
@@ -78,6 +77,7 @@ module.exports = function (db) {
             beforeCreate: function (user) {
                 user.salt = user.Model.generateSalt();
                 user.password = user.Model.encryptPassword(user.password, user.salt);
+                console.log('password is', typeof user.password)
             }
         }
     });
@@ -85,4 +85,3 @@ module.exports = function (db) {
    return User;
 
 };
-
