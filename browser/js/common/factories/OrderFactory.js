@@ -8,6 +8,9 @@ app.factory('OrderFactory', function($http){
       .then(function(products){
         return products.data;
       });
+    },
+    removeProduct : function(id){
+      return $http.delete('/api/orders/products/' + id)
     }
   };
 

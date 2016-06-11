@@ -15,6 +15,7 @@
         <td>{{product.OrderProducts.quantity}}</td>
         <td>{{product.price | currency}}</td>
         <td>{{product.OrderProducts.quantity * product.price | currency}}</td>
+        <td><button class="btn btn-default btn-xs" ng-click="removeItem(product)"><span class="glyphicon glyphicon-remove"></span></td>
       </tr>
     </tbody>
   </table>

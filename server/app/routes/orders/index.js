@@ -41,6 +41,30 @@ function addProductToOrder(product, userId){
        })
 }
 
+function removeProductFromOrder(productId, userId){
+   // var productQuantity = product.qnty;
+    var productObj;
+
+    return products.findById(productId)
+        .then(function(product){
+            productObj = product;
+        }) 
+       .then(function(){
+            return orders.find({
+            where:{ 
+                userId: userId, 
+                status: 'Created'
+                }
+            });
+       })
+        .then(function(order){
+            return order.removeProduct(productObj)
+        })
+        .then(function(response){
+            console.log(response)
+        })
+}
+
 // GET ALL ORDERS
 router.get('/', function(req, res, next) {
     if(!req.user || !req.user.isAdmin) res.sendStatus(403);
@@ -67,19 +91,28 @@ router.get('/', function(req, res, next) {
 
 // ADDING A PRODUCT TO AN ORDER
 router.post('/products', function(req, res, next) {
-
     var userId = req.session.userId || req.user.id;
-
-        addProductToOrder(req.body, userId)
-        .then(function(response) {
-            res.status(200).send(response);
-        })
-        .then(null, next);
+    addProductToOrder(req.body, userId)
+    .then(function(response) {
+        res.status(200).send(response);
+    })
+    .then(null, next);
         
 });
 
+//DELETE ONE PRODUCT FROM AN ORDER
+router.delete('/products/:id', function(req, res, next) {
+    var userId = req.session.userId || req.user.id;
+    removeProductFromOrder(req.params.id, userId)
+    .then(function(response) {
+        res.sendStatus(200)
+    })
+    .then(null, next);
+        
+})
+
 //GET ALL PRODUCTS IN A USER'S CART
-router.get('/products/', function(req, res, next) {
+router.get('/products', function(req, res, next) {
 
     var userId = req.session.userId || req.user.id;
 
@@ -136,6 +169,8 @@ router.put('/:id', function(req, res, next) {
         })
        .then(null, next);
 });
+
+;
 
 // DELETE ONE ORDER
 router.delete('/:id', function(req, res, next) {

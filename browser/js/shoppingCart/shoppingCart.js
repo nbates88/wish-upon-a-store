@@ -12,7 +12,16 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('ShoppingCartCtrl', function($scope, foundProducts){
+app.controller('ShoppingCartCtrl', function($scope, $state, foundProducts, OrderFactory){
 
     $scope.products = foundProducts;
+
+    $scope.removeItem = function (product) {
+    var idx = $scope.products.indexOf(product)
+    var id = product.id
+    return OrderFactory.removeProduct(id)
+      .then(function(something){
+        return $scope.products.splice(idx, 1)
+      })
+  };
 });
