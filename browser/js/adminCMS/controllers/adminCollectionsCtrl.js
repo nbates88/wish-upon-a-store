@@ -11,4 +11,9 @@ app.controller('AdminCollectionsCtrl', function($scope, ProductFactory, collecti
         $scope.collection = {}
         ProductFactory.createCollection(data)
     }
+
+    $scope.editCollection = function(collection){
+            ProductFactory.editCollection(collection.id, collection)
+        }
+    
     });

@@ -11,11 +11,17 @@
 	<br>
 
 	<h3>Update current collections</h3>
-
-	<ul>
-		<li ng-repeat="collection in collections">
-		<h4>Name: {{collection.name}}</h4>
+	<div>
+	<div ng-repeat="collection in collections">
+	<section class="bg-info container" >
+		<li >
+		<h4>Name:</h4><p contenteditable> {{collection.name}}</p>
+		<button type="submit" class="btn btn-success" ng-click="editCollection(collection)">Update Collection</button>
 		<button type="submit" class="btn btn-success" ng-click="deleteCollection(collection)">Delete Collection</button>
 		</li>
-	</ul>
+	</section>
+	<br>
+	</div>
+	</div>
+	
 </div>
