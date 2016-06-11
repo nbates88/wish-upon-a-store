@@ -16,6 +16,13 @@ Order.belongsToMany(Product, {through: OrderProducts});
 User.hasMany(Order, {as: 'Orders'});
 Review.belongsTo(Product);
 Review.belongsTo(User);
+
+// Review.belongsToMany(Product, {through: 'ProductReview', through: 'UserReview'})
+// Review.belongsToMany(User, {through: 'UserReview', through: 'UserReview'})
+
+User.hasMany(Review, {as: 'Reviews'})
+Product.hasMany(Review, {as: 'Reviews'})
+
 Product.belongsToMany(Collection, {through: 'CollectionProduct'});
 Collection.belongsToMany(Product, {through: 'CollectionProduct'});
 Product.belongsToMany(Wishlist, {through: 'WishlistProduct'});

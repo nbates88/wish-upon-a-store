@@ -11,7 +11,7 @@
     <th>Stars</th>
   </tr>
   <tr ng-repeat="review in reviews">
-    <td>{{review.productId}}</td>
+    <td><a ui-sref="product({id:review.productId})">{{review.product}}</a></td>
     <td>{{review.description}}</td>
     <td>{{review.stars}}</td>
   </tr>

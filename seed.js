@@ -224,6 +224,24 @@ var seedReviews = function () {
             productId: 2,
             description: 'This rox'
         },
+        {
+            stars: 1,
+            userId: 1,
+            productId: 3,
+            description: 'THE PACKAGE WAS DELIVERED IN A DENTED AND WET BOX WHAT A RIP OFF!!!!'
+        },
+        {
+            stars: 5,
+            userId: 1,
+            productId: 4,
+            description: 'Not really sure what this did for me but it was great'
+        },
+        {
+            stars: 2,
+            userId: 2,
+            productId: 3,
+            description: 'Meh'
+        },
     ];
 
     var creatingReviews = reviews.map(function (review) {

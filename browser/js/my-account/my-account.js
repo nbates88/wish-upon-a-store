@@ -86,7 +86,10 @@ app.config(function($stateProvider) {
             
             ReviewFactory.getUserReviews()
                 .then(function(reviews) {
-                    console.log('info from factory is', reviews)
+                    reviews.forEach(review => {
+                        review.product = reviews[0].product.name
+                        review.productId = reviews[0].product.id
+                    })
                     $scope.reviews = reviews;
                 })
         },
