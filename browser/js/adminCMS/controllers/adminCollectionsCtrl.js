@@ -1,4 +1,4 @@
-app.controller('AdminCollectionsCtrl', function($scope, ProductFactory, AdminFactory, collections){
+app.controller('AdminCollectionsCtrl', function($scope, ProductFactory, collections){
     $scope.collections = collections;
 
     $scope.deleteCollection = function(collection){
@@ -13,7 +13,7 @@ app.controller('AdminCollectionsCtrl', function($scope, ProductFactory, AdminFac
     }
 
     $scope.editCollection = function(collection){
-            AdminFactory.editCollection(collection.id, collection)
+            ProductFactory.editCollection(collection.id, collection)
         }
     
     });
