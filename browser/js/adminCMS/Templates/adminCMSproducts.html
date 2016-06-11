@@ -25,10 +25,17 @@
 	<h3>Update current products</h3>
 
 	<ul>
-		<li ng-repeat="product in products">
-		<h4>Name: {{product.name}}</h4>
-		<h4>Description: {{product.description}}</h4>
+		<div ng-repeat="product in products">
+		<section class="bg-info container" >
+		<h4> Name: </h4><p contenteditable>{{product.name}}</p>
+		<h4>Description: </h4><p contenteditable>{{product.description}}</p>
+		<h4> Price: </h4><p contenteditable>{{product.price}}</p>
+		<h4> Image URL: </h4><p contenteditable>{{product.imageUrl}}</p>
+		<h4> Inventory Quantity: </h4><p contenteditable>{{product.inventoryQuantity}}</p>
+		<button type="submit" class="btn btn-success" ng-click="editProduct(product)">Update Product</button>
 		<button type="submit" class="btn btn-success" ng-click="deleteProduct(product)">Delete Product</button>
-		</li>
+		</section>
+		<hr>
+		</div>
 	</ul>
 </div>

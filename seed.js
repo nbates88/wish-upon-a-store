@@ -182,7 +182,46 @@ var seedProducts = function (collections) {
             })
    });
 
-     return Promise.all([product1, product2, product3, product4, product5, product6]);
+    var product8 = Product.create({name: 'Get a promotion a work',
+            description: 'Salary boost included',
+            price: 29.99,
+            inventoryQuantity: 13
+        })
+    .then(function(product){
+        var product = product;
+        return product.addCollection(collections.Career)
+         .then(function(product){
+                return product;
+            })
+   });
+
+    var product9 = Product.create({name: 'Get your ex back',
+            description: 'They\'ll immediately realize how mistaken they were for leaving you',
+            price: 9.99,
+            inventoryQuantity: 33
+        })
+    .then(function(product){
+        var product = product;
+        return product.addCollection(collections.Romance)
+         .then(function(product){
+                return product;
+            })
+   });
+
+    var product10 = Product.create({name: 'Cure my ailment',
+            description: 'No matter the issue, you will wake up tomorrow healed',
+            price: 529.50,
+            inventoryQuantity: 7
+        })
+    .then(function(product){
+        var product = product;
+        return product.addCollection(collections.Health)
+         .then(function(product){
+                return product;
+            })
+   });
+
+     return Promise.all([product1, product2, product3, product4, product5, product6, product7, product8, product9, product10]);
 };
 
 var seedOrders = function () {

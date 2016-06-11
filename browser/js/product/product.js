@@ -29,6 +29,8 @@ app.controller('ProductCtrl', function($scope, product, $state, OrderFactory, Ad
     };
 
     $scope.product = product;
+    $scope.options = [{ name: "1", id: 1 }, { name: "2", id: 2 }, { name: "3", id: 3 }];
+    
     $scope.user = user;
     $scope.reviews = reviews;
 
@@ -40,20 +42,11 @@ app.controller('ProductCtrl', function($scope, product, $state, OrderFactory, Ad
         ReviewFactory.addReview(review, $scope.product.id)
     }
     
-   
-    // ItemFactory.addProduct(product)
-
-    $scope.addToCart = function(id){
-        console.log('ID',id)
-        //use factory function to findOrCreate order where status is open
-        //add product to order
-        OrderFactory.addProductToOrder(id)
+    $scope.addToCart = function(id, selectedQuantity){
+        var id = {'id': id}
+        OrderFactory.addProductToOrder(id, selectedQuantity)
         .then(function(){
-            console.log('GOING TO NEW STATE')
             $state.go('shoppingCart')
         });
-        //redirect to shoppingCart 
-        //and in shoppingCart state, have factoryfunc that getsOrder and renders with res. order from backend
-        
     };
 });
