@@ -13,4 +13,10 @@ app.controller('AdminProductsCtrl', function($scope, products, AdminFactory){
                 $scope.products.push(product)
             })
     }
+
+    $scope.editProduct = function(product){
+            AdminFactory.editProduct(product.id, product)
+        }
+        // console.log(product);
+    
     });
