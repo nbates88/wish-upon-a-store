@@ -6,18 +6,24 @@
       <h2>Description: {{ product.description }}</h2>
       <h2>Price: {{ product.price }}</h2>
 
-     <select name = "Qnty" id ="myQnty" ng-options="option.name for option in options track by option.id" ng-model="selectedQuantity"></select>
+      <select name="Qnty" id="myQnty" ng-options="option.name for option in options track by option.id" ng-model="selectedQuantity"></select>
       <h4>Average Rating: 3 </h4>
 
-    <button type="submit" ng-click="addToCart(product.id, selectedQuantity)">Add to Cart!</button>
-    
+      <button type="submit" ng-click="addToCart(product.id, selectedQuantity)">Add to Cart!</button>
+
     </div>
     <button ng-click="deleteProduct(product.id)" ng-hide="!user.isAdmin">
       Delete Product</span>
     </button>
     <br>
+
     <h4>Reviews</h4>
-    <table class="table">
+
+    <div ng-show="!user && !reviews.length">
+      No reviews yet.</a>
+    </div>
+
+    <table class="table" ng-hide="!user && !reviews.length">
       <tr>
         <th>Review</th>
         <th>Stars</th>
@@ -37,7 +43,7 @@
           </select>
         </td>
         <td>
-          <button type="button" ng-click="addReview()">Add a Review</button>
+          <button type="button" ng-click="addReview()">Leave a Review</button>
         </td>
       </tr>
 
