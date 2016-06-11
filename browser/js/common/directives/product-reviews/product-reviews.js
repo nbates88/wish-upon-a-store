@@ -15,7 +15,6 @@ app.directive('productReviews', function(ReviewFactory) {
                 var review = scope.review;
                 scope.reviewForm.$setPristine();
                 scope.review = {};
-
                 ReviewFactory.addReview(review, scope.productid);
             };
 

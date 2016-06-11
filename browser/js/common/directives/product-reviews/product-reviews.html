@@ -6,11 +6,13 @@
 
 <table class="table">
   <tr>
+    <th>User</th>
     <th>Review</th>
     <th>Stars</th>
     <th></th>
   </tr>
   <tr ng-form="reviewForm" name="reviewForm">
+    <td></td>
     <td>
       <input name="description" ng-model="review.description" type="text">
     </td>
@@ -29,6 +31,7 @@
   </tr>
 
   <tr ng-repeat="review in reviews">
+    <td>{{review.userId}}</td>
     <td>{{review.description}}</td>
     <td>{{review.stars}}</td>
     <td></td>

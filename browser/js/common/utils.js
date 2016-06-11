@@ -22,5 +22,5 @@ let getAverage = function(arrayOfNumbers) {
     let len = arrayOfNumbers.length;
     let total = arrayOfNumbers.reduce(function(a, b) {
         return a + b })
-    return parseFloat(total / len).toFixed(2);
+    return (Math.round((total/len)*2)/2).toFixed(1);
 }
