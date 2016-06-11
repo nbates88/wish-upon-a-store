@@ -15,5 +15,4 @@ app.config(function ($stateProvider) {
 app.controller('ShoppingCartCtrl', function($scope, foundProducts){
 
     $scope.products = foundProducts;
-    $scope.qty = 2;
 });

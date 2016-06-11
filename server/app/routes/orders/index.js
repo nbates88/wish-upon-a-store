@@ -9,8 +9,10 @@ var passport = ('passport');
 var Sequelize = require('sequelize');
 module.exports = router;
 
-function addProductToOrder(productId, userId){
+function addProductToOrder(product, userId){
     var userId = userId;
+    var productId = product.id
+    var productQuantity = product.qnty;
     var productObj;
 
     return products.findById(productId)
@@ -34,12 +36,9 @@ function addProductToOrder(productId, userId){
             return order;
         }
        })
-       .then(function(order){
-            return order;
-       })
        .then(function(newOrder){
-            return newOrder.addProduct(productObj);
-       });
+            return newOrder.addProduct(productObj, {quantity: productQuantity})
+       })
 }
 
 // GET ALL ORDERS
@@ -71,7 +70,7 @@ router.post('/products', function(req, res, next) {
 
     var userId = req.session.userId || req.user.id;
 
-        addProductToOrder(req.body.id, userId)
+        addProductToOrder(req.body, userId)
         .then(function(response) {
             res.status(200).send(response);
         })
