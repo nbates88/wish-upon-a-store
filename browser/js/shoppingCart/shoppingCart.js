@@ -32,6 +32,7 @@ app.controller('ShoppingCartCtrl', function($scope, $state, foundProducts, Order
     };
 
      $scope.decreaseQuantity = function(product){
+        var productId = product.id
         var idx = $scope.products.indexOf(product)
         $scope.products[idx].OrderProducts.quantity--
         $scope.updateProductQty(productId, $scope.products[idx].OrderProducts.quantity)
