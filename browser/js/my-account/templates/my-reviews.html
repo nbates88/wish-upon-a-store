@@ -4,15 +4,16 @@
   No reviews yet.
 </div>
 
-<table class="table" ng-show="reviews.length">
-  <tr>
-    <th>Product</th>
-    <th>Review</th>
-    <th>Stars</th>
-  </tr>
-  <tr ng-repeat="review in reviews">
-    <td><a ui-sref="product({id:review.product.id})">{{review.product.name}}</a></td>
-    <td>{{review.description}}</td>
-    <td>{{review.stars}}</td>
-  </tr>
-</table>
+<div class="container reviews" ng-repeat="review in reviews" ng-show="reviews.length">
+    <div class="row revrow">
+        <div class="col-sm-5">
+          <strong><a ui-sref="product({id:review.product.id})">{{review.product.name}}</a></strong>
+        </div>
+        <div class="col-sm-3">
+          <img ng-src="js/common/stars/{{review.stars}}.png">
+        </div>
+    </div>
+    <div class="row revrow">
+        <div class="col-sm-8">{{review.description}}</div>
+    </div>
+</div>

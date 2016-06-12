@@ -1,0 +1,31 @@
+<h4>Reviews</h4>
+
+<div ng-show="!reviews.length">
+  No reviews yet. <a ui-sref="product.addReview" ng-show="user">Want to add one?</a>
+</div>
+
+<!-- <table class="table" ng-show="reviews.length">
+  <tr>
+    <th>User</th>
+    <th>Review</th>
+    <th>Stars</th>
+    <th></th>
+  </tr>
+
+  <tr ng-repeat="review in reviews">
+    <td class='span2'>{{review.user.name}}</td>
+    <td>{{review.description}}</td>
+    <td><img ng-src="js/common/stars/{{review.stars}}.png"></td>
+    <td></td>
+  </tr>
+</table> -->
+
+<div class="container reviews" ng-repeat="review in reviews" ng-show="reviews.length">
+    <div class="row revrow">
+        <div class="col-sm-5"><strong>{{review.user.name}}</strong></div>
+        <div class="col-sm-3"><img ng-src="js/common/stars/{{review.stars}}.png"></div>
+    </div>
+    <div class="row revrow">
+        <div class="col-sm-8">{{review.description}}</div>
+    </div>
+</div>

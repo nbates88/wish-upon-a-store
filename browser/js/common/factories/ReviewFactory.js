@@ -1,39 +1,29 @@
+
+// THIS FACTORY CONTAINS FUNCTIONS FOR EVERYONE BUT ADMINS. FOR ADMIN FUNCTIONS, GO TO THE ADMIN FACTORY
+
 app.factory('ReviewFactory', function($http) {
 
-	var cachedProductReviews = []
-
 	var reviewfac = {}
-
-	reviewfac.addReview = function(review, productId) {
-		return $http.post('/api/products/' +productId+'/reviews', review)
-			.then(function(review){
-				cachedProductReviews.push(review.data)
-				return review.data
-			})
-
-	};
 
 	reviewfac.getProductReviews = function(productId) {
 		return $http.get('/api/products/' + productId + '/reviews')
 			.then(function(reviews) {
-				angular.copy(reviews.data, cachedProductReviews)
-				return cachedProductReviews;
+				return reviews.data;
 			})
 	};
 
-	reviewfac.deleteReview = function() {
-
-	};
-
 	reviewfac.getUserReviews = function() {
-		return $http.get('/api/reviews')
+		return $http.get('/api/reviews/user')
 			.then(function(reviews) {
 				return reviews.data;
 			});
 	};
 
-	reviewfac.getAverageRating = function() {
-
+	reviewfac.addReview = function(review, productId) {
+		return $http.post('/api/products/' +productId+'/reviews', review)
+			.then(function(review){
+				return review.data
+			})
 	};
 
 	return reviewfac;

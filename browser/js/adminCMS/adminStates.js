@@ -1,4 +1,4 @@
-app.config(function ($stateProvider) {
+app.config(function($stateProvider) {
 
     // Register our *collections* state.
     $stateProvider.state('admin', {
@@ -12,7 +12,7 @@ app.config(function ($stateProvider) {
         controller: 'AdminUsersCtrl',
         templateUrl: 'js/adminCMS/Templates/adminCMSusers.html',
         resolve: {
-            users: function(AdminFactory){
+            users: function(AdminFactory) {
                 return AdminFactory.getAllUsers()
             },
         }
@@ -23,7 +23,7 @@ app.config(function ($stateProvider) {
         controller: 'AdminProductsCtrl',
         templateUrl: 'js/adminCMS/Templates/adminCMSproducts.html',
         resolve: {
-            products: function(ProductFactory){
+            products: function(ProductFactory) {
                 return ProductFactory.getAllProducts()
             },
         }
@@ -34,7 +34,7 @@ app.config(function ($stateProvider) {
         controller: 'AdminCollectionsCtrl',
         templateUrl: 'js/adminCMS/Templates/adminCMScollections.html',
         resolve: {
-            collections: function(ProductFactory){
+            collections: function(ProductFactory) {
                 return ProductFactory.getAllCollections()
             }
         }
@@ -44,6 +44,17 @@ app.config(function ($stateProvider) {
         url: '/orders',
         controller: 'AdminOrdersCtrl',
         templateUrl: 'js/adminCMS/Templates/adminCMSorders.html'
+    });
+
+    $stateProvider.state('admin.reviews', {
+        url: '/reviews',
+        controller: 'AdminReviewsCtrl',
+        templateUrl: 'js/adminCMS/Templates/adminCMSreviews.html',
+        resolve: {
+            reviews: function(AdminFactory) {
+                return AdminFactory.getAllReviews();
+            }
+        }
     });
 
 });

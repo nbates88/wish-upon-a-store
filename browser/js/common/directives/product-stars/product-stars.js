@@ -12,7 +12,6 @@ app.directive('productStars', function(ReviewFactory) {
                         scope.stars = getAverage(reviews.map(review => review.stars));
                     }
                 });
-
         }
     };
 });
