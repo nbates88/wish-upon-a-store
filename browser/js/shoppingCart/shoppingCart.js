@@ -12,7 +12,7 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('ShoppingCartCtrl', function($scope, $state, foundProducts, OrderFactory){
+app.controller('ShoppingCartCtrl', function($scope, $window, $state, foundProducts, OrderFactory){
 
     $scope.products = foundProducts;
     $scope.removeItem = function (product) {
@@ -28,6 +28,9 @@ app.controller('ShoppingCartCtrl', function($scope, $state, foundProducts, Order
         var productId = product.id
         var idx = $scope.products.indexOf(product)
         $scope.products[idx].OrderProducts.quantity++
+        if(($scope.products[idx].OrderProducts.quantity) > 3){
+            $scope.products[idx].OrderProducts.quantity = 3
+        }
         $scope.updateProductQty(productId, $scope.products[idx].OrderProducts.quantity)
     };
 
@@ -35,6 +38,10 @@ app.controller('ShoppingCartCtrl', function($scope, $state, foundProducts, Order
         var productId = product.id
         var idx = $scope.products.indexOf(product)
         $scope.products[idx].OrderProducts.quantity--
+        if($scope.products[idx].OrderProducts.quantity < 1){
+            $scope.products[idx].OrderProducts.quantity = 1
+            $window.alert("Please click on the x if you want to remove this product from the order.");
+        }
         $scope.updateProductQty(productId, $scope.products[idx].OrderProducts.quantity)
     };
 
