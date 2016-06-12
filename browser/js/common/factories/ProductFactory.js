@@ -16,7 +16,6 @@ app.factory('ProductFactory', function($http) {
         getOneCollection: function(id) {
             return $http.get('/api/collections/' + id)
                 .then(function(collection) {
-                    console.log("factory collection", collection.data)
                     return collection.data
                 })
         },

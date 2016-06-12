@@ -1,0 +1,27 @@
+<div>
+  <h3>Manage Reviews</h3>
+
+  <div ng-hide="reviews.length">
+    No reviews yet.
+  </div>
+
+  <div class="container reviews" ng-repeat="review in reviews" ng-show="reviews.length">
+    <div class="row revrow">
+      <div class="col-sm-3">
+        <strong><a ui-sref="product({id:review.product.id})">{{review.product.name}}</a></strong>
+      </div>
+      <div class="col-sm-3">
+        <strong>{{review.user.name}}</strong>
+      </div>
+      <div class="col-sm-3">
+        <img ng-src="js/common/stars/{{review.stars}}.png">
+      </div>
+    </div>
+    <div class="row revrow">
+      <div class="col-sm-8">{{review.description}}</div>
+      <div class="col-sm-1">
+      	<button type="submit" class="btn btn-success" ng-click="deleteReview(review.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
