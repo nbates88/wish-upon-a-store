@@ -19,8 +19,11 @@ let formatDate = function(rawDateString) {
 
 
 let getAverage = function(arrayOfNumbers) {
-    let len = arrayOfNumbers.length;
-    let total = arrayOfNumbers.reduce(function(a, b) {
-        return a + b })
-    return (Math.round((total/len)*2)/2).toFixed(1);
+    if (arrayOfNumbers.length) {
+        let len = arrayOfNumbers.length;
+        let total = arrayOfNumbers.reduce(function(a, b) {
+            return a + b
+        })
+        return (Math.round((total / len) * 2) / 2).toFixed(1);
+    }
 }
