@@ -117,7 +117,6 @@ var seedProducts = function (collections) {
             imageUrl: 'http://blog.jobtoday.com/wp-content/uploads/2016/02/land-a-job.jpg'
         })
      .then(function(product){
-        console.log(product);
         return product.addCollection(collections.Career)
             .then(function(product){
                 return product;
@@ -283,7 +282,7 @@ var seedReviews = function () {
         },
         {
             stars: 2,
-            userId: 2,
+            userId: 3,
             productId: 3,
             description: 'aguhwwgggghhh uughguughhhghghghhhgh huuguughghg uggguh uughghhhgh aaaaahnr aarrragghuuhw uhghhhgh uughghhhgh aarrragghuuhw huuguughghg huurh'
         },
@@ -300,7 +299,7 @@ var seedReviews = function () {
             description: 'beep boop beep beep BOP BOP bonggg bonggg bonggg beep BEEP boop beep boop boop BONGGG'
         },
         {
-            stars: 4,
+            stars: 2,
             userId: 2,
             productId: 4,
             description: 'I got an extra hour every day but I just spent the time watching Keeping up with the Kardashians.'
