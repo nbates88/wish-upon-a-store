@@ -15,7 +15,7 @@
   <tr ng-repeat="review in reviews">
     <td>{{review.userId}}</td>
     <td>{{review.description}}</td>
-    <td><img src="js/common/stars/{{review.stars}}.png"></td>
+    <td><img ng-src="js/common/stars/{{review.stars}}.png"></td>
     <td></td>
   </tr>
 </table>
