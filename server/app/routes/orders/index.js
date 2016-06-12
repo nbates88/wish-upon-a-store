@@ -9,84 +9,67 @@ var passport = ('passport');
 var Sequelize = require('sequelize');
 module.exports = router;
 
+//FYI:These functions should be methods on the models.
+
 function addProductToOrder(product, userId){
-    var userId = userId;
     var productId = product.id
     var productQuantity = product.qnty;
-    var productObj;
+ 
+    var createOrder = orders.create(
+        {userId: userId, 
+        status: 'Created'});
 
-    return products.findById(productId)
-        .then(function(product){
-            productObj = product;
-        }) 
-       .then(function(){
-           return orders.find({
-            where:{ 
-                userId: userId, 
-                status: 'Created'
-                }
-            });
-       })
-       .then(function(order){
-        if(!order){
-            return orders.create(
-                {userId: userId, 
-                status: 'Created'});
-        }else{
-            return order;
+    return findOrderProductPair(productId, userId, createOrder)
+        .then(function(result){
+            var product = result.product
+            var order = result.order
+            return order.addProduct(product, {quantity: productQuantity})
+        })
+}
+
+function findOrderProductPair(productId, userId, fallbackOrder){
+    var findProduct = products.findById(productId)
+    var findOrder = orders.find({
+        where:{ 
+            userId: userId, 
+            status: 'Created'
+            }
+        });
+    if(fallbackOrder !== undefined){
+        findOrder = findOrder
+        .then(function(order){
+            if(!order){
+                return fallbackOrder
+            } else{
+                return order
+            }
+        })
+    }
+    return Promise.all([findOrder, findProduct])
+    .then(function(values){
+        return {
+            product: values[1],
+            order: values[0]
         }
-       })
-       .then(function(newOrder){
-            return newOrder.addProduct(productObj, {quantity: productQuantity})
-       })
+    })
 }
 
 function removeProductFromOrder(productId, userId){
-   // var productQuantity = product.qnty;
-    var productObj;
-
-    return products.findById(productId)
-        .then(function(product){
-            productObj = product;
-        }) 
-       .then(function(){
-            return orders.find({
-            where:{ 
-                userId: userId, 
-                status: 'Created'
-                }
-            });
-       })
-        .then(function(order){
-            return order.removeProduct(productObj)
-        })
-        .then(function(response){
-            console.log(response)
-        })
+    return findOrderProductPair(productId, userId)
+    .then(function(result){
+        var product = result.product
+        var order = result.order
+        return order.removeProduct(product)
+    })    
 }
 
 function updateProductQty(productId, quantity, userId){
-   // var productQuantity = product.qnty;
-    var productObj;
-
-    return products.findById(productId)
-        .then(function(product){
-            productObj = product;
-        }) 
-       .then(function(){
-            return orders.find({
-            where:{ 
-                userId: userId, 
-                status: 'Created'
-                }
-            });
-       })
-        .then(function(order){
-            return order.addProduct(productObj, {quantity: quantity})
-        })
-        .then(function(updatedOrder){
-            console.log(updatedOrder)
-        })
+    return findOrderProductPair(productId, userId)
+    .then(function(result){
+        var product = result.product
+        var order = result.order
+        return order.addProduct(product, {quantity: quantity})
+    })
 }
 
 // GET ALL ORDERS
