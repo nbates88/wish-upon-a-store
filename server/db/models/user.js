@@ -15,7 +15,7 @@ module.exports = function (db) {
         name: {
             type: Sequelize.STRING,
             // KC: Added this because all the User model tests are breaking after the changes to the define block (for requiring email, etc).
-            defaultValue: 'Pleiades Polaris'
+            defaultValue: 'pleiades' + parseInt(Math.random() * 1000)
         },
         isAdmin: {
             type: Sequelize.BOOLEAN,
