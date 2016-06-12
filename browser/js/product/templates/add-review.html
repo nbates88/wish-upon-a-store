@@ -1,0 +1,22 @@
+<div>
+
+  <h3>Add a Review</h3>
+  <form ng-submit="addReview(review)">
+
+    <label>Review</label>
+    <input name="description" ng-model="review.description" type="text">
+
+    <label>Stars</label>
+    <select name="stars" ng-model="review.stars">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+
+    <button type="button">Submit Review</button>
+
+  </form>
+
+</div>

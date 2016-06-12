@@ -13,14 +13,21 @@
 
       <button type="submit" ng-click="addToCart(product.id, selectedQuantity)">Add to Cart!</button>
 
+      <button ng-click="deleteProduct(product.id)" ng-hide="!user.isAdmin">
+        Delete Product</span>
+      </button>
     </div>
-    <button ng-click="deleteProduct(product.id)" ng-hide="!user.isAdmin">
-      Delete Product</span>
-    </button>
+
     <br>
 
-    <!-- REVIEW SECTION DIRECTIVE (PRODUCT-REVIEWS) -->
-    <product-reviews productid="product.id"></product-reviews>
+    <!-- REVIEW NAVGATION -->
+
+    <ul class="nav nav-tabs">
+      <li ui-sref-active="active"><a ui-sref='product.allReviews'>View All Reviews</a></li>
+      <li ui-sref-active="active" ng-show="user"><a ui-sref='product.addReview'>Add a Review</a></li>
+    </ul>
+
+    <ui-view></ui-view>
 
   </div>
 </section>
