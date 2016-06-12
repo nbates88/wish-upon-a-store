@@ -23,7 +23,15 @@ sidebar {
 	a {
 		color: navy;
 	}
-	
+}
+
+.reviews {
+  margin: 30px 0px;
+  border: 1px solid #ddd;
+}
+
+.revrow {
+  padding: 10px 0;
 }
 
 @import 'directives/main';

@@ -2,6 +2,8 @@ var router = require('express').Router();
 var db = require('../../../db');
 var products = db.model('product');
 var Review = db.model('review');
+var User = db.model('user');
+
 
 var Sequelize = require('sequelize');
 module.exports = router;
@@ -74,7 +76,8 @@ router.get('/:productId/reviews', function(req, res, next) {
     Review.findAll({
             where: {
                 productId: req.params.productId
-            }
+            },
+            include: [User]
         })
         .then(function(reviews) {
             res.status(200).send(reviews);

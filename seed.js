@@ -43,6 +43,18 @@ var seedUsers = function () {
             email: 'obama@gmail.com',
             password: 'potus',
             isAdmin: true
+        },
+        {
+            name: 'chewbacca',
+            email: 'chewbacca@star.wars',
+            password: 'wuhhha',
+            isAdmin: false
+        },
+        {
+            name: 'definitelynotarobot',
+            email: 'beep@boop.com',
+            password: 'wuhhha',
+            isAdmin: true
         }
     ];
 
@@ -255,13 +267,13 @@ var seedReviews = function () {
             stars: 1,
             userId: 1,
             productId: 1,
-            description: 'This sux'
+            description: 'After I bought this wish, I was mailed a 1-year gym membership. CONDESCENDING WASTE OF MONEY.'
         },
         {
-            stars: 5,
+            stars: 4,
             userId: 1,
-            productId: 2,
-            description: 'This rox'
+            productId: 9,
+            description: 'Got back together with my ex. It was a horrible idea. I should have bought the "Find the love of your life" wish instead.'
         },
         {
             stars: 1,
@@ -270,16 +282,28 @@ var seedReviews = function () {
             description: 'THE PACKAGE WAS DELIVERED IN A DENTED AND WET BOX WHAT A RIP OFF!!!!'
         },
         {
-            stars: 5,
-            userId: 1,
-            productId: 4,
-            description: 'Not really sure what this did for me but it was great'
-        },
-        {
             stars: 2,
             userId: 2,
             productId: 3,
-            description: 'Meh'
+            description: 'aguhwwgggghhh uughguughhhghghghhhgh huuguughghg uggguh uughghhhgh aaaaahnr aarrragghuuhw uhghhhgh uughghhhgh aarrragghuuhw huuguughghg huurh'
+        },
+        {
+            stars: 5,
+            userId: 3,
+            productId: 5,
+            description: 'aarrragghuuhw uughghhhgh aaahnruh hnnnhrrhhh uugggh huuguughghg uughghhhgh aguhwwgggghhh uughguughhhghghghhhgh uggguh uughghhhgh aaaaahnr aarrragghuuhw uughghhhgh aarrragghuuhw huuguughghg huurh uughguughhhghghghhhgh huuguughghg aaaaahnr raaaaaahhgh uughguughhhghghghhhgh huuguughghg wuuh wrrhw raaaaaahhgh raaaaaahhgh huuguughghg wrrhwrwwhw'
+        },
+        {
+            stars: 5,
+            userId: 4,
+            productId: 4,
+            description: 'beep boop beep beep BOP BOP bonggg bonggg bonggg beep BEEP boop beep boop boop BONGGG'
+        },
+        {
+            stars: 4,
+            userId: 2,
+            productId: 4,
+            description: 'I got an extra hour every day but I just spent the time watching Keeping up with the Kardashians.'
         },
     ];
 
