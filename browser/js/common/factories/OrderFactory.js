@@ -14,6 +14,10 @@ app.factory('OrderFactory', function($http){
     },
     updateProductQty : function(id, qty){
       return $http.put('/api/orders/products/' + id, qty)
+    },
+
+    updateOrderStatus : function(checkoutInfo){
+      return $http.put('/api/orders/', checkoutInfo)
     }
 
   };

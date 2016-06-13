@@ -166,21 +166,26 @@ router.get('/:id', function(req, res, next) {
         .then(null, next);
 });
 
-//UPDATE ONE ORDER
-router.put('/:id', function(req, res, next) {
-    orders.findById(req.params.id)
-        .then(function(response) {
-            if(response.user === req.user || req.user.isAdmin){
-                return response.update(req.body)
-                .then(function(repsonse){
-                    res.status(300).send(response);
-                });
+//UPDATE ONE ORDER'S STATUS
+router.put('/', function(req, res, next) {
+
+    var userId = req.user ? req.user.id : req.session.userId;
+        orders.find({
+            where:{ 
+                userId: userId, 
+                status: 'Created'
             }
-            else{
-                res.sendStatus(403);
-            }
+       })
+        .then(function(foundOrder){
+            return foundOrder.update({
+                status: "Processing",
+                checkoutInfo: req.body
+            })
         })
-       .then(null, next);
+        .then(function(updatedOrder){
+            res.sendStatus(201)
+        })
+        .then(null, next);
 });
 
 ;
