@@ -1,0 +1,39 @@
+<h4>Checkout</h4>
+<form name="checkoutForm" ng-submit="checkout(checkoutInfo)">
+   
+  <div class="form-group row col-sm-offset-2 col-sm-10">
+    <label for="name" class="col-sm-2 form-control-label">Name</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="name" name="name" ng-model="checkoutInfo.name" type="text" required>
+    </div>
+  </div>
+
+
+  <div class="form-group row col-sm-offset-2 col-sm-10">
+    <label for="email" class="col-sm-2 form-control-label">Email</label>
+     <div class="col-sm-10">
+      <input type="text" class="form-control" id="email" name="email" ng-model="checkoutInfo.email" type="text" required>
+    </div>
+  </div>
+
+  <div class="form-group row col-sm-offset-2 col-sm-10">
+    <label for="maidenName" class="col-sm-2 form-control-label">Mother's Maiden Name</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="maidenName" name="maidenName" ng-model="checkoutInfo.maidenName" type="text" required>
+    </div>
+  </div>
+  <div class="form-group row col-sm-offset-2 col-sm-10">
+    <label for="ssn" class="col-sm-2 form-control-label">Your SSN..you know, for verification</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="ssn" name="ssn" ng-model="checkoutInfo.ssn" type="text" required>
+    </div>
+  </div>
+  <div class="form-group row col-sm-offset-2 col-sm-10">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button name="submit" class="btn btn-primary" type="submit">Place Order</button>
+    </div>
+  </div>
+
+</form>
+
+

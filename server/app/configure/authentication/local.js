@@ -92,12 +92,41 @@ module.exports = function(app, db) {
                 console.log("ORDER AGAIN", order)
                 // We respond with a response object that has user with _id and email.
                 if(order){
-                    order.userId = req.session.userId; 
+                    console.log("hahahaha", order.dataValues.userId)
+                    console.log("heheheheh", req.session.userId)
+
+                    //order.dataValues.userId = req.user.id; 
+                    order.update({
+                        userId: req.user.id
+                        })
+                    .then(function(updatedOrder){
+                        return orders.findOne({
+                            where:{
+                                userId: req.user.id,
+                                status: "Created"
+                            },
+                            order: [
+                                ['createdAt', 'ASC']
+                            ]
+                        })
+                        .then(function(returnedOrder){
+                            return returnedOrder.destroy();
+                        })
+                        .then(function(){
+                           req.session.userId = null;
+                            res.status(200).send({
+                                user: user.sanitize()
+                            }); 
+                        })
+                    })
                 }
-                req.session.userId = null;
-                res.status(200).send({
-                    user: user.sanitize()
-                });
+                else{
+                    req.session.userId = null;
+                    res.status(200).send({
+                        user: user.sanitize()
+                    });
+                }
+                
             });
         };
         return orders.find({

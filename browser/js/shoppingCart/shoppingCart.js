@@ -55,6 +55,6 @@ app.controller('ShoppingCartCtrl', function($scope, $window, $state, foundProduc
     };
 
     $scope.checkout = function(){
-        $state.go('/checkout')
+        $state.go('checkout')
     }
 });
