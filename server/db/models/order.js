@@ -21,7 +21,7 @@ module.exports = function(db) {
             defaultValue: Sequelize.NOW
         },
         checkoutInfo: {
-            type: Sequelize.ARRAY(Sequelize.STRING)
+            type: Sequelize.JSON
         }
 
     })
