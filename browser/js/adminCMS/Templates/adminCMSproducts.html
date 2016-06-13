@@ -17,6 +17,10 @@
 		<label for="inventory">Inventory Quantity</label>
 		<input class="form-control" type="text" ng-model="product.inventoryQuantity" name="inventory">
 
+		<label for="collection">Collection</label>
+		<select ng-options="collection.name for collection in collections" class="form-control" ng-model="product.collection" name="collection">
+		</select>
+
 		<button type="submit" class="btn btn-success" ng-disabled="productForm.$invalid" >Create Product</button>
 	</form>
 
@@ -32,6 +36,7 @@
 		<h4> Price: </h4><p contenteditable>{{product.price}}</p>
 		<h4> Image URL: </h4><p contenteditable>{{product.imageUrl}}</p>
 		<h4> Inventory Quantity: </h4><p contenteditable>{{product.inventoryQuantity}}</p>
+		<h4> Collection: </h4><p contenteditable>{{product.collection}}</p>
 		<button type="submit" class="btn btn-success" ng-click="editProduct(product)">Update Product</button>
 		<button type="submit" class="btn btn-success" ng-click="deleteProduct(product)">Delete Product</button>
 		</section>
