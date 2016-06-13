@@ -15,6 +15,7 @@ app.controller('ProductCtrl', function($scope, product, $state, OrderFactory, Ad
             'id': id,
             'qnty': selectedQuantity.id
         }
+
         OrderFactory.addProductToOrder(product)
             .then(function() {
                 $state.go('shoppingCart')

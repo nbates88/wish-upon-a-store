@@ -37,15 +37,14 @@
 
     </div>
     <div class="col-lg-2">
-      <select class="dropdown">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-      </select>
+      <select name="Qnty" id="myQnty" ng-options="option.name for option in options track by option.id" ng-model="selectedQuantity"></select>
     </div>
 
     <div class="col-lg-2">
-      <button class="btn btn-primary btn-lg cart-button" type="submit" ng-click="addToCart(product.id)">Add to Cart</button>
+    {{product}}
+      <button class="btn btn-primary btn-lg cart-button" type="submit" ng-click="addToCart(product.id, selectedQuantity)">Add to Cart</button>
+    }
+    }
     </div>
 
     <!-- <div class="col-lg-2"></div> -->
