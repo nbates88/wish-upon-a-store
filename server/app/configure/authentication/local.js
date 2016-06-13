@@ -1,6 +1,8 @@
 'use strict';
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var db = require('../../../db');
+var orders = db.model('order');
 
 module.exports = function(app, db) {
 
@@ -70,6 +72,8 @@ module.exports = function(app, db) {
     // A POST /login route is created to handle login.
     // ALSO HANDLES SIGN UP
     app.post('/login', function(req, res, next) {
+        var userId = req.user ? req.user.id : req.session.userId;
+        var order;
 
         var authCb = function(err, user) {
             console.log('err from passport :', err)
@@ -85,15 +89,30 @@ module.exports = function(app, db) {
             // req.logIn will establish our session.
             req.logIn(user, function(loginErr) {
                 if (loginErr) return next(loginErr);
+                console.log("ORDER AGAIN", order)
                 // We respond with a response object that has user with _id and email.
+                if(order){
+                    order.userId = req.session.userId; 
+                }
+                req.session.userId = null;
                 res.status(200).send({
                     user: user.sanitize()
                 });
             });
         };
-
-        passport.authenticate('local', authCb)(req, res, next);
-
+        return orders.find({
+            where:{ 
+                userId: userId, 
+                status: 'Created'
+            }
+        })
+        .then(function(foundOrder){ 
+            order = foundOrder;
+            console.log("ORDERRRR", order)
+            passport.authenticate('local', authCb)(req, res, next);    
+            return order
+        })
+        
     });
 
 
