@@ -53,4 +53,8 @@ app.controller('ShoppingCartCtrl', function($scope, $window, $state, foundProduc
         return OrderFactory.updateProductQty(productId, qty)
 
     };
+
+    $scope.checkout = function(){
+        $state.go('/checkout')
+    }
 });

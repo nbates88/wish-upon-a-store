@@ -19,6 +19,9 @@ module.exports = function(db) {
         _updatedAt: {
             type: Sequelize.DATEONLY,
             defaultValue: Sequelize.NOW
+        },
+        checkoutInfo: {
+            type: Sequelize.ARRAY(Sequelize.STRING)
         }
 
     })

@@ -15,7 +15,7 @@ function addProductToOrder(product, userId){
     var productId = product.id
     var productQuantity = product.qnty;
  
-    var createOrder = orders.create(
+    var createOrder = orders.build(
         {userId: userId, 
         status: 'Created'});
 
@@ -34,12 +34,12 @@ function findOrderProductPair(productId, userId, fallbackOrder){
             userId: userId, 
             status: 'Created'
             }
-        });
+        })
     if(fallbackOrder !== undefined){
         findOrder = findOrder
         .then(function(order){
             if(!order){
-                return fallbackOrder
+                return fallbackOrder.save()
             } else{
                 return order
             }
@@ -84,21 +84,12 @@ router.get('/', function(req, res, next) {
     }
 });
 
-// GET ALL ORDERS
-router.get('/', function(req, res, next) {
-    if(!req.user || !req.user.isAdmin) res.sendStatus(403);
-    else{
-    orders.findAll()
-        .then(function(response) {
-            res.status(200).send(response);
-        })
-        .then(null, next);
-    }
-});
-
 // ADDING A PRODUCT TO AN ORDER
 router.post('/products', function(req, res, next) {
-    var userId = req.session.userId || req.user.id;
+    //console.log("IDDDDS", req.user.id, req.session.userId)
+   
+    var userId = req.user ? req.user.id : req.session.userId;
+    console.log("USER ID", userId)
     addProductToOrder(req.body, userId)
     .then(function(response) {
         res.status(200).send(response);
@@ -109,7 +100,7 @@ router.post('/products', function(req, res, next) {
 
 //DELETE ONE PRODUCT FROM AN ORDER
 router.delete('/products/:id', function(req, res, next) {
-    var userId = req.session.userId || req.user.id;
+    var userId = req.user ? req.user.id : req.session.userId;
     removeProductFromOrder(req.params.id, userId)
     .then(function(response) {
         res.sendStatus(200)
@@ -120,7 +111,7 @@ router.delete('/products/:id', function(req, res, next) {
 
 //UPDATE QTY OF A PRODUCT IN AN ORDER
 router.put('/products/:id', function(req, res, next) {
-    var userId = req.session.userId || req.user.id;
+    var userId = req.user ? req.user.id : req.session.userId;
     if(req.body.qty < 1 || req.body.qty > 3){
         res.sendStatus(500)
         return;
@@ -136,8 +127,7 @@ router.put('/products/:id', function(req, res, next) {
 //GET ALL PRODUCTS IN A USER'S CART
 router.get('/products', function(req, res, next) {
 
-    var userId = req.session.userId || req.user.id;
-
+    var userId = req.user ? req.user.id : req.session.userId;
         orders.find({
             where:{ 
                 userId: userId, 
@@ -145,6 +135,7 @@ router.get('/products', function(req, res, next) {
             }
        })
        .then(function(order){
+        console.log("ORDER", order)
             return order;
        })
        .then(function(foundOrder){

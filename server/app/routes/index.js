@@ -7,11 +7,16 @@ module.exports = router;
 
 //ADD A USER RIGHT AWAY
 router.use('/', function(req,res, next){
-  
   if(!req.session.userId && !req.user){
         users.create()
        .then(function(user){
-          req.session.userId = user.dataValues.id;
+        //   req.logIn(user, function(err){
+        //     if(err) return (err)
+        //     //res.status(200).send({
+        //       //user: user.sanitize()
+        //     //})          
+        // })
+        req.session.userId = user.dataValues.id
           next();  
        });
        
