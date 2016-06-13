@@ -142,18 +142,20 @@ router.get('/products', function(req, res, next) {
                 status: 'Created'
             }
        })
-       .then(function(order){
-            return order;
-       })
        .then(function(foundOrder){
-            return foundOrder.getProducts();
+            if(!foundOrder){
+                res.send({})
+            } else{
+               return foundOrder.getProducts()
+               .then(function(foundProducts){
+                    return foundProducts;
+            })
+               .then(function(response){
+                    res.send(response);
+                })
+            }
        })
-       .then(function(foundProducts){
-            return foundProducts;
-       })
-       .then(function(response) {
-            res.send(response);
-        })
+       
         .then(null, next);
 });
 
