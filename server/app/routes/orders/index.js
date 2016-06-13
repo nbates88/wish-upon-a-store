@@ -121,6 +121,10 @@ router.delete('/products/:id', function(req, res, next) {
 //UPDATE QTY OF A PRODUCT IN AN ORDER
 router.put('/products/:id', function(req, res, next) {
     var userId = req.session.userId || req.user.id;
+    if(req.body.qty < 1 || req.body.qty > 3){
+        res.sendStatus(500)
+        return;
+    }
     updateProductQty(req.params.id, req.body.qty, userId)
     .then(function(response) {
         res.sendStatus(200)
