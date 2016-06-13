@@ -75,6 +75,9 @@ module.exports = function (db) {
             // }
 
             beforeCreate: function (user) {
+                // KC: Added conditional so that hook runs only if password exists.
+                // Otherwise, the route.use('/') causes problems because it runs users.create()
+                // which causes an error because there's no password set yet.
                 if (user.password) {
                     user.salt = user.Model.generateSalt();
                     user.password = user.Model.encryptPassword(user.password, user.salt);
