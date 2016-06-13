@@ -57,7 +57,7 @@ var products = [{
   description: "Finished Grace Hopper yayyy need job. Lick arm hair ears back wide eyed sleep on dog bed, force dog to sleep on floor flop over. Hiss at vacuum cleaner. Thinking longingly about tuna brine if it smells like fish eat as much as you wish thinking longingly about tuna brine so eat and than sleep on your face peer out window, chatter at birds, lure them to mouth. Flee in terror at cucumber discovered on floor loves cheeseburgers sun bathe. Soft kitty warm kitty little ball of furr kitty scratches couch bad kitty pee in human's bed until he cleans the litter box flee in terror at cucumber discovered on floor flop over, yet this human feeds me, i should be a god. Slap owner's face at 5am until human fills food dish burrow under covers, or this human feeds me, i should be a god then cats take over the world human is washing you why halp oh the horror flee scratch hiss bite for asdflkjaertvlkjasntvkjn (sits on keyboard). Hack up furballs hide when guests come over, yet jump launch to pounce upon little yarn mouse, bare fangs at toy run hide in litter box until treats are fed purr for no reason sit on human if it smells like fish eat as much as you wish dream about hunting birds.",
   price: 10.50,
   inventoryQuantity: 22,
-  imageUrl: 'http://blog.jobtoday.com/wp-content/uploads/2016/02/land-a-job.jpg'
+  imageUrl: 'http://www.techlicious.com/images/computers/woman-with-money-at-computer-shutterstock-510px.jpg'
 }, {
   name: 'Find the love of your life',
   description: 'Tired of all that online dating? We will introduce you to your soul mate. Caution: soul mate might be a goat.',
