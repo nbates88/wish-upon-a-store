@@ -13,9 +13,9 @@ app.controller('CheckoutCtrl', function($scope, $state, OrderFactory) {
         //updates order status to processing and adds checkout info to order
       	OrderFactory.updateOrderStatus($scope.checkoutInfo)
       	.then(function(){
-      		 $state.go('home')
-      	})
-       
+          OrderFactory.sendConfirmEmail($scope.checkoutInfo)
+          $state.go('home')
+      	}) 
     };
 
   

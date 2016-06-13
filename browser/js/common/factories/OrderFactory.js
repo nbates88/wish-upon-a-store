@@ -18,6 +18,10 @@ app.factory('OrderFactory', function($http){
 
     updateOrderStatus : function(checkoutInfo){
       return $http.put('/api/orders/', checkoutInfo)
+    },
+
+    sendConfirmEmail : function(checkoutInfo){
+      return $http.post('/api/orders/email', checkoutInfo)
     }
 
   };
