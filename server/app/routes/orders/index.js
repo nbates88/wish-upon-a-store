@@ -5,7 +5,15 @@ var orders = db.model('order');
 var users = db.model('user');
 var products = db.model('product');
 var passport = ('passport');
-
+var nodemailer = require('nodemailer')
+var smtpTransport = require('nodemailer-smtp-transport')
+var transporter = nodemailer.createTransport(smtpTransport({
+    service: "Gmail",
+    auth : {
+        user: "wishuponastoregha@gmail.com",
+        pass: "graceHopper"
+    }
+}));
 var Sequelize = require('sequelize');
 module.exports = router;
 
@@ -188,7 +196,6 @@ router.put('/', function(req, res, next) {
         .then(null, next);
 });
 
-;
 
 // DELETE ONE ORDER
 router.delete('/:id', function(req, res, next) {
@@ -205,4 +212,22 @@ router.delete('/:id', function(req, res, next) {
             }
         })
         .then(null, next);
+});
+
+router.post('/email', function(req, res, next) {
+    
+    var mailOptions = {
+        from: "Wish Upon A Store",
+        to: req.body.email,
+        subject: "Your Wishes Will Be Granted Soon",
+        text: "Thanks for placing your order, " + req.body.name 
+    }
+
+    transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            return console.log(error)
+        }
+        console.log("Message Sent: ", info.response)
+    })
+        
 });
