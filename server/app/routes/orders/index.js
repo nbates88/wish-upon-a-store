@@ -143,7 +143,6 @@ router.get('/products', function(req, res, next) {
             }
        })
        .then(function(order){
-        console.log("ORDER", order)
             return order;
        })
        .then(function(foundOrder){

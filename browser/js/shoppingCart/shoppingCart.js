@@ -5,7 +5,7 @@ app.config(function ($stateProvider) {
         templateUrl: 'js/shoppingCart/shoppingcart.html',
         resolve: {
         	foundProducts: function(OrderFactory){
-        		return OrderFactory.getProducts();
+        		return OrderFactory.getProducts()
         	}
         }
     });
@@ -13,7 +13,7 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('ShoppingCartCtrl', function($scope, $window, $state, foundProducts, OrderFactory){
-
+    
     $scope.products = foundProducts;
     $scope.removeItem = function (product) {
     var idx = $scope.products.indexOf(product)
