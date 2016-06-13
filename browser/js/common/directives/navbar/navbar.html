@@ -1,5 +1,5 @@
 <nav class="navbar navbar-static-top">
-    <div class="container">
+    <div class="container header-image">
         <div class="navbar-header">
             <wish-logo></wish-logo>
         </div>
@@ -11,10 +11,11 @@
                 <a ui-sref-active="active" ui-sref="admin">Admin Panel</a>
             </li>
         </ul>
-        <button ng-show="!user" ui-sref="login" class="btn login-button">Login or Sign Up</button>
+        <button ng-show="!user" ui-sref="login" class="btn btn-primary btn-lg">Login or Sign Up</button>
         <div ng-show="user" class="welcome">
             <span>Welcome, {{ user.email }}!</span>
             <a ng-click="logout()">Logout</a>
         </div>
     </div>
 </nav>
+<!-- <sidebar></sidebar> -->

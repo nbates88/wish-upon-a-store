@@ -3,7 +3,8 @@
 }
 
 body {
-  background: #fdfdfd;
+  // background: #fdfdfd;
+  background: yellow;
 }
 
 @mixin clearfix {
@@ -15,15 +16,17 @@ body {
 }
 
 #main {
-  padding-top: 60px;
+  padding-top: 40px;
   margin: 0 auto;
+  background: black;
 }
 
 sidebar {
+  background: red;
 	a {
-		color: navy;
+		color: blue;
 	}
-	
+
 }
 
 @import 'directives/main';
