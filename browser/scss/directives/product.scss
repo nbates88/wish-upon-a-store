@@ -1,0 +1,27 @@
+.product-image {
+	width: 100%;
+	display: inline-block;
+}
+
+.cart-button {
+
+	border: none;
+
+	background: orange;
+	&.active {
+      background: yellow;
+    }
+    &:hover {
+      background: darken(orange, 10%);
+      color: white;
+    }
+    &:focus {
+      background: none;
+    }
+}
+
+p {
+	font-family: Roboto, Arial, sans-serif;
+	font-size: 18px;
+	text-align: justify;
+}

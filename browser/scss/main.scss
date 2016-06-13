@@ -3,7 +3,8 @@
 }
 
 body {
-  background: #fdfdfd;
+  // background: #fdfdfd;
+  background: black;
 }
 
 @mixin clearfix {
@@ -15,13 +16,15 @@ body {
 }
 
 #main {
-  padding-top: 60px;
+  padding-top: 40px;
   margin: 0 auto;
+  background: pink;
 }
 
 sidebar {
+  background: red;
 	a {
-		color: navy;
+		color: blue;
 	}
 }
 

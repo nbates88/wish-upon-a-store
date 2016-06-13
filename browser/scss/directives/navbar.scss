@@ -3,23 +3,41 @@ navbar {
   display: block;
   background: white;
   border-bottom: 1px solid black;
-  box-shadow: 1px 1px 14px -3px black;
 
   .container {
-    width: 91%;
-    max-width: 1340px;
+    width: 100%;
+    // max-width: 1170px;
     padding-top: 20px;
   }
 
-  fullstack-logo {
+  .header-image {
+    margin: 0px;
+    background-image: url("http://img02.deviantart.net/2e5d/i/2013/309/f/6/wish_upon_a_star_by_nikkidoodlesx3-d6t7zjw.jpg");
+    background-size: cover;
+    width: 100%;
+    height: 400px;
+    // z-index: -1;
+    // position: absolute;
+
+  }
+
+  .list-inline {
+    padding: 5px;
+  }
+
+  wish-logo {
     margin-top: 5px;
     margin-right: 20px;
     width: 40px;
   }
 
+  sidebar {
+    background: red;
+  }
+
   a {
-    color: black;
-    font-size: 16px;
+    color: white;
+    font-size: 20px;
   }
 
   .nav > li > a {
@@ -37,13 +55,10 @@ navbar {
     }
   }
 
-  .login-button {
+  .btn-primary {
     float: right;
-    border: 1px solid black;
-    margin-top: 10px;
-    background: none;
-    outline: none !important;
   }
+
 
   .welcome {
     float: right;
@@ -60,3 +75,4 @@ navbar {
   }
 
 }
+

@@ -1,3 +1,64 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <!-- <h3>{{ product.name }}</h3> -->
+    </div>
+    <div class="col-lg-8">
+      <h3>{{ product.name }}</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-4">
+      <img id="productImage" ng-src="{{ product.imageUrl }}" class="product-image">
+    </div>
+    <div class="col-lg-8">
+      <p>
+        <product-stars productid="product.id"></product-stars>
+      </p>
+      <p>{{ product.description }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-4">
+    </div>
+    <div class="col-lg-8">
+      <h3>Price: {{ product.price }}</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-2"></div>
+
+    <div class="col-lg-2">
+      <h3>Ouantity</h3>
+
+    </div>
+    <div class="col-lg-2">
+      <select class="dropdown">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+    </div>
+
+    <div class="col-lg-2">
+      <button class="btn btn-primary btn-lg cart-button" type="submit" ng-click="addToCart(product.id)">Add to Cart</button>
+    </div>
+
+    <!-- <div class="col-lg-2"></div> -->
+
+    <div class="col-lg-2 btn-group">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Ouantity <span class="caret"></span>
+      </button>
+    </div>
+
+  </div>
+</div>
+
 <section id="product" class="col-xs-10">
   <div>
     <h3>{{ product.name }}</h3>
@@ -5,19 +66,17 @@
     <div class="product_details">
       <h2>Description: {{ product.description }}</h2>
       <h2>Price: {{ product.price }}</h2>
-
-      <select name="Qnty" id="myQnty" ng-options="option.name for option in options track by option.id" ng-model="selectedQuantity"></select>
-
-      <!-- AVERAGE RATING DIRECTIVE (PRODUCT-STARS) -->
-      <product-stars productid="product.id"></product-stars>
-
-      <button type="submit" ng-click="addToCart(product.id, selectedQuantity)">Add to Cart!</button>
-
-      <button ng-click="deleteProduct(product.id)" ng-hide="!user.isAdmin">
-        Delete Product</span>
-      </button>
+      <select>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+      <h4>Average Rating: 3 </h4>
+      <button type="submit" ng-click="addToCart(product.id)">Add to Cart!</button>
     </div>
-
+    <button ng-click="deleteProduct(product.id)" ng-hide="!user.isAdmin">
+      Delete Product</span>
+    </button>
     <br>
 
     <!-- REVIEW CHILD STATES START HERE -->
@@ -30,6 +89,6 @@
     <ui-view></ui-view>
 
     <!-- END OF REVIEWS  -->
-    
+
   </div>
 </section>
