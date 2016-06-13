@@ -57,6 +57,7 @@ module.exports = function (db) {
                 return crypto.randomBytes(16).toString('base64');
             },
             encryptPassword: function (plainText, salt) {
+                console.log("plainText: ", plainText, "salt: ", salt)
                 var hash = crypto.createHash('sha1');
                 hash.update(plainText);
                 hash.update(salt);
@@ -74,8 +75,10 @@ module.exports = function (db) {
             // }
 
             beforeCreate: function (user) {
-                user.salt = user.Model.generateSalt();
-                user.password = user.Model.encryptPassword(user.password, user.salt);
+                if (user.password) {
+                    user.salt = user.Model.generateSalt();
+                    user.password = user.Model.encryptPassword(user.password, user.salt);
+                }
             }
         }
     });
