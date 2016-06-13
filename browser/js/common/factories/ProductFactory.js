@@ -38,6 +38,7 @@ app.factory('ProductFactory', function($http) {
         
         //here data will likely just be an object that looks like {name: 'Career'}
         createCollection: function(data) {
+            // EI: same thing here, what you're getting back in the .then is an HTTP response
             return $http.post('/api/collections', data)
                 .then(function(collection) {
                 	cachedCollections.push(collection.data)

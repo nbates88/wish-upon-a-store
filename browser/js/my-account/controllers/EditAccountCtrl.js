@@ -1,5 +1,6 @@
 app.controller('EditAccountCtrl', function($scope, $http, Session, $rootScope, AUTH_EVENTS, $q, MyAccountFactory, AuthService) {
 
+    // EI: should be in a resolve block instead of the controller, for all these my-account controllers
     MyAccountFactory.getMyAccount()
         .then(function(account) {
             $scope.orders = account.Orders;

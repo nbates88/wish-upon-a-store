@@ -1,8 +1,12 @@
+// EI: why have just one 'factories' folder instead of sticking them in their associated feature folder?
+
 app.factory('AdminFactory', function($http) {
     var cachedReviews = []
     return {
         //data will be req.body -- will likely come from a form in an admin panel
         createProduct: function(data) {
+            // EI: great place to use some ES6: then(res => res.data)
+            // also, this is where you'd say 'response' in the callback, because that's really what you're getting back in this case
             return $http.post('/api/products', data)
                 .then(function(product) {
                     return product.data
@@ -18,6 +22,7 @@ app.factory('AdminFactory', function($http) {
             return $http.delete('/api/products/' + id)
                 .then(function() {
                     //not sure if anything needs to happen here
+                    //EI: hmm... send back some sort of success message?
                 })
         },
         createUser: function(data) {

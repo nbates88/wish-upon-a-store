@@ -73,11 +73,11 @@ module.exports = function (db) {
             //         user.password = user.Model.encryptPassword(user.password, user.salt);
             //     }
             // }
-
+            // EI: yeah, why did you need to change this? beforeValidate runs before beforeCreate, according to Sequelize docs
             beforeCreate: function (user) {
+                console.log('password is', typeof user.password)
                 user.salt = user.Model.generateSalt();
                 user.password = user.Model.encryptPassword(user.password, user.salt);
-                console.log('password is', typeof user.password)
             }
         }
     });
