@@ -92,17 +92,20 @@ var products = [{
   name: 'Get a promotion at work',
   description: "The promotion you\'ve been owed is within reach. Salary boost and respect of your professional peers not guaranteed. Scratch at the door then walk away scratch at the door then walk away or run in circles favor packaging over toy human is washing you why halp oh the horror flee scratch hiss bite. Flop over knock over christmas tree drink water out of the faucet. Hopped up on catnip who's the baby, and chase dog then run away this human feeds me, i should be a god kitty power! . Purr for no reason cats go for world domination but kick up litter or hack up furballs yet thinking longingly about tuna brine get video posted to internet for chasing red dot play time. Gate keepers of hell i like big cats and i can not lie slap owner's face at 5am until human fills food dish and kitty power! lie on your belly and purr when you are asleep. ",
   price: 29.99,
-  inventoryQuantity: 13
+  inventoryQuantity: 13,
+  imageUrl: 'http://www.pyramidcg.com/blog/wp-content/uploads/2014/07/Depositphotos_44893469_s.jpg'
 }, {
   name: 'Get your ex back',
   description: "They\'ll immediately realize how mistaken they were for leaving you. Cheaper than finding the love of your life, but let\'s be honest here, do you really want your ex back? Meow for food, then when human fills food dish, take a few bites of food and continue meowing destroy couch hola te quiero. Hide at bottom of staircase to trip human ignore the squirrels, you'll never catch them anyway, for knock over christmas tree. Caticus cuteicus scratch at the door then walk away jump around on couch, meow constantly until given food, so toy mouse squeak roll over climb a tree, wait for a fireman jump to fireman then scratch his face and i am the best for touch water with paw then recoil in horror. I like big cats and i can not lie i like big cats and i can not lie and attack feet, for has closed eyes but still sees you lick sellotape. Cough furball eat owner's food yet lick butt attack the dog then pretend like nothing happened so hate dog paw at your fat belly yet chase laser. If it smells like fish eat as much as you wish purr while eating or white cat sleeps on a black shirt and chase laser find something else more interesting. Sit on the laptop lick yarn hanging out of own butt and kick up litter.",
   price: 9.99,
-  inventoryQuantity: 33
+  inventoryQuantity: 33,
+  imageUrl: 'http://recultured.com/wp-content/uploads/2012/03/getyourexback2.jpg'
 }, {
   name: 'Dr. Braun\'s Magic Panacea',
   description: "No matter what ails you, you will wake up tomorrow completely healed Refuse to leave cardboard box steal the warm chair right after you get up and flop over knock dish off table head butt cant eat out of my own dish, favor packaging over toy present belly, scratch hand when stroked. Human give me attention meow cat is love, cat is life favor packaging over toy. Jump launch to pounce upon little yarn mouse, bare fangs at toy run hide in litter box until treats are fed kick up litter. Touch water with paw then recoil in horror hunt by meowing loudly at 5am next to human slave food dispenser for lick arm hair yet tuxedo cats always looking dapper. Chase ball of string jump around on couch, meow constantly until given food, claws in your leg chase imaginary bugs. ",
   price: 529.50,
-  inventoryQuantity: 7
+  inventoryQuantity: 7,
+  imageUrl: 'http://www.wisdom-square.com/images/xcure.jpg.pagespeed.ic.ARpmi3J_mU.jpg'
 }]
 
 var orders = [{
