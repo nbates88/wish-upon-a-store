@@ -45,7 +45,7 @@ describe('ProductFactory Collections', function () {
       CONFIGURATION
   /------------------*/
 
-  beforeEach(module('FullstackGeneratedApp'));  
+  beforeEach(module('WishUponAStore'));  
   // the `Todo` factory will be loaded before each test
   // $httpBackend lets us "stub" $http responses
   // fakeResTodo is a modified copy of fakeReqTodo (a randomized todo object)
@@ -116,7 +116,7 @@ describe('ProductFactory Products', function () {
       CONFIGURATION
   /------------------*/
 
-  beforeEach(module('FullstackGeneratedApp'));  
+  beforeEach(module('WishUponAStore'));  
   // the `Todo` factory will be loaded before each test
   // $httpBackend lets us "stub" $http responses
   // fakeResTodo is a modified copy of fakeReqTodo (a randomized todo object)
