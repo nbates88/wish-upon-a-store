@@ -67,6 +67,7 @@ app.factory('ProductFactory', function($http) {
         // })
         // },
         deleteCollection: function(collection) {
+            console.log(collection);
         	cachedCollections.splice(cachedCollections.indexOf(collection), 1)
             return $http.delete('/api/collections/' + collection.id)
                 .then(function() {

@@ -15,6 +15,7 @@ var transporter = nodemailer.createTransport(smtpTransport({
     }
 }));
 var Sequelize = require('sequelize');
+
 module.exports = router;
 
 //FYI:These functions should be methods on the models.

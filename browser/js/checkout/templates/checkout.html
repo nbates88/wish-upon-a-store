@@ -1,4 +1,5 @@
 <h4>Checkout</h4>
+
 <form name="checkoutForm" ng-submit="order(checkoutInfo)">
    
   <div class="form-group row col-sm-offset-2 col-sm-10">
@@ -28,8 +29,13 @@
       <input type="password" placeholder="#########" class="form-control" id="ssn" name="ssn" ng-model="checkoutInfo.ssn" type="text" required>
     </div>
   </div>
-  <form action="" method="POST">
-  <script
+
+  <div class="form-group row col-sm-offset-2 col-sm-10">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button name="submit" class="btn btn-primary" type="submit">Place Order</button>
+    </div>
+  </div>
+<script
     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="sk_test_tjLm2xBtWM5KW8ShhgWyGiy8"
     data-amount="999"
@@ -39,12 +45,7 @@
     data-locale="auto">
   </script>
 </form>
-  <div class="form-group row col-sm-offset-2 col-sm-10">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button name="submit" class="btn btn-primary" type="submit">Place Order</button>
-    </div>
-  </div>
 
-</form>
+
 
 
