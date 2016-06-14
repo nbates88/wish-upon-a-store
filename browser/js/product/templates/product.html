@@ -1,18 +1,16 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-4">
-      <!-- <h3>{{ product.name }}</h3> -->
-    </div>
-    <div class="col-lg-8">
-      <h3>{{ product.name }}</h3>
+    <div class="col-lg-6"></div>
+    <div class="col-lg-6">
+      <h1>{{ product.name }}</h1>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-6">
       <img id="productImage" ng-src="{{ product.imageUrl }}" class="product-image">
     </div>
-    <div class="col-lg-8">
+    <div class="col-lg-6">
       <p>
         <product-stars productid="product.id"></product-stars>
       </p>
@@ -21,38 +19,67 @@
   </div>
 
   <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-6">
     </div>
-    <div class="col-lg-8">
-      <h3>Price: {{ product.price }}</h3>
+    <div class="col-lg-6">
+      <h2>${{ product.price }}</h2>
+    </div>
+  </div>
+
+  
+  <div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-3"></div>
+
+    <div class="col-lg-1">
+      <h3 text-align="center">Qty</h3>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-lg-2"></div>
-    <div class="col-lg-2"></div>
+    <div class="col-lg-3"></div>
+    <div class="col-lg-3"></div>
 
-    <div class="col-lg-2">
-      <h3>Quantity</h3>
-
-    </div>
-    <div class="col-lg-2">
-      <select name="Qnty" id="myQnty" ng-options="option.name for option in options track by option.id" ng-model="selectedQuantity"></select>
+    <div class="form-group col-lg-1">
+      <select class="form-control qty-dropdown" for="sell" name="Qnty" id="myQnty"  ng-options="option.name for option in options track by option.id" ng-model="selectedQuantity"></select>
     </div>
 
     <div class="col-lg-2">
       <button class="btn btn-primary btn-lg cart-button" type="submit" ng-click="addToCart(product.id, selectedQuantity)">Add to Cart</button>
     </div>
 
-    <!-- <div class="col-lg-2"></div> -->
+  </div>
 
+
+
+
+
+
+
+
+
+<<<<<<< HEAD
     <div class="col-lg-2 btn-group">
       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Quantity <span class="caret"></span>
       </button>
     </div>
+||||||| merged common ancestors
+    <div class="col-lg-2 btn-group">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Ouantity <span class="caret"></span>
+      </button>
+    </div>
+=======
+>>>>>>> 79317511eb52df75b25468f486ed8aa536bb3453
    
   </div>
+
+
+
+
+
+
    <!-- REVIEW CHILD STATES START HERE -->
 
     <ul class="nav nav-tabs">

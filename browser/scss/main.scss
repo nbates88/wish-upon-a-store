@@ -2,9 +2,19 @@
   box-sizing: border-box;
 }
 
+// body {
+//   background: none;
+//   background-image: url("background-wallpaper.jpg");
+
+// }
+
 body {
-  background: none;
-  background-image: url("background-wallpaper.jpg");
+  background-color: white;
+  background-image: linear-gradient(to left, white, #E8F8F5, #EBF5FB, #EAF2F8, #F4ECF7, #F5EEF8);
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: #85929E;
 
 }
 
@@ -16,15 +26,98 @@ body {
   }
 }
 
+@font-face {
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: 300;
+  src: local('Roboto Condensed Light'), local('RobotoCondensed-Light'), url("../fonts/RobotoCondensed-Light.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: "Rochester";
+  font-style: normal;
+  font-weight: 300;
+  src: url("../fonts/Rochester-Regular.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: "YellowUmbrella";
+  font-style: normal;
+  font-weight: 300;
+  src: url("../fonts/YellowUmbrella.ttf") format('truetype');
+}
+
+// @font-face {
+//   font-family: "Roboto";
+//   font-style: normal;
+//   font-weight: 300;
+//   src: local('Roboto'), local('Roboto'), url("../fonts/Roboto-Regular.ttf") format('truetype');
+// }
+
 #main {
-  padding-top: 40px;
+  width: 80%;
+  padding-top: 80px;
+  padding-left: 50px;
   margin: 0 auto;
   background: none;
+}
+
+p {
+  color: #85929E;
+  display: inline-block;
+  margin: 0;
+}
+
+
+h1 {
+  font-family: "Roboto Condensed",'Raleway', sans-serif;
+  color: #5D6D7E;
+  font-weight: 300;
+  text-transform: uppercase;
+  border-bottom: 1px solid #424242;
+  padding-bottom: 4px;
+  display: inline-block;
+  margin: 0;
+}
+
+h2 {
+  font-family: 'Raleway', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  color: #5D6D7E;
+  font-weight: 400;
+  font-size: 26px;
+  padding-top: 6px;
+  padding-bottom: 8px;
+  display: inline-block;
+}
+
+h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: #5D6D7E;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 6px;
+    margin-right: 10px;
+}
+
+h4 {
+    font-family: 'Montserrat', sans-serif;
+    color: #5D6D7E;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-top: 6px;
+    margin-right: 10px;
 }
 
 figcaption {
   font-size: 16px;
 }
+
+
 
 .reviews {
   margin: 30px 0px;
@@ -36,21 +129,36 @@ figcaption {
 }
 
 .product-thumbnail {
-  width: 320px;
-  height: 320px;
-  border: white;
-
+  width: 200px;
+  height: 200px;
+  background: white;
+  align: middle;
+  padding-bottom: 10px;
+  // border: 20px solid white;
   // margin-top: 50px;
 }
 
-.product-thumbnail-tiles {
+figure {
+  width: 220px;
+  height: 260px;
   display: inline-block;
-  margin-top: 50px;
+  background: white;
+  border: 20px solid white;
+  border-top: 30px solid white;
+  margin-right: 40px;
+  margin-top: 40px;
+  align: middle;
+  text-align: center;
 }
 
-span .product-thumbnail-tiles {
-  background: white;
+.qty-dropdown {
+  font-size: 16px;
+  text-align: right;
+  height: 44px;
 }
+
+
+
 
 @import 'directives/_main';
 @import 'home/main';
