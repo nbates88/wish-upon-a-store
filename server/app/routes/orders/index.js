@@ -94,6 +94,23 @@ router.get('/', function(req, res, next) {
     }
 });
 
+// GET ALL ORDERS BY USER ID
+router.get('/user', function(req, res, next) {
+    if (!req.user.isAdmin) res.sendStatus(403);
+    else {
+        orders.findAll({
+            where: {
+                userId: req.user.id
+            }
+        })
+            .then(function(response) {
+                console.log('got all orders for', req.user.id, 'and response is', response)
+                res.status(200).send(response);
+            })
+            .then(null, next);
+    }
+});
+
 // ADDING A PRODUCT TO AN ORDER
 router.post('/products', function(req, res, next) {
     //console.log("IDDDDS", req.user.id, req.session.userId)
