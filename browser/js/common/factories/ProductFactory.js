@@ -1,5 +1,6 @@
 app.factory('ProductFactory', function($http) {
     var cachedCollections = [];
+    var cachedProducts = [];
     return {
         getOneProduct: function(id) {
             return $http.get('/api/products/' + id)
@@ -10,6 +11,7 @@ app.factory('ProductFactory', function($http) {
         getAllProducts: function() {
             return $http.get('/api/products')
                 .then(function(products) {
+                    angular.copy(products.data, cachedProducts)
                     return products.data
                 })
         },
@@ -71,6 +73,26 @@ app.factory('ProductFactory', function($http) {
                     
                 })
         },
+        createProduct: function(data) {
+            return $http.post('/api/products', data)
+                .then(function(product) {
+                    cachedProducts.push(product.data)
+                    return product.data
+                })
+        },
+        editProduct: function(id, data) {
+            return $http.put('/api/products/' + id, data)
+                .then(function(product) {
+                    return product.data
+                })
+        },
+        deleteProduct: function(product) {
+            cachedProducts.splice(cachedProducts.indexOf(product), 1)
+            return $http.delete('/api/products/' + product.id)
+                .then(function() {
+                    //not sure if anything needs to happen here
+                })
+        }
     }
 
 

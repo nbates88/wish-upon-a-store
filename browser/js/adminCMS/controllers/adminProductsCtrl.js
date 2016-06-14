@@ -1,4 +1,4 @@
-app.controller('AdminProductsCtrl', function($scope, products, ProductFactory, AdminFactory){
+app.controller('AdminProductsCtrl', function($scope, products, ProductFactory, $state){
     
     //here we get info
     $scope.products = products;
@@ -11,7 +11,7 @@ app.controller('AdminProductsCtrl', function($scope, products, ProductFactory, A
 
     $scope.deleteProduct = function(product){
         $scope.products.splice($scope.products.indexOf(product), 1);
-        AdminFactory.deleteProduct(product.id);
+        ProductFactory.deleteProduct(product);
     };
 
     //here we set it
@@ -19,13 +19,16 @@ app.controller('AdminProductsCtrl', function($scope, products, ProductFactory, A
         console.log($scope.productForm);
         $scope.productForm.$setPristine();
         $scope.product = {};
-        AdminFactory.createProduct(data);   
+        ProductFactory.createProduct(data);   
     };
-
-    $scope.editProduct = function(product){
-        console.log('product is', product);
-        console.log($scope.test)
-            // AdminFactory.editProduct(product.id, product);
+   
+    $scope.editProduct = function(newProduct, oldProduct){
+        if(!newProduct.name) newProduct.name = oldProduct.name;
+        if(!newProduct.description) newProduct.description = oldProduct.description; 
+        if(!newProduct.price) newProduct.price = oldProduct.price;
+        if(!newProduct.imageUrl) newProduct.imageUrl = oldProduct.imageUrl;
+        if(!newProduct.inventoryQuantity) newProduct.inventoryQuantity = oldProduct.inventoryQuantity;  
+        ProductFactory.editProduct(oldProduct.id, newProduct);
     };
 });
             
