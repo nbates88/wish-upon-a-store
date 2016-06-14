@@ -1,6 +1,11 @@
 <section id="shopping_cart">
 
-<table class='table'>
+<div ng-hide="products.length">
+  Nothing in shopping cart.
+  <br><a onclick="goBack()">Go back?</a>
+</div>
+
+<table class='table' ng-hide="!products.length">
     <thead>
       <tr>
         <th>Item</th>
@@ -21,6 +26,6 @@
       </tr>
     </tbody>
   </table>
-   <button type="submit" ng-click="checkout()">Checkout</button>
+   <button type="submit" ng-click="checkout()" ng-hide="!products.length">Checkout</button >
 
 
