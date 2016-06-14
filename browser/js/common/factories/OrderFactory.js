@@ -1,5 +1,8 @@
 app.factory('OrderFactory', function($http){
   return {
+    getAllOrders: function() {
+      return $http.get('/api/orders')
+    },
     addProductToOrder : function(product){
       return $http.post('/api/orders/products/', product);
     },
@@ -19,6 +22,10 @@ app.factory('OrderFactory', function($http){
 
     updateOrderStatus : function(checkoutInfo){
       return $http.put('/api/orders/', checkoutInfo)
+    },
+
+    updateOrderStatusAsAdmin : function(order){
+      return $http.put('/api/orders/status', order)
     },
 
     sendConfirmEmail : function(checkoutInfo){

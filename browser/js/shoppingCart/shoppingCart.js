@@ -54,6 +54,8 @@ app.controller('ShoppingCartCtrl', function($scope, $window, $state, foundProduc
 
     };
 
+    $scope.totalPrice = totalPrice($scope.products)
+    
     $scope.checkout = function(){
         $state.go('checkout')
     }

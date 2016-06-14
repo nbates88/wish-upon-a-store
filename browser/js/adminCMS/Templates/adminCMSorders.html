@@ -1,1 +1,32 @@
-<h1>manage orders</h1>
+<h3>Manage Orders</h3>
+
+<div>
+    <ul>
+        <div ng-repeat="order in orders">
+            <section class="bg-info container">
+                <h4> Order ID: </h4>
+                <p>{{order.id}}</p>
+                <h4>User: </h4>
+                <p>{{order.userId}}</p>
+                <h4> Last Updated: </h4>
+                <p>{{order.updatedAt}}</p>
+                <h4> Status: </h4>
+                <p>{{order.status}}</p>
+
+                <!-- update status dropdown -->
+                <!-- <form name="orderUpdate" ng-submit="updateStatus(order)"> -->
+                    <h4> Update Status: </h4>
+
+                    <p>
+                        <select name="status" ng-model="newStatus" ng-options="status for status in allStatus" required>
+                           {{status}}
+                        </select>
+                    </p>
+                    <br>
+                    <button type="submit" class="btn btn-success" ng-click="updateStatus(order, newStatus)">Update Status</button>
+                <!-- </form> -->
+            </section>
+            <hr>
+        </div>
+    </ul>
+</div>
