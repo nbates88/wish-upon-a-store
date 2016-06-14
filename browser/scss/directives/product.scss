@@ -1,18 +1,23 @@
 .product-image {
-	width: 100%;
+	width: 90%;
+  background-color: #EAECEE;
+  padding: 1px;
+  border: 30px solid white;
 	display: inline-block;
+  
+  align: right;
 }
 
 .cart-button {
 
 	border: none;
 
-	background: orange;
+	background: #F39C12;
 	&.active {
       background: yellow;
     }
     &:hover {
-      background: darken(orange, 10%);
+      background: #E67E22;
       color: white;
     }
     &:focus {
@@ -21,7 +26,11 @@
 }
 
 p {
-	font-family: Roboto, Arial, sans-serif;
-	font-size: 18px;
 	text-align: justify;
+  margin-bottom: 2px;
 }
+
+h3 {
+  margin-top: 16px;
+}
+

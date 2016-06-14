@@ -1,7 +1,32 @@
 #home {
-  h1 {
-    margin-top: 40px;
-    text-align: center;
-  }
+	// background-image: url('https://i.ytimg.com/vi/PVnohopBWw8/maxresdefault.jpg');
+
+}
+
+.home-img {
+	margin-left: -500px;
+	margin-top: -60px;
+	position: relative;
+}
+
+.store-name {
+	color: white;
+	font-size: 220px;
+	font-family: "Rochester", serif;
+	position: absolute;
+	top: 170px;
+	left: 450px;
+	text-align: center;
+}
+
+h6 {
+	color: white;
+	font-size: 110px;
+	font-family: "YellowUmbrella", serif;
+	position: absolute;
+	// z-index: 3;
+	top: 30px;
+	left: 860px;
+	text-align: center;
 }
 
