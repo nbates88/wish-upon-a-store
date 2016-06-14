@@ -56,11 +56,6 @@ app.config(function($stateProvider) {
 app.config(function($stateProvider) {
     $stateProvider.state('reviewSuccess', {
         url: '/review-submitted',
-        templateUrl: 'js/product/templates/success.html',
-        controller: function($scope) {
-            $scope.goBack = function() {
-                window.history.back();
-            };
-        }
+        templateUrl: 'js/product/templates/success.html'
     })
 })
