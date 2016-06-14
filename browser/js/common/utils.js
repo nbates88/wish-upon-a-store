@@ -27,3 +27,8 @@ let getAverage = function(arrayOfNumbers) {
         return (Math.round((total / len) * 2) / 2).toFixed(1);
     }
 }
+
+
+function goBack() {
+    window.history.back();
+}

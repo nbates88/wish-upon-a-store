@@ -52,3 +52,10 @@ app.config(function($stateProvider) {
     });
 
 });
+
+app.config(function($stateProvider) {
+    $stateProvider.state('reviewSuccess', {
+        url: '/review-submitted',
+        templateUrl: 'js/product/templates/success.html'
+    })
+})

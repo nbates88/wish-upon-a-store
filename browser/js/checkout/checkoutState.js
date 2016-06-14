@@ -6,3 +6,10 @@ app.config(function($stateProvider) {
     });
 
 });
+
+app.config(function($stateProvider) {
+    $stateProvider.state('checkoutSuccess', {
+        url: '/checked-out',
+        templateUrl: 'js/checkout/templates/success.html',
+    })
+})
