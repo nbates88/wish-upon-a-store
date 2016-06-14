@@ -1,5 +1,5 @@
 <nav class="navbar navbar-static-top">
-    <div class="container header-image">
+    <div class="container">
         <div class="navbar-header">
             <wish-logo></wish-logo>
         </div>
@@ -12,6 +12,28 @@
             </li>
         </ul>
 
+
+<div class="dropdown">
+<button class="dropbtn">Shop</button>
+    <div class="dropdown-content">
+        <a ui-sref="collections({id:'all'})">All</a>
+        <a ui-sref="collections({id:'1'})">Health</a>
+        <a ui-sref="collections({id:'2'})">Career</a>
+        <a ui-sref="collections({id:'4'})">Luxury</a>
+        <a ui-sref="collections({id:'3'})">Romance</a>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
         <button ui-sref="shoppingCart" class="btn btn-primary btn-lg">Cart</button>
 
 
@@ -21,21 +43,25 @@
             <a ng-click="logout()">Logout</a>
         </div>
 
-        
-
-
     </div>
+
+
+
+
+
+
+
 </nav>
 
 <div class="dropdown">
 <button class="dropbtn">Shop</button>
-<div class="dropdown-content">
-    <a ui-sref="collections({id:'all'})">All</a>
-    <a ui-sref="collections({id:'1'})">Health</a>
-    <a ui-sref="collections({id:'2'})">Career</a>
-    <a ui-sref="collections({id:'4'})">Luxury</a>
-    <a ui-sref="collections({id:'3'})">Romance</a>
-</div>
+    <div class="dropdown-content">
+        <a ui-sref="collections({id:'all'})">All</a>
+        <a ui-sref="collections({id:'1'})">Health</a>
+        <a ui-sref="collections({id:'2'})">Career</a>
+        <a ui-sref="collections({id:'4'})">Luxury</a>
+        <a ui-sref="collections({id:'3'})">Romance</a>
+    </div>
 </div>
 
 

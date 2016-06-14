@@ -1,9 +1,18 @@
-<div>
+<div class="container">
+  <h1>{{ collection.name }} Collection</h1>
+    <span class="product-thumbnail-tiles col-lg-4" ng-repeat="product in products">
+    	<img class="product-thumbnail" id="productImage" ng-src="{{ product.imageUrl }}">
+    	<figcaption><a ui-sref="product({id:product.id})"> {{product.name}} </a></figcaption>
+    </span>
+</div>
+
+
+<!-- <div>
   <h1>{{ collection.name }} Collection</h1>
   <ul>
-    <li ng-repeat="product in products">
+    <li class="product-thumbnail-tiles" ng-repeat="product in products">
     	<img class="product-thumbnail" id="productImage" ng-src="{{ product.imageUrl }}">
     	<a ui-sref="product({id:product.id})"> {{product.name}} </a>
     </li>
   </ul>
-</div>
+</div> -->
