@@ -3,6 +3,11 @@ app.config(function($stateProvider) {
         url: '/checkout',
         controller: 'CheckoutCtrl',
         templateUrl: 'js/checkout/templates/checkout.html',
+        resolve: {
+    	user: function(AuthService) {
+                return AuthService.getLoggedInUser();
+            }
+    }
     });
 
 });

@@ -216,12 +216,12 @@ router.delete('/:id', function(req, res, next) {
 });
 
 router.post('/email', function(req, res, next) {
-    
+
     var mailOptions = {
         from: "Wish Upon A Store",
         to: req.body.email,
         subject: "Your Wishes Will Be Granted Soon",
-        text: "Thanks for placing your order, " + req.body.name 
+        text: "Thanks for placing your order, " + req.body.name
     }
 
     transporter.sendMail(mailOptions, function(error, info){
