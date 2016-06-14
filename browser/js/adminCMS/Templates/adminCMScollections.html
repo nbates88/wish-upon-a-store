@@ -1,35 +1,29 @@
 <div>
-	<h3>Create new collection</h3>
-
+	<h2>Create new collection</h2>
+	<div class="admin-container">
 	<form name="collectionForm" ng-model="collectionForm" ng-submit="createCollection(collection)">
-		<label for="productname">Name</label>
+		<label for="productname"><h4>Name</h4></label>
 		<input class="form-control" type="text" ng-model="collection.name" name="collectionname">
 
 		<button type="submit" class="btn btn-success" ng-disabled="collection.$invalid" >Create Collection</button>
 	</form>
+	</div>
 
 	<br>
 
-	<h3>Update current collections</h3>
-	<div>
-	<ul>
-	<div ng-repeat="collection in collections">
-	<section class="bg-info container" >
+	<h2>Update current collections</h2>
+	<div class="admin-container" ng-repeat="collection in collections">
 		<div >
-		<h2>{{collection.name}}</h2>
+		<h3>{{collection.name}}</h3>
 		<form name="updateCollectionForm" novalidate>
 		<label for="collectionName">
 		<h4> New Name: </h4>
 		</label>	
 		<input type="text" name="collectionName" ng-model="newcollection.name" class="form-control">
 		<button type="submit" class="btn btn-success" ng-click="editCollection(newcollection, collection)">Update Collection</button>
-		<button type="submit" class="btn btn-success" ng-click="deleteCollection(collection)">Delete Collection</button>
+		<button type="submit" class="btn btn-danger" ng-click="deleteCollection(collection)">Delete Collection</button>
 		</form>
 		</div>
-	</section>
-	<br>
-	</div>
-	</ul>
 	</div>
 	
 </div>

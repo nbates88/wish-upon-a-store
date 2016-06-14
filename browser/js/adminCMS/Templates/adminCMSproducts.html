@@ -1,68 +1,67 @@
 <div>
-	<h3>Create new product</h3>
+	<h2>Create new product</h2>
 
+	<div class="admin-container">
 	<form name="productForm" ng-model="productForm" ng-submit="createProduct(product)">
-		<label for="productname">Name</label>
+		<label for="productname"><h4>Name</h4></label>
 		<input class="form-control" type="text" ng-model="product.name" name="productname">
 
-		<label for="description">Description</label>
+		<label for="description"><h4>Description</h4></label>
 		<input class="form-control" type="text" ng-model="product.description" name="description">
 
-		<label for="price">Price</label>
+		<label for="price"><h4>Price</h4></label>
 		<input class="form-control" type="text" ng-model="product.price" name="price">
 
-		<label for="image">Image URL</label>
+		<label for="image"><h4>Image URL</h4></label>
 		<input class="form-control" type="text" ng-model="product.imageUrl" name="image">
 
-		<label for="inventory">Inventory Quantity</label>
+		<label for="inventory"><h4>Inventory Quantity</h4></label>
 		<input class="form-control" type="text" ng-model="product.inventoryQuantity" name="inventory">
 
-		<label for="collection">Collection</label>
+		<label for="collection"><h4>Collection</h4></label>
 		<select ng-options="collection.name for collection in collections" class="form-control" ng-model="product.collection" name="collection">
 		</select>
-
+		<br>
 		<button type="submit" class="btn btn-success" ng-disabled="productForm.$invalid" >Create Product</button>
 	</form>
+	</div>
 
 	<br>
 
-	<h3>Update current products</h3>
+	<h2>Update current products</h2>
 
 	<div class="panel input-group">
       <span class="input-group-addon">Filter</span>
       <input type="text" class="form-control" placeholder="by name" ng-model="nameSearch">
     </div>
 
-	<ul>
-		<section class="bg-info container" >
-
-		<div ng-repeat="product in products | filter: { name: nameSearch }">
-			  <div class="container">
+		<div class="admin-container" ng-repeat="product in products | filter: { name: nameSearch }">
+			  <!-- <div class="container"> -->
 			  <div class="row">
-			    <div class="col-lg-6"></div>
-			    <div class="col-lg-6">
+			    <div class="col-lg-4"></div>
+			    <div class="col-lg-8">
 			      <h1>{{ product.name }}</h1>
 			    </div>
 			  </div>
 
 			  <div class="row">
-			    <div class="col-lg-6">
-			      <img id="productImage" ng-src="{{ product.imageUrl }}" class="product-image">
+			    <div class="col-lg-4">
+			      <img id="productImage" ng-src="{{ product.imageUrl }}" class="admin-product-thumbnail">
 			    </div>
-			    <div class="col-lg-6">
+			    <div class="col-lg-8">
 			      <p>{{ product.description }}</p>
 			    </div>
 			  </div>
 
 			  <div class="row">
-			    <div class="col-lg-6">
+			    <div class="col-lg-4">
 			    </div>
-			    <div class="col-lg-6">
+			    <div class="col-lg-8">
 			      <h2>${{ product.price }}</h2>
 			    </div>
 			  </div>
 
-		<form name="newProductForm" novalidate>
+ 		<form name="newProductForm" novalidate>
 		<label for="productName">
 		<h4> Name: </h4>
 		</label>	
@@ -89,9 +88,6 @@
 		<input type="text" name="productName" ng-model="newproduct.collection" class="form-control">
 		<button type="submit" class="btn btn-success" ng-click="editProduct(newproduct, product)">Update Product</button>
 
-		<button type="submit" class="btn btn-success" ng-click="deleteProduct(product)">Delete Product</button>
+		<button type="submit" class="btn btn-danger" ng-click="deleteProduct(product)">Delete Product</button>
 		</form>
-		</div>
-		</section>
-	</ul>
 </div>

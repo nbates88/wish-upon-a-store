@@ -17,15 +17,24 @@
 
 	<br> -->
 
-	<h3>Update curent users</h3>
+	<h2>Update curent users</h2>
 
-	<ul>
-		<li ng-repeat="user in users">
+	<div class="admin-container" ng-repeat="user in users">
+		<div class="row">
+		<div class="col-lg-6">
 		<h4>Name: {{user.name}}</h4>
 		<h4>Email: {{user.email}}</h4>
-		<button type="submit" class="btn btn-success" ng-show="!user.isAdmin" ng-click="makeAdmin(user.id)">Make User Admin</button>
-		<button type="submit" class="btn btn-success" ng-show="user.isAdmin" ng-click="removeAdmin(user.id)">Remove Admin Status</button>
-		<button type="submit" class="btn btn-success" ng-click="deleteUser(user)">Delete User</button>
-		</li>
-	</ul>
+		</div>
+
+		<div class="col-lg-3">
+		<button type="submit" class="btn btn-success" ng-show="!user.isAdmin" ng-click="makeAdmin(user.id)">Grant Admin Status</button>
+		<button type="submit" class="btn btn-warning" ng-show="user.isAdmin" ng-click="removeAdmin(user.id)">Remove Admin Status</button>
+		</div>
+
+		<div class="col-lg-3">
+		<button type="submit" class="btn btn-danger" ng-click="deleteUser(user)">Delete User</button>
+		</div>
+
+		</div>
+	</div>
 </div>
