@@ -1,10 +1,15 @@
-app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) {
+app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, ProductFactory) {
 
     return {
         restrict: 'E',
         scope: {},
         templateUrl: 'js/common/directives/navbar/navbar.html',
         link: function (scope) {
+            ProductFactory.getAllCollections()
+                .then(function(collections) {
+                    scope.collections = collections
+                    console.log(collections)
+                })
 
             scope.items = [
                 { label: 'Home', state: 'home' },
