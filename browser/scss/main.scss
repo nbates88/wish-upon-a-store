@@ -22,11 +22,8 @@ body {
   background: none;
 }
 
-sidebar {
-  background: red;
-	a {
-		color: blue;
-	}
+figcaption {
+  font-size: 16px;
 }
 
 .reviews {
@@ -39,8 +36,20 @@ sidebar {
 }
 
 .product-thumbnail {
-  width: 200px;
-  height: 200px;
+  width: 320px;
+  height: 320px;
+  border: white;
+
+  // margin-top: 50px;
+}
+
+.product-thumbnail-tiles {
+  display: inline-block;
+  margin-top: 50px;
+}
+
+span .product-thumbnail-tiles {
+  background: white;
 }
 
 @import 'directives/_main';

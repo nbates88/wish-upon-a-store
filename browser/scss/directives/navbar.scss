@@ -9,16 +9,6 @@ navbar {
     padding-top: 20px;
   }
 
-  .header-image {
-    margin: 0px;
-    // background-image: url("http://img02.deviantart.net/2e5d/i/2013/309/f/6/wish_upon_a_star_by_nikkidoodlesx3-d6t7zjw.jpg");
-    // background-size: cover;
-    width: 100%;
-    // z-index: -1;
-    // position: absolute;
-
-  }
-
   .list-inline {
     padding: 5px;
   }
@@ -29,12 +19,8 @@ navbar {
     width: 40px;
   }
 
-  sidebar {
-    background: red;
-  }
-
   a {
-    color: #7D3C98;
+    color: #AED6F1;
     font-size: 20px;
   }
 
@@ -42,11 +28,11 @@ navbar {
     cursor: pointer;
     transition: color 0.2s;
     &.active {
-      color: darken(#f31214, 10%);
+      color: white;
     }
     &:hover {
       background: none;
-      color: #BB8FCE;
+      color: white;
     }
     &:focus {
       background: none;
@@ -64,28 +50,45 @@ navbar {
 
   .welcome {
     float: right;
-    margin-top: 12px;
+    margin-top: 4px;
+    padding-right: 40px;
+    font-weight: 500;
+    color: white;
+
     span {
-      color: black;
-      font-size: 16px;
-      margin-right: 5px;
+      font-size: 26px;
+      margin-right: 30px;
     }
     a {
-      color: #f30046;
+      font-size: 20px;
+      font-weight: normal;
+      color: #AED6F1;
       cursor: pointer;
+      &:hover {
+        color: white;
+        text-decoration: none;
+      }
     }
   }
 
 }
 
+.navbar-static-top {
+    background-color: #21618C;
+    position: fixed;
+    width: 100%;
+    height: 80px;
+
+}
 
 
 /* Dropdown Button */
 .dropbtn {
-    background-color: none;
-    color: blue;
-    padding: 16px;
-    font-size: 16px;
+    background-color: #21618C;
+    color: #AED6F1;
+    padding-top: 11px;
+    padding-left: 30px;
+    font-size: 20px;
     border: none;
     cursor: pointer;
 }
@@ -99,9 +102,9 @@ navbar {
     color: red;
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: white;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    // box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
 .dropdown-content a {
@@ -111,12 +114,12 @@ navbar {
     display: block;
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown-content a:hover {background-color: #AED6F1}
 
 .dropdown:hover .dropdown-content {
     display: block;
 }
 
 .dropdown:hover .dropbtn {
-    background-color: #3e8e41;
+    color: white;
 }
