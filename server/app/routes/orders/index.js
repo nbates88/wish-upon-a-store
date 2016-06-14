@@ -101,7 +101,7 @@ router.get('/', function(req, res, next) {
 
 // GET ALL ORDERS BY USER ID
 router.get('/user', function(req, res, next) {
-    if (!req.user.isAdmin) res.sendStatus(403);
+    if (!req.user) res.sendStatus(403);
     else {
         orders.findAll({
             where: {
