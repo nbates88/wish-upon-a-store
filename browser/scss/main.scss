@@ -3,8 +3,9 @@
 }
 
 body {
-  // background: #fdfdfd;
-  background: black;
+  background: none;
+  background-image: url("background-wallpaper.jpg");
+
 }
 
 @mixin clearfix {
@@ -18,7 +19,7 @@ body {
 #main {
   padding-top: 40px;
   margin: 0 auto;
-  background: pink;
+  background: none;
 }
 
 sidebar {
@@ -37,7 +38,12 @@ sidebar {
   padding: 10px 0;
 }
 
-@import 'directives/main';
+.product-thumbnail {
+  width: 200px;
+  height: 200px;
+}
+
+@import 'directives/_main';
 @import 'home/main';
 @import 'about/main';
 @import 'tutorial/main';
