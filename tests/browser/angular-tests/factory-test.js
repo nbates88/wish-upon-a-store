@@ -45,7 +45,7 @@ describe('ProductFactory Collections', function () {
       CONFIGURATION
   /------------------*/
 
-  beforeEach(module('FullstackGeneratedApp'));  
+  beforeEach(module('WishUponAStore'));  
   // the `Todo` factory will be loaded before each test
   // $httpBackend lets us "stub" $http responses
   // fakeResTodo is a modified copy of fakeReqTodo (a randomized todo object)
@@ -56,7 +56,7 @@ describe('ProductFactory Collections', function () {
     $httpBackend = $injector.get('$httpBackend');
     fakeCollection = makeFakeCollection();
   }));
- 
+
   // checks that $httpBackend received and handled all expected calls
   afterEach(function(){
     try {
@@ -77,6 +77,9 @@ describe('ProductFactory Collections', function () {
     $httpBackend
       .expect('GET', '/api/collections/' + fakeCollection.id)
       .respond(200, fakeCollection);
+    $httpBackend
+      .expect('GET', 'js/home/home.html')
+      .respond(200);
     ProductFactory.getOneCollection(fakeCollection.id)
       .then(function (collection) {
         expect(collection).to.deep.equal(fakeCollection);
@@ -93,6 +96,9 @@ describe('ProductFactory Collections', function () {
     $httpBackend
       .expect('GET', '/api/collections')
       .respond(200, fakeCollections);
+    $httpBackend
+      .expect('GET', 'js/home/home.html')
+      .respond(200);
     ProductFactory.getAllCollections()
       .then(function (collections) {
         expect(collections).to.deep.equal(fakeCollections);
@@ -110,7 +116,7 @@ describe('ProductFactory Products', function () {
       CONFIGURATION
   /------------------*/
 
-  beforeEach(module('FullstackGeneratedApp'));  
+  beforeEach(module('WishUponAStore'));  
   // the `Todo` factory will be loaded before each test
   // $httpBackend lets us "stub" $http responses
   // fakeResTodo is a modified copy of fakeReqTodo (a randomized todo object)
@@ -140,6 +146,9 @@ describe('ProductFactory Products', function () {
     $httpBackend
       .expect('GET', '/api/products/' + fakeProduct.id)
       .respond(200, fakeProduct);
+    $httpBackend
+      .expect('GET', 'js/home/home.html')
+      .respond(200);
     ProductFactory.getOneProduct(fakeProduct.id)
       .then(function (product) {
         expect(product).to.deep.equal(fakeProduct);
@@ -155,6 +164,9 @@ describe('ProductFactory Products', function () {
     $httpBackend
       .expect('GET', '/api/products')
       .respond(200, fakeProducts);
+    $httpBackend
+      .expect('GET', 'js/home/home.html')
+      .respond(200);
     ProductFactory.getAllProducts()
       .then(function (products) {
         expect(products).to.deep.equal(fakeProducts);
