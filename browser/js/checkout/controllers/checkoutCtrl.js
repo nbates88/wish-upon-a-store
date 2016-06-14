@@ -1,9 +1,9 @@
 app.controller('CheckoutCtrl', function($scope, $state, OrderFactory, user) {
   $scope.user = user;
 
-  $scope.order = function(checkoutInfo) {
-
-    $scope.checkoutInfo = {
+  $scope.order = function() {
+    console.log($scope.checkoutInfo.name);
+    $scope.formInfo = {
       name: checkoutInfo.name || $scope.user.name,
       email: checkoutInfo.email || $scope.user.email,
       maidenName: checkoutInfo.maidenName,
@@ -11,10 +11,10 @@ app.controller('CheckoutCtrl', function($scope, $state, OrderFactory, user) {
     }
 
     //updates order status to processing and adds checkout info to order
-    OrderFactory.updateOrderStatus($scope.checkoutInfo)
+    OrderFactory.updateOrderStatus($scope.formInfo)
       .then(function() {
-        OrderFactory.sendConfirmEmail($scope.checkoutInfo)
-        $state.go('home')
+        OrderFactory.sendConfirmEmail($scope.formInfo)
+        $state.go('checkoutSuccess')
       })
   };
 
