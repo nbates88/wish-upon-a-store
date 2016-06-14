@@ -100,7 +100,7 @@ module.exports = function(app, db) {
                         userId: req.user.id
                         })
                     .then(function(updatedOrder){
-                        return orders.findOne({
+                        return orders.findAll({
                             where:{
                                 userId: req.user.id,
                                 status: "Created"
@@ -110,7 +110,7 @@ module.exports = function(app, db) {
                             ]
                         })
                         .then(function(returnedOrder){
-                            return returnedOrder.destroy();
+                            if (returnedOrder.length > 1) return returnedOrder[0].destroy();
                         })
                         .then(function(){
                            req.session.userId = null;
