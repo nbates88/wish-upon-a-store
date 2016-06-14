@@ -3,6 +3,7 @@ var db = require('../../../db');
 var products = db.model('product');
 var Review = db.model('review');
 var User = db.model('user');
+var Collection = db.model('collection');
 
 
 var Sequelize = require('sequelize');
@@ -12,7 +13,9 @@ module.exports = router;
 
 // GET ALL PRODUCTS
 router.get('/', function(req, res, next) {
-    products.findAll()
+    products.findAll({
+        include: [Collection]
+    })
         .then(function(response) {
             res.status(200).send(response);
         })
@@ -21,12 +24,18 @@ router.get('/', function(req, res, next) {
 
 // CREATE PRODUCT
 router.post('/', function(req, res, next) {
+
     if (!req.user || !req.user.isAdmin) res.sendStatus(403);
     else {
         products.create(req.body)
-            .then(function(response) {
-                res.status(201).send(response);
-            });
+            .then(function(product) {
+                console.log('created product,', product)
+                return product.addCollection(req.body.collection.id)
+            })
+            .then(function(product) {
+                console.log('updated product is', product)
+                res.status(201).send(product);
+            })
     }
 });
 

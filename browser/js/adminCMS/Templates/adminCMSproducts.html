@@ -36,7 +36,10 @@
 		<h4> Price: </h4><p contenteditable>{{product.price}}</p>
 		<h4> Image URL: </h4><p contenteditable>{{product.imageUrl}}</p>
 		<h4> Inventory Quantity: </h4><p contenteditable>{{product.inventoryQuantity}}</p>
-		<h4> Collection: </h4><p contenteditable>{{product.collection}}</p>
+		<h4> Collections: </h4><p >
+		<span ng-repeat="collection in product.collections" contenteditable>	{{collection.name}}
+		</span>
+		<br>
 		<button type="submit" class="btn btn-success" ng-click="editProduct(product)">Update Product</button>
 		<button type="submit" class="btn btn-success" ng-click="deleteProduct(product)">Delete Product</button>
 		</section>
