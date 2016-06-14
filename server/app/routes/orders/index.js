@@ -106,7 +106,8 @@ router.get('/user', function(req, res, next) {
         orders.findAll({
             where: {
                 userId: req.user.id
-            }
+            },
+            include: [products]
         })
             .then(function(response) {
                 console.log('got all orders for', req.user.id, 'and response is', response)
