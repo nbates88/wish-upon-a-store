@@ -1,31 +1,36 @@
 <section id="shopping_cart">
 
-<div ng-hide="products.length">
-  Nothing in shopping cart.
-  <br><a onclick="goBack()">Go back?</a>
-</div>
+    <div ng-hide="products.length">
+        Nothing in shopping cart.
+        <br><a onclick="goBack()">Go back?</a>
+    </div>
 
-<table class='table' ng-hide="!products.length">
-    <thead>
-      <tr>
-        <th>Item</th>
-        <th>Qty</th>
-        <th>Change Qty</th>
-        <th>Unit Price</th>
-        <th>Subtotal</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat='product in products'>
-        <td>{{product.name}}</td>
-        <td>{{product.OrderProducts.quantity}}</td>
-        <td><button class="btn btn-default btn-xs" ng-click="decreaseQuantity(product)"><span class="glyphicon glyphicon-minus"></span><button class="btn btn-default btn-xs" ng-click="increaseQuantity(product)"><span class="glyphicon glyphicon-plus"></span></td>
-        <td>{{product.price | currency}}</td>
-        <td>{{product.OrderProducts.quantity * product.price | currency}}</td>
-        <td><button class="btn btn-default btn-xs" ng-click="removeItem(product)"><span class="glyphicon glyphicon-remove"></span></td>
-      </tr>
-    </tbody>
-  </table>
-   <button type="submit" ng-click="checkout()" ng-hide="!products.length">Checkout</button >
+    <table class='table' ng-hide="!products.length">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Qty</th>
+                <th>Change Qty</th>
+                <th>Unit Price</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat='product in products'>
+                <td>{{product.name}}</td>
+                <td>{{product.OrderProducts.quantity}}</td>
+                <td>
+                    <button class="btn btn-default btn-xs" ng-click="decreaseQuantity(product)"><span class="glyphicon glyphicon-minus"></span>
+                        <button class="btn btn-default btn-xs" ng-click="increaseQuantity(product)"><span class="glyphicon glyphicon-plus"></span></td>
+                <td>{{product.price | currency}}</td>
+                <td>{{product.OrderProducts.quantity * product.price | currency}}</td>
+                <td>
+                    <button class="btn btn-default btn-xs" ng-click="removeItem(product)"><span class="glyphicon glyphicon-remove"></span></td>
+            </tr>
 
+        </tbody>
+    </table>
 
+    <h3>TOTAL PRICE: {{totalPrice | currency}} </h3>
+
+    <button class="btn btn-success" type="submit" ng-click="checkout()" ng-hide="!products.length">Checkout</button>

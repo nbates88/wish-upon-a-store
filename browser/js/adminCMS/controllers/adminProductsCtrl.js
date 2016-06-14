@@ -23,7 +23,9 @@ app.controller('AdminProductsCtrl', function($scope, products, ProductFactory, A
     };
 
     $scope.editProduct = function(product){
-            AdminFactory.editProduct(product.id, product);
+        console.log('product is', product);
+        console.log($scope.test)
+            // AdminFactory.editProduct(product.id, product);
     };
 });
             
