@@ -28,6 +28,17 @@
       <input type="password" placeholder="#########" class="form-control" id="ssn" name="ssn" ng-model="checkoutInfo.ssn" type="text" required>
     </div>
   </div>
+  <form action="" method="POST">
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="sk_test_tjLm2xBtWM5KW8ShhgWyGiy8"
+    data-amount="999"
+    data-name="Stripe.com"
+    data-description="Widget"
+    data-image="/img/documentation/checkout/marketplace.png"
+    data-locale="auto">
+  </script>
+</form>
   <div class="form-group row col-sm-offset-2 col-sm-10">
     <div class="col-sm-offset-2 col-sm-10">
       <button name="submit" class="btn btn-primary" type="submit">Place Order</button>
