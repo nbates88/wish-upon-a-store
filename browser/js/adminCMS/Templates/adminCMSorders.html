@@ -1,8 +1,16 @@
 <h3>Manage Orders</h3>
 
+<!-- SEARCH -->
+<br>
+<div class="panel input-group">
+    <span class="input-group-addon">Search</span>
+    <input type="text" class="form-control" placeholder="by status" ng-model="statusSearch">
+</div>
+
+
 <div>
     <ul>
-        <div ng-repeat="order in orders">
+        <div ng-repeat="order in orders | filter: { status: statusSearch }">
             <section class="bg-info container">
                 <h4> Order ID: </h4>
                 <p>{{order.id}}</p>
