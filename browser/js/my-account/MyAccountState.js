@@ -13,11 +13,8 @@ app.config(function($stateProvider) {
                 return MyAccountFactory.getMyAccount()
             }
         }
-    });
-});
-
-app.config(function($stateProvider) {
-    $stateProvider.state('myAccount.myOrders', {
+    })
+    .state('myAccount.myOrders', {
         url: '/orders',
         parent: 'myAccount',
         templateUrl: '/js/my-account/templates/my-orders.html',
@@ -30,12 +27,8 @@ app.config(function($stateProvider) {
                 return MyAccountFactory.getMyOrders()
             }
         }
-    });
-});
-
-
-app.config(function($stateProvider) {
-    $stateProvider.state('myAccount.editAccount', {
+    })
+    .state('myAccount.editAccount', {
         url: '/edit',
         parent: 'myAccount',
         templateUrl: '/js/my-account/templates/edit-account.html',
@@ -44,10 +37,7 @@ app.config(function($stateProvider) {
             authenticate: true
         }
     })
-});
-
-app.config(function($stateProvider) {
-    $stateProvider.state('myAccount.myReviews', {
+    .state('myAccount.myReviews', {
         url: '/reviews',
         parent: 'myAccount',
         templateUrl: '/js/my-account/templates/my-reviews.html',
