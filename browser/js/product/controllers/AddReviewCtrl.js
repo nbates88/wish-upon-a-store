@@ -7,7 +7,7 @@ app.controller('AddReviewCtrl', function($scope, product, $state, ReviewFactory)
             .then(function(review) {
                 $scope.reviewForm.$setPristine();
                 $scope.review = {};
-                $state.go('product.allReviews')
+                $state.go('reviewSuccess')
             })
     }
 });
