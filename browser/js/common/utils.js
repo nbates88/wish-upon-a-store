@@ -32,11 +32,12 @@ function goBack() {
     window.history.back();
 }
 
-function totalPrice(arr) {
+function totalPrice(cart) {
     var total = 0;
-    console.log('arr is', arr)
-    arr.forEach(product => {
-        total += +product.OrderProducts.quantity * +product.price
+    if (!Array.isArray(cart)) cart = [cart];
+    cart.forEach(product => {
+        if (product.OrderProducts) total += +product.OrderProducts.quantity * +product.price
     })
     return total;
+
 }

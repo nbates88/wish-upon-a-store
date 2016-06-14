@@ -7,12 +7,14 @@ app.config(function($stateProvider) {
         // that controls access to this state. Refer to app.js.
         data: {
             authenticate: true
+        },
+        resolve: {
+            accountInfo: function(MyAccountFactory) {
+                return MyAccountFactory.getMyAccount()
+            }
         }
-    });
-});
-
-app.config(function($stateProvider) {
-    $stateProvider.state('myAccount.myOrders', {
+    })
+    .state('myAccount.myOrders', {
         url: '/orders',
         parent: 'myAccount',
         templateUrl: '/js/my-account/templates/my-orders.html',
@@ -20,12 +22,13 @@ app.config(function($stateProvider) {
         data: {
             authenticate: true
         },
-    });
-});
-
-
-app.config(function($stateProvider) {
-    $stateProvider.state('myAccount.editAccount', {
+        resolve: {
+            orders: function(MyAccountFactory) {
+                return MyAccountFactory.getMyOrders()
+            }
+        }
+    })
+    .state('myAccount.editAccount', {
         url: '/edit',
         parent: 'myAccount',
         templateUrl: '/js/my-account/templates/edit-account.html',
@@ -34,10 +37,7 @@ app.config(function($stateProvider) {
             authenticate: true
         }
     })
-});
-
-app.config(function($stateProvider) {
-    $stateProvider.state('myAccount.myReviews', {
+    .state('myAccount.myReviews', {
         url: '/reviews',
         parent: 'myAccount',
         templateUrl: '/js/my-account/templates/my-reviews.html',

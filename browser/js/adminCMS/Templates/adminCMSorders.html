@@ -1,32 +1,31 @@
-<h3>Manage Orders</h3>
+<h2>Manage Orders</h2>
 
-<div>
-    <ul>
-        <div ng-repeat="order in orders">
-            <section class="bg-info container">
-                <h4> Order ID: </h4>
-                <p>{{order.id}}</p>
-                <h4>User: </h4>
-                <p>{{order.userId}}</p>
-                <h4> Last Updated: </h4>
-                <p>{{order.updatedAt}}</p>
-                <h4> Status: </h4>
-                <p>{{order.status}}</p>
+<!-- SEARCH -->
+<br>
+<div class="panel input-group">
+    <span class="input-group-addon">Search</span>
+    <input type="text" class="form-control" placeholder="by status" ng-model="statusSearch">
+</div>
 
-                <!-- update status dropdown -->
-                <!-- <form name="orderUpdate" ng-submit="updateStatus(order)"> -->
-                    <h4> Update Status: </h4>
+<div class="admin-container" ng-repeat="order in orders | filter: { status: statusSearch }">
+<table class="table">
+  <tr>
+    <th>Order ID</th>
+    <th>User</th>
+    <th>Last Updated</th>
+    <th>Status</th>
+    <th>Update Status</th>
+  </tr>
+  <tr>
+    <td>{{order.id}}</td>
+    <td>{{order.userId}}</td>
+    <td>{{order.updatedAt}}</td>
+    <td>{{order.status}}</td>
+    <td><select name="status" ng-model="newStatus" ng-options="status for status in allStatus" required>{{status}}</select></td>
+  </tr>
+</table>
 
-                    <p>
-                        <select name="status" ng-model="newStatus" ng-options="status for status in allStatus" required>
-                           {{status}}
-                        </select>
-                    </p>
-                    <br>
-                    <button type="submit" class="btn btn-success" ng-click="updateStatus(order, newStatus)">Update Status</button>
-                <!-- </form> -->
-            </section>
-            <hr>
-        </div>
-    </ul>
+<br>
+<button type="submit" class="btn btn-success" ng-click="updateStatus(order, newStatus)">Update Status</button>
+
 </div>

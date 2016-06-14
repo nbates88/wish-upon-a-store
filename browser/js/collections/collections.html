@@ -1,10 +1,18 @@
-<div class="container"><h1>{{ collection.name }}</h1></div>
+<div class="container">
+    <h1>{{ collection.name }}</h1></div>
+
+<!-- SEARCH -->
+<br>
+<div class="panel input-group">
+    <span class="input-group-addon">Search</span>
+    <input type="text" class="form-control" placeholder="by name" ng-model="nameSearch">
+</div>
 
 <div class="container">
-	<a ui-sref="product({id:product.id})">
-    <figure class="product-thumbnail-tiles col-lg-3" ng-repeat="product in products">
-    	<img class="product-thumbnail" id="productImage" ng-src="{{ product.imageUrl }}">
-    	<figcaption><a ui-sref="product({id:product.id})"> {{product.name}} </a></figcaption>
-    </figure>
+    <a ui-sref="product({id:product.id})">
+        <figure class="product-thumbnail-tiles col-lg-3" ng-repeat="product in products |filter: { name: nameSearch }">
+            <img class="product-thumbnail" id="productImage" ng-src="{{ product.imageUrl }}">
+            <figcaption><a ui-sref="product({id:product.id})"> {{product.name}} </a></figcaption>
+        </figure>
     </a>
 </div>
