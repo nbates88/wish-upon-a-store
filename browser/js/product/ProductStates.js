@@ -4,7 +4,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
             url: '/products/:id',
             controller: 'ProductCtrl',
             templateUrl: 'js/product/templates/product.html',
-            // abstract: true,
             resolve: {
                 product: function($stateParams, ProductFactory) {
                     var id = $stateParams.id;
@@ -19,7 +18,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
         .state('product.allReviews', {
             url: '/all-reviews',
             controller: 'AllReviewsCtrl',
-            // parent: 'product',
             templateUrl: 'js/product/templates/all-reviews.html',
             resolve: {
                 reviews: function($stateParams, ReviewFactory) {
@@ -31,7 +29,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
         .state('product.addReview', {
             url: '/add-review',
             controller: 'AddReviewCtrl',
-            parent: 'product',
             templateUrl: 'js/product/templates/add-review.html',
             resolve: {
                 product: function($stateParams, ProductFactory) {

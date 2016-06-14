@@ -1,25 +1,6 @@
 app.factory('AdminFactory', function($http) {
     var cachedReviews = []
     return {
-        //data will be req.body -- will likely come from a form in an admin panel
-        // createProduct: function(data) {
-        //     return $http.post('/api/products', data)
-        //         .then(function(product) {
-        //             return product.data
-        //         })
-        // },
-        // editProduct: function(id, data) {
-        //     return $http.put('/api/products/' + id, data)
-        //         .then(function(product) {
-        //             return product.data
-        //         })
-        // },
-        // deleteProduct: function(id) {
-        //     return $http.delete('/api/products/' + id)
-        //         .then(function() {
-        //             //not sure if anything needs to happen here
-        //         })
-        // },
         createUser: function(data) {
             return $http.post('/api/users', data)
                 .then(function(user) {
@@ -35,7 +16,6 @@ app.factory('AdminFactory', function($http) {
         deleteUser: function(id) {
             return $http.delete('/api/users/' + id)
                 .then(function() {
-                    //not sure if anything needs to happen here
                 })
         },
         getAllUsers: function() {
@@ -53,7 +33,6 @@ app.factory('AdminFactory', function($http) {
         deleteOrder: function(id) {
             return $http.delete('/api/orders/' + id)
                 .then(function() {
-                    //not sure if anything needs to happen here
                 })
         },
         getAllOrders: function() {

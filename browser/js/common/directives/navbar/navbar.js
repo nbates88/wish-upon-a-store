@@ -7,8 +7,7 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
         link: function (scope) {
             ProductFactory.getAllCollections()
                 .then(function(collections) {
-                    scope.collections = collections
-                    console.log(collections)
+                    scope.collections = collections;
                 })
 
             scope.items = [

@@ -15,14 +15,13 @@ app.controller('AdminUsersCtrl', function($scope, users, AdminFactory){
         AdminFactory.editUser(id, {isAdmin: true})
 
     };
+    
     $scope.removeAdmin = function(id){
         var user = _.find($scope.users, function(user){
             return user.id === id
         });
         user.isAdmin = false;
-        AdminFactory.editUser(id, {isAdmin: false})
-        .then(function(){
-             
-        })
+        AdminFactory.editUser(id, {isAdmin: false});
     };
+
     });
