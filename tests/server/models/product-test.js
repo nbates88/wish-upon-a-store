@@ -139,7 +139,11 @@ describe('Product model', function () {
             });
         });
 
+<<<<<<< HEAD
         it('rounds price to 2 decimal places', function() {
+=======
+        it('requires price to have 2 decimal places', function() {
+>>>>>>> c92a7b4edd7aa68488086512ee92e3c62b7d8c48
             return Product.create({
                 name: 'Post-graduation Employment',
                 description: "You've busted your butt on databases and routes, eaten countless bowls of cereal, and trusted the process despite deep DEEP (we're talkin' deeeeeeeeep) levels of confusion and doubt. Now let's get you a JOB homie!",
@@ -148,6 +152,7 @@ describe('Product model', function () {
                 imageUrl: "https://pixabay.com/static/uploads/photo/2015/05/24/21/19/wish-782424_960_720.jpg"
             })
             .then(function(savedProduct) {
+<<<<<<< HEAD
                 // // KC: Apparently it saves as a string.
                 // expect(savedProduct.price).to.be.a('number');
                 expect(savedProduct.price).to.equal('7.16');
@@ -168,6 +173,11 @@ describe('Product model', function () {
                 expect(savedProduct.price).to.equal('7.10');
             });
         });
+=======
+                expect(savedProduct.price).to.equal('7.16');
+            });
+        });
+>>>>>>> c92a7b4edd7aa68488086512ee92e3c62b7d8c48
 
         it('requires inventoryQuantity', function() {
             return Product.build({

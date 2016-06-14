@@ -1,8 +1,7 @@
 navbar {
 
   display: block;
-  background: white;
-  border-bottom: 1px solid black;
+  background: none;
 
   .container {
     width: 100%;
@@ -12,10 +11,9 @@ navbar {
 
   .header-image {
     margin: 0px;
-    background-image: url("http://img02.deviantart.net/2e5d/i/2013/309/f/6/wish_upon_a_star_by_nikkidoodlesx3-d6t7zjw.jpg");
-    background-size: cover;
+    // background-image: url("http://img02.deviantart.net/2e5d/i/2013/309/f/6/wish_upon_a_star_by_nikkidoodlesx3-d6t7zjw.jpg");
+    // background-size: cover;
     width: 100%;
-    height: 400px;
     // z-index: -1;
     // position: absolute;
 
@@ -36,7 +34,7 @@ navbar {
   }
 
   a {
-    color: white;
+    color: #7D3C98;
     font-size: 20px;
   }
 
@@ -48,7 +46,7 @@ navbar {
     }
     &:hover {
       background: none;
-      color: #f31214;
+      color: #BB8FCE;
     }
     &:focus {
       background: none;
@@ -57,6 +55,10 @@ navbar {
 
   .btn-primary {
     float: right;
+  }
+
+  .btn-shop {
+    background: none;
   }
 
 
@@ -76,3 +78,45 @@ navbar {
 
 }
 
+
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: none;
+    color: blue;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    color: red;
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
