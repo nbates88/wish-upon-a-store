@@ -43,7 +43,12 @@ app.config(function($stateProvider) {
     $stateProvider.state('admin.orders', {
         url: '/orders',
         controller: 'AdminOrdersCtrl',
-        templateUrl: 'js/adminCMS/Templates/adminCMSorders.html'
+        templateUrl: 'js/adminCMS/Templates/adminCMSorders.html',
+        resolve: {
+            orders: function(OrderFactory) {
+                return OrderFactory.getAllOrders()
+            }
+        }
     });
 
     $stateProvider.state('admin.reviews', {
