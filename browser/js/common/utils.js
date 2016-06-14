@@ -28,7 +28,15 @@ let getAverage = function(arrayOfNumbers) {
     }
 }
 
-
 function goBack() {
     window.history.back();
+}
+
+function totalPrice(arr) {
+    var total = 0;
+    console.log('arr is', arr)
+    arr.forEach(product => {
+        total += +product.OrderProducts.quantity * +product.price
+    })
+    return total;
 }

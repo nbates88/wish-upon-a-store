@@ -3,7 +3,7 @@
   <div class="form-group row">
     <label for="description" class="col-sm-2 form-control-label">Review</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="description" placeholder="Please leave a review" name="description" ng-model="review.description" type="text" required>
+      <input type="text" class="form-control" id="description" placeholder="Please leave a review" name="description" ng-model="review.description" type="text" required minlength=10 maxlength=500>
     </div>
   </div>
   <div class="form-group row">
