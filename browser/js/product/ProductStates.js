@@ -1,5 +1,5 @@
-app.config(function($stateProvider) {
-
+app.config(function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.when('/products/:id', '/products/:id/all-reviews');
     $stateProvider.state('product', {
             url: '/products/:id',
             controller: 'ProductCtrl',

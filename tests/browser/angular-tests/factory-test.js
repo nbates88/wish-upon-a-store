@@ -56,6 +56,7 @@ describe('ProductFactory Collections', function () {
     $httpBackend = $injector.get('$httpBackend');
     fakeCollection = makeFakeCollection();
   }));
+ 
   // checks that $httpBackend received and handled all expected calls
   afterEach(function(){
     try {
