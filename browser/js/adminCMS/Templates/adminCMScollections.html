@@ -12,16 +12,24 @@
 
 	<h3>Update current collections</h3>
 	<div>
+	<ul>
 	<div ng-repeat="collection in collections">
 	<section class="bg-info container" >
-		<li >
-		<h4>Name:</h4><p contenteditable> {{collection.name}}</p>
-		<button type="submit" class="btn btn-success" ng-click="editCollection(collection)">Update Collection</button>
+		<div >
+		<h2>{{collection.name}}</h2>
+		<form name="updateCollectionForm" novalidate>
+		<label for="collectionName">
+		<h4> New Name: </h4>
+		</label>	
+		<input type="text" name="collectionName" ng-model="newcollection.name" class="form-control">
+		<button type="submit" class="btn btn-success" ng-click="editCollection(newcollection, collection)">Update Collection</button>
 		<button type="submit" class="btn btn-success" ng-click="deleteCollection(collection)">Delete Collection</button>
-		</li>
+		</form>
+		</div>
 	</section>
 	<br>
 	</div>
+	</ul>
 	</div>
 	
 </div>
