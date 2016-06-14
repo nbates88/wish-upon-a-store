@@ -34,10 +34,10 @@ function goBack() {
 
 function totalPrice(cart) {
     var total = 0;
-
     if (!Array.isArray(cart)) cart = [cart];
     cart.forEach(product => {
-        total += +product.OrderProducts.quantity * +product.price
+        if (product.OrderProducts) total += +product.OrderProducts.quantity * +product.price
     })
     return total;
+
 }
