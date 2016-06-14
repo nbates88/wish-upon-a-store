@@ -7,6 +7,11 @@ app.config(function($stateProvider) {
         // that controls access to this state. Refer to app.js.
         data: {
             authenticate: true
+        },
+        resolve: {
+            accountInfo: function(MyAccountFactory) {
+                return MyAccountFactory.getMyAccount()
+            }
         }
     });
 });
@@ -20,6 +25,11 @@ app.config(function($stateProvider) {
         data: {
             authenticate: true
         },
+        resolve: {
+            orders: function(MyAccountFactory) {
+                return MyAccountFactory.getMyOrders()
+            }
+        }
     });
 });
 
