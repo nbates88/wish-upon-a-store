@@ -16,6 +16,11 @@ var transporter = nodemailer.createTransport(smtpTransport({
 }));
 var Sequelize = require('sequelize');
 
+// Set your secret key: remember to change this to your live secret key in production
+// See your keys here https://dashboard.stripe.com/account/apikeys
+var stripe = require("stripe")("sk_test_tjLm2xBtWM5KW8ShhgWyGiy8");
+
+
 module.exports = router;
 
 //FYI:These functions should be methods on the models.
@@ -253,13 +258,31 @@ router.delete('/:id', function(req, res, next) {
         .then(null, next);
 });
 
-router.post('/email', function(req, res, next) {
+router.post('/checkout', function(req, res, next) {
 
-    var mailOptions = {
+
+    // (Assuming you're using express - expressjs.com)
+    // Get the credit card details submitted by the form
+    var stripeToken = req.body.stripeToken;
+    console.log(req.body)
+    var charge = stripe.charges.create({
+      amount: req.body.amount, // amount in cents, again
+      currency: "usd",
+      source: stripeToken,
+      description: "Example charge"
+    }, function(err, charge) {
+      if (err && err.type === 'StripeCardError') {
+        // The card has been declined
+        console.error(err);
+      }
+      else console.log("yay")
+    });
+
+     var mailOptions = {
         from: "Wish Upon A Store",
-        to: req.body.email,
+        to: req.body.stripeEmail,
         subject: "Your Wishes Will Be Granted Soon",
-        text: "Thanks for placing your order, " + req.body.name
+        text: "Thanks for placing your order, " + req.body.stripeEmail
     }
 
     transporter.sendMail(mailOptions, function(error, info) {
@@ -268,5 +291,21 @@ router.post('/email', function(req, res, next) {
         }
         console.log("Message Sent: ", info.response)
     })
+    var userId = req.user ? req.user.id : req.session.userId;
+    orders.find({
+            where: {
+                userId: userId,
+                status: 'Created'
+            }
+        })
+        .then(function(foundOrder) {
+            return foundOrder.update({
+                status: "Processing"
+            })
+        })
+        .then(function(updatedOrder) {
+            res.send("Yay! Your wish is on its way!").status(201)
+        })
+        .then(null, next);
 
 });
