@@ -1,10 +1,8 @@
-<h4>My Reviews</h4>
-
 <div ng-hide="reviews.length">
   No reviews yet.
 </div>
 
-<div class="container reviews" ng-repeat="review in reviews" ng-show="reviews.length">
+<div class="admin-container container reviews" ng-repeat="review in reviews" ng-show="reviews.length">
     <div class="row revrow">
         <div class="col-sm-5">
           <strong><a ui-sref="product({id:review.product.id})">{{review.product.name}}</a></strong>
