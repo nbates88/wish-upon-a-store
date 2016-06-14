@@ -3,6 +3,8 @@ var db = require('../../../db');
 var products = db.model('product');
 var Review = db.model('review');
 var User = db.model('user');
+var Collection = db.model('collection');
+
 
 
 var Sequelize = require('sequelize');
@@ -44,11 +46,23 @@ router.put('/:id', function(req, res, next) {
     if (!req.user || !req.user.isAdmin) res.sendStatus(403);
     else {
         products.findById(req.params.id)
-            .then(function(response) {
-                return response.update(req.body);
+            .then(function(product) {
+                return product.update(req.body);
             })
-            .then(function(response) {
-                res.status(200).send(response);
+            .then(function(product){
+                var updatedProduct = product;
+                if(req.body.collection){
+                    Collection.findOne({where:
+                        {name: req.body.collection}
+                    })
+                    .then(function(collection){
+                        return updatedProduct.addCollection(collection.id);
+                    })
+                    
+                }
+            })
+            .then(function(updatedProduct) {
+                res.status(200).send(updatedProduct);
             })
             .then(null, next)
     }
