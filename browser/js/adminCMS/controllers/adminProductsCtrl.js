@@ -16,7 +16,6 @@ app.controller('AdminProductsCtrl', function($scope, products, ProductFactory, $
 
     //here we set it
     $scope.createProduct = function(data){
-        console.log($scope.productForm);
         $scope.productForm.$setPristine();
         $scope.product = {};
         ProductFactory.createProduct(data);   

@@ -3,27 +3,6 @@
   No orders yet. <a ui-sref="home">Want to place one?</a>
 </div>
 
-<div class="admin-container">
-
-  <table class="table" ng-show="orders.length">
-    <tr>
-      <th>Created On</th>
-      <th>Status</th>
-      <th>Last Updated</th>
-    </tr>
-    <tr ng-repeat="order in orders">
-      <td>{{order._createdAt}}</td>
-      <td>{{order.status}}</td>
-      <td>{{order._updatedAt}}</td>
-      <tr ng-repeat="product in orders.products">
-      <td>{{product.name}}</td>
-      
-    </tr>
-    </tr>
-    
-  </table>
-</div>
-
 <div class="admin-container" ng-repeat="order in orders" ng-show="orders.length">
     <div class="row revrow">
         <div class="col-sm-3">

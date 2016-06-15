@@ -3,7 +3,6 @@ app.config(function($stateProvider) {
     // Register our *collections* state.
     $stateProvider.state('admin', {
         url: '/admin',
-        controller: 'AdminCtrl',
         templateUrl: 'js/adminCMS/Templates/adminCMS.html'
     });
 
