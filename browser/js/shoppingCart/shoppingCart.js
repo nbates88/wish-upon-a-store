@@ -43,18 +43,24 @@ app.controller('ShoppingCartCtrl', function($scope, $window, $state, foundProduc
             $window.alert("Please click on the x if you want to remove this product from the order.");
         }
         $scope.updateProductQty(productId, $scope.products[idx].OrderProducts.quantity)
+
     };
 
     $scope.updateProductQty = function(productId, quantity){
         var qty = {
             'qty': quantity
         }
+         $scope.updateTotalPrice()
 
         return OrderFactory.updateProductQty(productId, qty)
 
     };
 
     $scope.totalPrice = totalPrice($scope.products)
+
+    $scope.updateTotalPrice = function(){
+        $scope.totalPrice = totalPrice($scope.products)
+    }
     
     $scope.checkout = function(){
         $state.go('checkout')
