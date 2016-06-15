@@ -1,8 +1,7 @@
-<h2>Edit My Account</h2>
-<!--this update my account function still needs to be written-->
-
+<h2>Edit Email or Password</h2>
 <!-- KC: This message pops up to confirm a password update. -->
-<p ng-model="message">{{message}}</p>
+<div class="admin-container">
+    <p ng-model="message">{{message}}</p>
 
 <div class="admin-container">
 <form ng-submit="submit(newpassword)">
@@ -16,5 +15,5 @@
   </div>
   <button type="submit" class="btn btn-info btn-lg">Submit</button>
 
-</form>
+    </form>
 </div>

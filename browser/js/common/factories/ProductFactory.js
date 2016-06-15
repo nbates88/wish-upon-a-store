@@ -31,7 +31,6 @@ app.factory('ProductFactory', function($http) {
         getProductsByCollectionId: function(id) {
             return $http.get('/api/collections/' + id + '/products')
                 .then(function(products) {
-                    console.log(products, "products")
                     return products.data
                 })
         },
@@ -91,7 +90,6 @@ app.factory('ProductFactory', function($http) {
             cachedProducts.splice(cachedProducts.indexOf(product), 1)
             return $http.delete('/api/products/' + product.id)
                 .then(function() {
-                    //not sure if anything needs to happen here
                 })
         }
     }

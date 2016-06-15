@@ -14,10 +14,4 @@ app.controller('SidebarCtrl', function($scope, ProductFactory, $rootScope) {
         .then(function(collections) {
             $scope.items = collections;
         })
-    // $rootScope.on('collectionsUpdate', function() {
-    //     ProductFactory.getAllCollections()
-    //         .then(function(collections) {
-    //             $scope.items = collections;
-    //         })
-    // })
 })

@@ -1,25 +1,6 @@
 app.factory('AdminFactory', function($http) {
     var cachedReviews = []
     return {
-        //data will be req.body -- will likely come from a form in an admin panel
-        // createProduct: function(data) {
-        //     return $http.post('/api/products', data)
-        //         .then(function(product) {
-        //             return product.data
-        //         })
-        // },
-        // editProduct: function(id, data) {
-        //     return $http.put('/api/products/' + id, data)
-        //         .then(function(product) {
-        //             return product.data
-        //         })
-        // },
-        // deleteProduct: function(id) {
-        //     return $http.delete('/api/products/' + id)
-        //         .then(function() {
-        //             //not sure if anything needs to happen here
-        //         })
-        // },
         createUser: function(data) {
             return $http.post('/api/users', data)
                 .then(function(user) {
@@ -35,7 +16,6 @@ app.factory('AdminFactory', function($http) {
         deleteUser: function(id) {
             return $http.delete('/api/users/' + id)
                 .then(function() {
-                    //not sure if anything needs to happen here
                 })
         },
         getAllUsers: function() {
@@ -53,7 +33,6 @@ app.factory('AdminFactory', function($http) {
         deleteOrder: function(id) {
             return $http.delete('/api/orders/' + id)
                 .then(function() {
-                    //not sure if anything needs to happen here
                 })
         },
         getAllOrders: function() {
@@ -69,7 +48,7 @@ app.factory('AdminFactory', function($http) {
             return $http.get('/api/reviews/')
                 .then(function(reviews) {
                     angular.copy(reviews.data, cachedReviews);
-                    return reviews.data;
+                    return cachedReviews;
                 })
         },
         deleteReview: function(id) {
@@ -77,7 +56,7 @@ app.factory('AdminFactory', function($http) {
                 .then(function() {
                     var index;
                     cachedReviews.forEach(function(rev, i) {
-                        if (rev.id === id) index = id;
+                        if (rev.id === id) index = i;
                     })
                     cachedReviews.splice(index, 1);
                     return cachedReviews

@@ -1,13 +1,12 @@
-app.config(function($stateProvider) {
+app.config(function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.when('/admin/', '/admin/users');
 
     // Register our *collections* state.
     $stateProvider.state('admin', {
         url: '/admin',
-        controller: 'AdminCtrl',
         templateUrl: 'js/adminCMS/Templates/adminCMS.html'
-    });
-
-    $stateProvider.state('admin.users', {
+    })
+    .state('admin.users', {
         url: '/users',
         controller: 'AdminUsersCtrl',
         templateUrl: 'js/adminCMS/Templates/adminCMSusers.html',
@@ -16,9 +15,8 @@ app.config(function($stateProvider) {
                 return AdminFactory.getAllUsers()
             },
         }
-    });
-
-    $stateProvider.state('admin.products', {
+    })
+    .state('admin.products', {
         url: '/products',
         controller: 'AdminProductsCtrl',
         templateUrl: 'js/adminCMS/Templates/adminCMSproducts.html',
@@ -27,9 +25,8 @@ app.config(function($stateProvider) {
                 return ProductFactory.getAllProducts()
             },
         }
-    });
-
-    $stateProvider.state('admin.collections', {
+    })
+    .state('admin.collections', {
         url: '/collections',
         controller: 'AdminCollectionsCtrl',
         templateUrl: 'js/adminCMS/Templates/adminCMScollections.html',
@@ -38,9 +35,8 @@ app.config(function($stateProvider) {
                 return ProductFactory.getAllCollections()
             }
         }
-    });
-
-    $stateProvider.state('admin.orders', {
+    })
+    .state('admin.orders', {
         url: '/orders',
         controller: 'AdminOrdersCtrl',
         templateUrl: 'js/adminCMS/Templates/adminCMSorders.html',
@@ -49,9 +45,8 @@ app.config(function($stateProvider) {
                 return OrderFactory.getAllOrders()
             }
         }
-    });
-
-    $stateProvider.state('admin.reviews', {
+    })
+    .state('admin.reviews', {
         url: '/reviews',
         controller: 'AdminReviewsCtrl',
         templateUrl: 'js/adminCMS/Templates/adminCMSreviews.html',

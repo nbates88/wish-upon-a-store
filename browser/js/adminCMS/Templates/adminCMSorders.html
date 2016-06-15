@@ -19,7 +19,7 @@
   <tr>
     <td>{{order.id}}</td>
     <td>{{order.userId}}</td>
-    <td>{{order.updatedAt}}</td>
+    <td>{{order._updatedAt}}</td>
     <td>{{order.status}}</td>
     <td><select name="status" ng-model="newStatus" ng-options="status for status in allStatus" required>{{status}}</select></td>
   </tr>

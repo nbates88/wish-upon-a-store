@@ -23,8 +23,6 @@ module.exports = function(app, db) {
                 // if the user already exists, LOGIN:
                 if (result) {
                     let user = result;
-                    // console.log("user: ", user);
-                    // console.log("AUTH PW:", password)
                     // user.correctPassword is a method from the User schema.
                     if (!user || !user.correctPassword(password)) {
                         done(null, false);
@@ -35,17 +33,11 @@ module.exports = function(app, db) {
 
                     // if the user DOESN'T exist (new user SIGNUP), create one:
                 } else {
-                    // console.log("no user exists");
-                    // console.log("user email: ", email);
-                    // console.log("user password: ", password);
-
                     return User.create({
                             email: email,
                             password: password
                         })
                         .then(function(user) {
-                            // console.log("user: ", user);
-                            // console.log("AUTH PW:", password)
                             // user.correctPassword is a method from the User schema.
                             if (!user || !user.correctPassword(password)) {
                                 done(null, false);

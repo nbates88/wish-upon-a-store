@@ -1,4 +1,6 @@
-app.config(function($stateProvider) {
+app.config(function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.when('/my-account/', '/my-account/my-orders');
+
     $stateProvider.state('myAccount', {
         url: '/my-account',
         templateUrl: '/js/my-account/templates/my-account.html',

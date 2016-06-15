@@ -2,7 +2,6 @@ app.controller('AdminCollectionsCtrl', function($scope, ProductFactory, collecti
     $scope.collections = collections;
 
     $scope.deleteCollection = function(collection){
-        console.log(collection);
         $scope.collections.splice($scope.collections.indexOf(collection), 1)
         ProductFactory.deleteCollection(collection)
     };

@@ -210,7 +210,9 @@ footer {
 }
 
 
-
+.numbered-list {
+    display: list-item;
+}
 
 @import 'directives/_main';
 @import 'home/main';

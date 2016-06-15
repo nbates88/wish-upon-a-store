@@ -5,6 +5,7 @@
 </div>
 
 <div class="container reviews admin-container" ng-repeat="review in reviews" ng-show="reviews.length">
+
     <div class="row revrow">
         <div class="col-lg-6">
           <strong><a ui-sref="product({id:review.product.id})">{{review.product.name}}</a></strong>

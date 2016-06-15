@@ -25,7 +25,7 @@ router.delete('/:id', function(req, res, next) {
                 return review.destroy();
             })
             .then(function(response) {
-                res.status(204).redirect('/');
+                res.sendStatus(204);
             });
     }
 });
