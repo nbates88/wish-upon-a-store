@@ -10,7 +10,6 @@ module.exports = function(app, db) {
 
     // Define strategy function that will be passed to passport.use.
     var strategyFn = function(email, password, done) {
-        console.log("AUTH EMAIL:", email)
 
         // find the user in the database
         User.find({
@@ -68,8 +67,6 @@ module.exports = function(app, db) {
         var order;
 
         var authCb = function(err, user) {
-            console.log('err from passport :', err)
-            console.log('if not user', user)
             if (err) return next(err);
 
             if (!user) {
@@ -81,11 +78,9 @@ module.exports = function(app, db) {
             // req.logIn will establish our session.
             req.logIn(user, function(loginErr) {
                 if (loginErr) return next(loginErr);
-                console.log("ORDER AGAIN", order)
+            
                 // We respond with a response object that has user with _id and email.
                 if(order){
-                    console.log("hahahaha", order.dataValues.userId)
-                    console.log("heheheheh", req.session.userId)
 
                     //order.dataValues.userId = req.user.id; 
                     order.update({
@@ -129,7 +124,6 @@ module.exports = function(app, db) {
         })
         .then(function(foundOrder){ 
             order = foundOrder;
-            console.log("ORDERRRR", order)
             passport.authenticate('local', authCb)(req, res, next);    
             return order
         })
@@ -146,12 +140,10 @@ module.exports = function(app, db) {
             })
             .then(function(user) {
                 if (!user) throw new Error('user not found')
-                console.log("new password: ", req.body.newpassword);
                 // Need to update BOTH password and salt because the updatePassword changes both of these properties.
                 return user.update({ password: user.updatePassword(req.body.newpassword), salt: user.salt });
             })
             .then(function(me) {
-                console.log('me after save: ', me)
                 res.send({ message: "You just updated your password like a ROCK STAR!" });
             })
             .catch(next);

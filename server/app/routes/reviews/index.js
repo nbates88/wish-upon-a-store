@@ -3,7 +3,7 @@ var db = require('../../../db');
 var Review = db.model('review');
 var Product = db.model('product');
 var User = db.model('user');
-var Sequelize = require('sequelize');
+
 module.exports = router;
 
 // GET ALL REVIEWS FOR ONE USER
@@ -25,7 +25,7 @@ router.delete('/:id', function(req, res, next) {
                 return review.destroy();
             })
             .then(function(response) {
-                res.status(204).redirect('/');
+                res.sendStatus(204);
             });
     }
 });

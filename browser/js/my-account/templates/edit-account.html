@@ -1,20 +1,19 @@
-<!--this update my account function still needs to be written-->
-
+<h2>Edit Email or Password</h2>
 <!-- KC: This message pops up to confirm a password update. -->
-<br>
 <div class="admin-container">
     <p ng-model="message">{{message}}</p>
 
-    <form ng-submit="submit(newpassword)">
-        <div class="form-group">
-            <label for="edit-email">New Email Address</label>
-            <input type="email" name="newemail" ng-model="email" class="form-control" id="edit-email" required>
-        </div>
-        <div class="form-group">
-            <label for="edit-password">New Password</label>
-            <input type="password" name="newpassword" ng-model="newpassword" class="form-control" id="edit-password" placeholder="Enter new password" required>
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+<div class="admin-container">
+<form ng-submit="submit(newpassword)">
+  <div class="form-group">
+    <label for="edit-email"><h4>New Email Address</h4></label>
+    <input type="email" name="newemail" ng-model="email" class="form-control" id="edit-email" required>
+  </div>
+  <div class="form-group">
+    <label for="edit-password"><h4>New Password</h4></label>
+    <input type="password" name="newpassword" ng-model="newpassword" class="form-control" id="edit-password" placeholder="Enter new password" required>
+  </div>
+  <button type="submit" class="btn btn-info btn-lg">Submit</button>
 
     </form>
 </div>

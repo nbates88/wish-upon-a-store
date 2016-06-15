@@ -1,15 +1,16 @@
-<h4>Add a Review</h4>
+<br>
 <form name="reviewForm" ng-submit="addReview(review)">
   <div class="form-group row">
-    <label for="description" class="col-sm-2 form-control-label">Review</label>
-    <div class="col-sm-10">
+    <label for="description" class="col-lg-2 form-control-label">Review</label>
+    <div class="col-lg-10">
       <input type="text" class="form-control" id="description" placeholder="Please leave a review" name="description" ng-model="review.description" type="text" required minlength=10 maxlength=500>
     </div>
   </div>
   <div class="form-group row">
-    <label for="stars" class="col-sm-2 form-control-label">Stars</label>
-    <div class="col-sm-10">
-      <select name="stars" ng-model="review.stars" required>
+    <label for="stars" class="col-lg-2 form-control-label">Stars</label>
+    <div class="col-lg-1">
+    <div class="form-group">
+      <select class="form-control qty-dropdown" for="sell" name="stars" ng-model="review.stars" required>
         <option>1</option>
         <option>2</option>
         <option>3</option>
@@ -17,11 +18,12 @@
         <option>5</option>
       </select>
     </div>
+    </div>
   </div>
 
   <div class="form-group row">
     <div class="col-sm-offset-2 col-sm-10">
-      <button name="submit" class="btn btn-primary" type="submit">Submit Review</button>
+      <button name="submit" class="btn btn-info btn-lg" type="submit">Submit Review</button>
     </div>
   </div>
 

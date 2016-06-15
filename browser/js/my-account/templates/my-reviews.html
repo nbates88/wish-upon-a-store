@@ -1,17 +1,20 @@
+<h2>My Reviews</h2>
+
 <div ng-hide="reviews.length">
   No reviews yet.
 </div>
 
-<div class="admin-container container reviews" ng-repeat="review in reviews" ng-show="reviews.length">
+<div class="container reviews admin-container" ng-repeat="review in reviews" ng-show="reviews.length">
+
     <div class="row revrow">
-        <div class="col-sm-5">
+        <div class="col-lg-6">
           <strong><a ui-sref="product({id:review.product.id})">{{review.product.name}}</a></strong>
         </div>
-        <div class="col-sm-3">
+        <div class="col-lg-3">
           <img ng-src="js/common/stars/{{review.stars}}.png">
         </div>
     </div>
     <div class="row revrow">
-        <div class="col-sm-8">{{review.description}}</div>
+        <div class="col-lg-12">{{review.description}}</div>
     </div>
 </div>

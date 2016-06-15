@@ -39,7 +39,6 @@ module.exports = function (app, db) {
                 done(null, user);
             })
             .catch(function (err) {
-                console.error('Error creating user from Twitter authentication', err);
                 done(err);
             });
 

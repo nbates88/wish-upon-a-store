@@ -1,9 +1,9 @@
 var router = require('express').Router();
 
 var db = require('../../../db');
-var orders = db.model('order');
-var users = db.model('user');
-var products = db.model('product');
+var Order = db.model('order');
+var User = db.model('user');
+var Product = db.model('product');
 var passport = ('passport');
 var nodemailer = require('nodemailer')
 var smtpTransport = require('nodemailer-smtp-transport')
@@ -29,7 +29,7 @@ function addProductToOrder(product, userId) {
     var productId = product.id
     var productQuantity = product.qnty;
 
-    var createOrder = orders.build({
+    var createOrder = Order.build({
         userId: userId,
         status: 'Created'
     });
@@ -43,8 +43,8 @@ function addProductToOrder(product, userId) {
 }
 
 function findOrderProductPair(productId, userId, fallbackOrder) {
-    var findProduct = products.findById(productId)
-    var findOrder = orders.find({
+    var findProduct = Product.findById(productId)
+    var findOrder = Order.find({
         where: {
             userId: userId,
             status: 'Created'
@@ -91,7 +91,7 @@ function updateProductQty(productId, quantity, userId) {
 router.get('/', function(req, res, next) {
     if (!req.user.isAdmin) res.sendStatus(403);
     else {
-        orders.findAll()
+        Order.findAll()
             .then(function(response) {
                 res.status(200).send(response);
             })
@@ -103,14 +103,13 @@ router.get('/', function(req, res, next) {
 router.get('/user', function(req, res, next) {
     if (!req.user) res.sendStatus(403);
     else {
-        orders.findAll({
+        Order.findAll({
             where: {
                 userId: req.user.id
             },
-            include: [products]
+            include: [Product]
         })
             .then(function(response) {
-                console.log('got all orders for', req.user.id, 'and response is', response)
                 res.status(200).send(response);
             })
             .then(null, next);
@@ -119,10 +118,7 @@ router.get('/user', function(req, res, next) {
 
 // ADDING A PRODUCT TO AN ORDER
 router.post('/products', function(req, res, next) {
-    //console.log("IDDDDS", req.user.id, req.session.userId)
-
     var userId = req.user ? req.user.id : req.session.userId;
-    console.log("USER ID", userId)
     addProductToOrder(req.body, userId)
         .then(function(response) {
             res.status(200).send(response);
@@ -161,7 +157,7 @@ router.put('/products/:id', function(req, res, next) {
 router.get('/products', function(req, res, next) {
 
     var userId = req.user ? req.user.id : req.session.userId;
-    orders.find({
+    Order.find({
             where: {
                 userId: userId,
                 status: 'Created'
@@ -185,10 +181,8 @@ router.get('/products', function(req, res, next) {
 });
 
 // GET ONE ORDER BY ID
-// EI: findByUser method, use req.user ID
-// EI: create another route for an admin, allowing admin to get all orders, with middleware above it to keep non-admins out
 router.get('/:id', function(req, res, next) {
-    orders.findById(req.params.id)
+    Order.findById(req.params.id)
         .then(function(response) {
             if (response.user === req.user || req.user.isAdmin) {
                 res.status(200).send(response);
@@ -201,9 +195,8 @@ router.get('/:id', function(req, res, next) {
 
 //UPDATE ONE ORDER'S STATUS UPON ORDERING
 router.put('/', function(req, res, next) {
-
     var userId = req.user ? req.user.id : req.session.userId;
-    orders.find({
+    Order.find({
             where: {
                 userId: userId,
                 status: 'Created'
@@ -225,7 +218,7 @@ router.put('/', function(req, res, next) {
 router.put('/status', function(req, res, next) {
     if (!req.user.isAdmin) res.sendStatus(403);
     var theOrder
-    orders.find({
+    Order.find({
             where: {
                 id: req.body.id,
             }
@@ -237,10 +230,9 @@ router.put('/status', function(req, res, next) {
         })
         .then(function(updatedOrder) {
             theOrder = updatedOrder
-            return users.findById(updatedOrder.userId)
+            return User.findById(updatedOrder.userId)
         })
         .then(function(foundUser) {
-            console.log('found user is', foundUser)
             var mailOptions = {
                 from: "Wish Upon A Store",
                 to: foundUser.email,
@@ -262,7 +254,7 @@ router.put('/status', function(req, res, next) {
 
 // DELETE ONE ORDER
 router.delete('/:id', function(req, res, next) {
-    orders.findById(req.params.id)
+    Order.findById(req.params.id)
         .then(function(response) {
             if (response.user === req.user || req.user.isAdmin) {
                 return response.destroy()
@@ -277,7 +269,6 @@ router.delete('/:id', function(req, res, next) {
 });
 
 router.post('/checkout', function(req, res, next) {
-
 
     // (Assuming you're using express - expressjs.com)
     // Get the credit card details submitted by the form
@@ -310,7 +301,7 @@ router.post('/checkout', function(req, res, next) {
         console.log("Message Sent: ", info.response)
     })
     var userId = req.user ? req.user.id : req.session.userId;
-    orders.find({
+    Order.find({
             where: {
                 userId: userId,
                 status: 'Created'
