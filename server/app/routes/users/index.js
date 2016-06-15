@@ -1,7 +1,6 @@
 var router = require('express').Router();
 var db = require('../../../db');
-var users = db.model('user');
-var Review = db.model('review');
+var User = db.model('user');
 
 var Sequelize = require('sequelize');
 module.exports = router;
@@ -11,7 +10,7 @@ module.exports = router;
 router.get('/', function(req, res, next) {
     if(!req.user || !req.user.isAdmin) res.sendStatus(403);
     else {
-    users.findAll()
+    User.findAll()
         .then(function(response) {
             res.status(200).send(response);
         });
@@ -20,7 +19,7 @@ router.get('/', function(req, res, next) {
 
 // CREATE USER
 router.post('/', function(req, res, next) {
-    users.create(req.body)
+    User.create(req.body)
         .then(function(response) {
             res.status(201).send(response);
         });
@@ -30,7 +29,7 @@ router.post('/', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
     if(!req.user || !req.user.isAdmin && req.user !== req.params.id) res.sendStatus(403);
     else {
-    users.findById(req.params.id)
+    User.findById(req.params.id)
         .then(function(response) {
             res.status(200).send(response);
         });
@@ -41,7 +40,7 @@ router.get('/:id', function(req, res, next) {
 router.put('/:id', function(req, res, next) {
     if(!req.user || !req.user.isAdmin && req.user !== req.params.id) res.sendStatus(403);
     else {
-    users.findById(req.params.id)
+    User.findById(req.params.id)
         .then(function(response) {
             return response.update(req.body);
         })
@@ -55,7 +54,7 @@ router.put('/:id', function(req, res, next) {
 router.delete('/:id', function(req, res, next) {
     if(!req.user || !req.user.isAdmin && req.user !== req.params.id) res.sendStatus(403);
     else {
-    users.findById(req.params.id)
+    User.findById(req.params.id)
         .then(function(response) {
             return response.destroy();
         })

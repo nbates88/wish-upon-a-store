@@ -1,6 +1,6 @@
 var router = require('express').Router();
 var db = require('../../../db');
-var products = db.model('product');
+var Product = db.model('product');
 var Review = db.model('review');
 var User = db.model('user');
 var Collection = db.model('collection');
@@ -12,7 +12,7 @@ module.exports = router;
 
 // GET ALL PRODUCTS
 router.get('/', function(req, res, next) {
-    products.findAll({
+    Product.findAll({
         include: [Collection]
     })
         .then(function(response) {
@@ -26,7 +26,7 @@ router.post('/', function(req, res, next) {
 
     if (!req.user || !req.user.isAdmin) res.sendStatus(403);
     else {
-        products.create(req.body)
+        Product.create(req.body)
             .then(function(product) {
                 console.log('created product,', product)
                 return product.addCollection(req.body.collection.id)
@@ -40,7 +40,7 @@ router.post('/', function(req, res, next) {
 
 // GET ONE PRODUCT BY ID
 router.get('/:id', function(req, res, next) {
-    products.findById(req.params.id)
+    Product.findById(req.params.id)
         .then(function(response) {
             res.status(200).send(response);
         })
@@ -51,7 +51,7 @@ router.get('/:id', function(req, res, next) {
 router.put('/:id', function(req, res, next) {
     if (!req.user || !req.user.isAdmin) res.sendStatus(403);
     else {
-        products.findById(req.params.id)
+        Product.findById(req.params.id)
             .then(function(product) {
                 return product.update(req.body);
             })
@@ -78,7 +78,7 @@ router.put('/:id', function(req, res, next) {
 router.delete('/:id', function(req, res, next) {
     if (!req.user || !req.user.isAdmin) res.sendStatus(403);
     else {
-        products.findById(req.params.id)
+        Product.findById(req.params.id)
             .then(function(response) {
                 return response.destroy();
             })
@@ -109,7 +109,7 @@ router.post('/:productId/reviews', function(req, res, next) {
     if (!req.user) res.sendStatus(403);
     else {
         Promise.all([
-            products.findById(req.params.productId),
+            Product.findById(req.params.productId),
             Review.create(req.body)
         ])
         .then(function(response) {
