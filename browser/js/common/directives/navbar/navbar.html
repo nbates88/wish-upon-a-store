@@ -1,5 +1,5 @@
 <nav class="navbar navbar-static-top">
-    <div class="container">
+    <div class="container-fluid">
         <div class="navbar-header">
             <wish-logo></wish-logo>
         </div>
@@ -10,28 +10,25 @@
             <li ng-hide="!user.isAdmin">
                 <a ui-sref-active="active" ui-sref="admin">Admin Panel</a>
             </li>
+            <li class="dropdown">
+                <button class="dropbtn">Shop</button>
+                <div class="dropdown-content" >
+                <a ui-sref="collections({id:'all'})">All Products</a>
+                <a ui-sref="collections({id:collection.id})" ng-repeat="collection in collections">{{collection.name}}</a>
+                </div>
+            </li>
+            <li>
+                <a ng-show="user" ng-click="logout()">Logout</a>
+            </li>
         </ul>
 
+        
+        <button ui-sref="shoppingCart" class="btn btn-warning btn-lg btn-nav-cart"><span class="glyphicon glyphicon-shopping-cart"></span><span ng-show="user"> {{ user.name }}'s</span> Cart</button>
 
-<div class="dropdown">
-<button class="dropbtn">Shop</button>
-    <div class="dropdown-content" >
-        <a ui-sref="collections({id:'all'})">All Products</a>
-        <a ui-sref="collections({id:collection.id})" ng-repeat="collection in collections">{{collection.name}}</a>
-    </div>
-</div>
+        <button ng-show="!user" ui-sref="login" class="btn btn-info btn-lg btn-login">Login or Sign Up</button>
 
-        <button ui-sref="shoppingCart" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</button>
-
-
-        <button ng-show="!user" ui-sref="login" class="btn btn-primary btn-lg">Login or Sign Up</button>
-        <div ng-show="user" class="welcome">
-            <span>Welcome, {{ user.email }}!</span>
-            <a ng-click="logout()">Logout</a>
-        </div>
 
     </div>
-
 </nav>
 
 
