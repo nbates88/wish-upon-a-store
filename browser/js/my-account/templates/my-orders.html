@@ -7,16 +7,21 @@
 <div class="admin-container" ng-repeat="order in orders" ng-show="orders.length">
     <div class="row revrow">
         <div class="col-sm-3">
-          <strong>{{order._createdAt}}</strong>
+          <strong>Created:</strong>
+          <br>{{order._createdAt}}
         </div>
         <div class="col-sm-3">
-          {{order.status}}
+          <strong>Status:</strong>
+          <br>{{order.status}}
         </div>
         <div class="col-sm-3">
-          {{order._updatedAt}}
+          <strong>Updated:</strong>
+          <br>{{order._updatedAt}}
         </div>
     </div>
     <div class="row revrow" >
+      <div class="col-sm-3"><strong>Products Ordered:</strong></div>
+      <br>
       <ol>
         <li ng-repeat="product in order.products">
           <a ui-sref="product({id: product.id})">{{product.name}}</a>
