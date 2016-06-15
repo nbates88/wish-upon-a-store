@@ -113,6 +113,15 @@ h4 {
     margin-right: 10px;
 }
 
+h5 {
+    font-family: 'Montserrat', sans-serif;
+    color: #5D6D7E;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+}
+
 figcaption {
   font-size: 16px;
 }
@@ -129,26 +138,39 @@ figcaption {
 }
 
 .product-thumbnail {
-  width: 200px;
-  height: 200px;
-  background: white;
+  width: 240px;
+  height: 240px;
   align: middle;
-  padding-bottom: 10px;
-  // border: 20px solid white;
-  // margin-top: 50px;
+  margin-bottom: 10px;
+  border: 1px solid #EAECEE;
 }
 
 figure {
   width: 220px;
-  height: 260px;
+  // min-height: 500px;
   display: inline-block;
   background: white;
-  border: 20px solid white;
-  border-top: 30px solid white;
+  border: 18px solid white;
+  padding-top: 12px;
   margin-right: 40px;
   margin-top: 40px;
-  align: middle;
+  // align: middle;
   text-align: center;
+}
+
+div.stretchy-wrapper {
+    width: 100%;
+    padding-bottom: 100%;
+    position: relative;
+    background: white;
+}
+ 
+div.stretchy-wrapper > div {
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    color: white;
+    font-size: 24px;
+    text-align: center;
 }
 
 .qty-dropdown {
@@ -181,6 +203,10 @@ figure {
 
 input {
   margin-bottom: 10px;
+}
+
+footer {
+  text-align: center;
 }
 
 
