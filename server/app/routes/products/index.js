@@ -23,16 +23,13 @@ router.get('/', function(req, res, next) {
 
 // CREATE PRODUCT
 router.post('/', function(req, res, next) {
-
     if (!req.user || !req.user.isAdmin) res.sendStatus(403);
     else {
         Product.create(req.body)
             .then(function(product) {
-                console.log('created product,', product)
                 return product.addCollection(req.body.collection.id)
             })
             .then(function(product) {
-                console.log('updated product is', product)
                 res.status(201).send(product);
             })
     }

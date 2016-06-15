@@ -110,7 +110,6 @@ router.get('/user', function(req, res, next) {
             include: [Product]
         })
             .then(function(response) {
-                console.log('got all orders for', req.user.id, 'and response is', response)
                 res.status(200).send(response);
             })
             .then(null, next);
@@ -119,10 +118,7 @@ router.get('/user', function(req, res, next) {
 
 // ADDING A PRODUCT TO AN ORDER
 router.post('/products', function(req, res, next) {
-    //console.log("IDDDDS", req.user.id, req.session.userId)
-
     var userId = req.user ? req.user.id : req.session.userId;
-    console.log("USER ID", userId)
     addProductToOrder(req.body, userId)
         .then(function(response) {
             res.status(200).send(response);
@@ -185,8 +181,6 @@ router.get('/products', function(req, res, next) {
 });
 
 // GET ONE ORDER BY ID
-// EI: findByUser method, use req.user ID
-// EI: create another route for an admin, allowing admin to get all orders, with middleware above it to keep non-admins out
 router.get('/:id', function(req, res, next) {
     Order.findById(req.params.id)
         .then(function(response) {
@@ -201,7 +195,6 @@ router.get('/:id', function(req, res, next) {
 
 //UPDATE ONE ORDER'S STATUS UPON ORDERING
 router.put('/', function(req, res, next) {
-
     var userId = req.user ? req.user.id : req.session.userId;
     Order.find({
             where: {
@@ -240,7 +233,6 @@ router.put('/status', function(req, res, next) {
             return User.findById(updatedOrder.userId)
         })
         .then(function(foundUser) {
-            console.log('found user is', foundUser)
             var mailOptions = {
                 from: "Wish Upon A Store",
                 to: foundUser.email,
@@ -277,7 +269,6 @@ router.delete('/:id', function(req, res, next) {
 });
 
 router.post('/checkout', function(req, res, next) {
-
 
     // (Assuming you're using express - expressjs.com)
     // Get the credit card details submitted by the form
