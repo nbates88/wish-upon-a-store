@@ -8,6 +8,10 @@
 
 // }
 
+html, body {
+  height: 100;
+}
+
 body {
   background-color: white;
   background-image: linear-gradient(to left, white, #E8F8F5, #EBF5FB, #EAF2F8, #F4ECF7, #F5EEF8);
@@ -205,9 +209,26 @@ input {
   margin-bottom: 10px;
 }
 
-footer {
+.footer-container {
+min-height: 100%;
+margin-bottom: -330px;
+position: relative;
+}
+
+.clearfooter {
+height: 330px;
+clear: both;
+}
+
+.footer {
+  width: 100%;
+  position: relative;
+  bottom: 0px;
+  // top: 0px;
   text-align: center;
 }
+
+
 
 
 .numbered-list {
