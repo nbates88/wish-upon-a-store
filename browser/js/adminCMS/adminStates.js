@@ -49,7 +49,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('admin.reviews', {
         url: '/reviews',
         controller: 'AdminReviewsCtrl',
-        templateUrl: 'js/adminCMS/Templates/adminCMSreviews.html',
+        templateUrl: 'js/adminCMS/Templates/adminCMSReviews.html',
         resolve: {
             reviews: function(AdminFactory) {
                 return AdminFactory.getAllReviews();
