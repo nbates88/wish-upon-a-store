@@ -1,14 +1,14 @@
 'use strict';
 var router = require('express').Router();
 var db = require('../../db');
-var users = db.model('user');
+var User = db.model('user');
 
 module.exports = router;
 
 //ADD A USER RIGHT AWAY
 router.use('/', function(req,res, next){
   if(!req.session.userId && !req.user){
-        users.create()
+        User.create()
        .then(function(user){
         //   req.logIn(user, function(err){
         //     if(err) return (err)

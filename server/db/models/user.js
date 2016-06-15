@@ -46,8 +46,6 @@ module.exports = function (db) {
             }, 
             updatePassword: function (newPassword) {
                 // KC: Don't forget to add new salt as an argument when calling user.update! This function (updatePassword) is changing 2 properties (salt and password), so you need to update both. Not adding the salt to the update call was the reason you couldn't log in with either the old or the new password after a password change.
-                console.log("salt: ", this.salt);
-                console.log("new password: ", newPassword);
                 this.salt = this.Model.generateSalt();
                 this.password = this.Model.encryptPassword(newPassword, this.salt);
                 return this.password;
