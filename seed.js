@@ -109,14 +109,26 @@ var products = [{
 }]
 
 var orders = [{
-  status: 'Created',
+  status: 'Completed',
   userId: 1
+}, {
+  status: 'Cancelled',
+  userId: 2
 }, {
   status: 'Processing',
   userId: 2
 }, {
+  status: 'Cancelled',
+  userId: 3
+}, {
   status: 'Processing',
   userId: 1
+}, {
+  status: 'Completed',
+  userId: 3
+}, {
+  status: 'Completed',
+  userId: 4
 }];
 
 var reviews = [{
@@ -256,8 +268,12 @@ var seedOrders = function() {
   var creatingOrders = orders.map(function(order) {
     return Order.create(order)
       .then(function(response) {
-        return response;
-      });
+        var productId = Math.floor(Math.random() * 10 + 1)
+        return response.addProduct(productId);
+      })
+      .then(function(order) {
+        return order
+      })
   });
 
   return Promise.all(creatingOrders)
