@@ -11,7 +11,7 @@ var transporter = nodemailer.createTransport(smtpTransport({
     service: "Gmail",
     auth: {
         user: "wishuponastoregha@gmail.com",
-        pass: "graceHopper"
+        pass: ""
     }
 }));
 var Sequelize = require('sequelize');
